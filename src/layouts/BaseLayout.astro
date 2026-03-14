@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'en' | 'fr';
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Au plus près de la culture et de la musique — La Loingtaine, a charming 18th century farmhouse near Fontainebleau dedicated to music, culture, and the arts.',
+  lang = 'en',
+  ogImage,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content="La Loingtaine" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicons (to be added) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title} — La Loingtaine</title>
+
+    <!-- Styles -->
+    <style is:global>
+      @import '../styles/global.css';
+      @import '../styles/parchment.css';
+      @import '../styles/navigation.css';
+    </style>
+  </head>
+  <body>
+    <!-- SVG Filters for parchment edges -->
+    <svg width="0" height="0" style="position:absolute">
+      <filter id="rough-edge">
+        <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="5" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+      </filter>
+    </svg>
+
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,32 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<header class="parchment-header">
+  <a href={lang === 'fr' ? '/fr/' : '/'} class="header-link">
+    <h1 class="site-logo">{t('site.title')}</h1>
+  </a>
+  <p class="site-tagline">{t('site.tagline')}</p>
+</header>
+
+<style>
+  .header-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header-link:hover {
+    text-decoration: none;
+  }
+
+  .header-link:hover .site-logo {
+    text-shadow: 0 2px 12px rgba(160, 30, 34, 0.15);
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<PageLayout title="Home" section="home">
+  <!-- Hero: Image + Content split -->
+  <div class="home-split">
+    <div class="home-split__image">
+      <img
+        src="/images/site/home-hero.jpg"
+        alt="La Loingtaine at night — a charming 18th century farmhouse"
+        width="600"
+        height="500"
+        loading="eager"
+      />
+    </div>
+    <div class="home-split__content">
+      <div class="home-announcement">
+        <h2 class="announcement-title">International Women's Day Concert</h2>
+        <p class="announcement-detail">March 8 at 4 p.m. at La Loingtaine</p>
+        <p><strong>Musicians</strong></p>
+        <p>
+          Natsumi Dempo (Japan),<br />
+          Lana Herazymenko (Ukraine)<br />
+          Emily Davies (New Zealand)<br />
+          Louise de Crombrugghe (Belgium)<br />
+          Marta Medan (Serbia)<br />
+          accompanied by Simon Adda-Reyss
+        </p>
+      </div>
+
+      <div class="home-ctas">
+        <a href="/delight/upcoming-concerts/" class="btn btn--primary">
+          click to get the concert schedule
+        </a>
+        <a href="/learning/academies/" class="btn">
+          discover the music academy
+        </a>
+      </div>
+
+      <!-- About Links -->
+      <nav class="about-links">
+        <a href="/about/history/">La Loingtaine</a>
+        <a href="/about/why-new-site/">Why this new site?</a>
+        <a href="/about/who-are-we/">Who are we?</a>
+        <a href="/about/calendar/">Calendar</a>
+        <a href="/about/how-to-get-there/">How to go there?</a>
+      </nav>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .home-announcement {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .announcement-title {
+    font-size: 1.3rem;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+  }
+
+  .announcement-detail {
+    font-weight: 700;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-md);
+  }
+
+  .home-ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+</style>

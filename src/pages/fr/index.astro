@@ -1,0 +1,83 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+---
+
+<PageLayout title="Accueil" section="home">
+  <!-- Hero: Image + Content split -->
+  <div class="home-split">
+    <div class="home-split__image">
+      <img
+        src="/images/site/home-hero.jpg"
+        alt="La Loingtaine de nuit — une charmante ferme du XVIIIe siècle"
+        width="600"
+        height="500"
+        loading="eager"
+      />
+    </div>
+    <div class="home-split__content">
+      <div class="home-announcement">
+        <h2 class="announcement-title">Concert de la Journée Internationale des Femmes</h2>
+        <p class="announcement-detail">8 mars à 16h à La Loingtaine</p>
+        <p><strong>Musiciens</strong></p>
+        <p>
+          Natsumi Dempo (Japon),<br />
+          Lana Herazymenko (Ukraine)<br />
+          Emily Davies (Nouvelle-Zélande)<br />
+          Louise de Crombrugghe (Belgique)<br />
+          Marta Medan (Serbie)<br />
+          accompagnés par Simon Adda-Reyss
+        </p>
+      </div>
+
+      <div class="home-ctas">
+        <a href="/fr/delight/upcoming-concerts/" class="btn btn--primary">
+          cliquez pour le programme des concerts
+        </a>
+        <a href="/fr/learning/academies/" class="btn">
+          découvrir l'académie de musique
+        </a>
+      </div>
+
+      <!-- About Links -->
+      <nav class="about-links">
+        <a href="/fr/about/history/">La Loingtaine</a>
+        <a href="/fr/about/why-new-site/">Pourquoi ce nouveau site?</a>
+        <a href="/fr/about/who-are-we/">Qui sommes-nous?</a>
+        <a href="/fr/about/calendar/">Calendrier</a>
+        <a href="/fr/about/how-to-get-there/">Comment y aller?</a>
+      </nav>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .home-announcement {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .announcement-title {
+    font-size: 1.3rem;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+  }
+
+  .announcement-detail {
+    font-weight: 700;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-md);
+  }
+
+  .home-ctas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+</style>

@@ -1,0 +1,185 @@
+/* ============================================
+   Parchment Frame — The signature La Loingtaine look
+   ============================================ */
+
+.parchment {
+  position: relative;
+  max-width: var(--parchment-max-width);
+  margin: var(--space-xl) auto;
+  background: var(--color-cream);
+  padding: var(--space-2xl);
+  min-height: 70vh;
+}
+
+/* Irregular torn-paper border effect using clip-path + pseudo elements */
+.parchment::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(
+    135deg,
+    var(--color-brown-light) 0%,
+    var(--color-border) 30%,
+    var(--color-brown-light) 50%,
+    var(--color-border) 70%,
+    var(--color-brown-light) 100%
+  );
+  z-index: -1;
+  /* Create rough edge effect */
+  filter: url(#rough-edge);
+  mask-image: 
+    linear-gradient(to right, 
+      transparent 0px, black 12px, black calc(100% - 12px), transparent 100%),
+    linear-gradient(to bottom, 
+      transparent 0px, black 12px, black calc(100% - 12px), transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+}
+
+/* Top rough edge */
+.parchment::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 10px;
+  right: 10px;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-border) 0px,
+    var(--color-brown-light) 3px,
+    transparent 4px,
+    transparent 6px,
+    var(--color-border) 7px,
+    var(--color-brown-light) 10px
+  );
+  opacity: 0.8;
+}
+
+/* Parchment border shadow effect */
+.parchment-wrapper {
+  position: relative;
+  max-width: calc(var(--parchment-max-width) + 60px);
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+/* Decorative border image approach (simpler, more cross-browser) */
+.parchment-border {
+  position: relative;
+  max-width: var(--parchment-max-width);
+  margin: var(--space-xl) auto;
+  background-color: var(--color-cream);
+  padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+  border: 8px solid var(--color-border);
+  border-image: repeating-linear-gradient(
+    45deg,
+    var(--color-brown-light),
+    var(--color-border) 2px,
+    var(--color-brown-light) 4px,
+    var(--color-cream) 5px,
+    var(--color-border) 7px
+  ) 8;
+  box-shadow:
+    0 2px 15px rgba(139, 117, 101, 0.2),
+    inset 0 0 40px rgba(139, 117, 101, 0.05);
+}
+
+/* Paper texture overlay */
+.parchment-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 117, 101, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(160, 30, 34, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(139, 117, 101, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.parchment-border > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rough edge SVG filter (to be placed in the HTML) */
+/*
+<svg width="0" height="0">
+  <filter id="rough-edge">
+    <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="5" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+  </filter>
+</svg>
+*/
+
+/* --- Inner content areas --- */
+.parchment-content {
+  position: relative;
+  z-index: 1;
+}
+
+.parchment-header {
+  text-align: center;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-xl);
+}
+
+.parchment-header .site-logo {
+  font-family: var(--font-logo);
+  font-size: 3.5rem;
+  color: var(--color-burgundy);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+}
+
+.parchment-header .site-tagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-brown);
+  margin-bottom: 0;
+}
+
+/* --- Home Split Layout (Image left, content right) --- */
+.home-split {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 0;
+  min-height: 500px;
+}
+
+.home-split__image {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-split__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-split__content {
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .home-split {
+    grid-template-columns: 1fr;
+  }
+
+  .parchment-border {
+    margin: var(--space-md);
+    padding: var(--space-lg);
+  }
+
+  .parchment-header .site-logo {
+    font-size: 2.5rem;
+  }
+}

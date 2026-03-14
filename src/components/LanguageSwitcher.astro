@@ -1,0 +1,60 @@
+---
+import { getLocalizedPath } from '../i18n/utils';
+
+interface Props {
+  lang: 'en' | 'fr';
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+
+// Build the alternate language path
+function getAlternatePath(path: string, currentLang: string): string {
+  if (currentLang === 'fr') {
+    // Remove /fr/ prefix to get EN path
+    return path.replace(/^\/fr/, '') || '/';
+  } else {
+    // Add /fr/ prefix to get FR path
+    return `/fr${path}`;
+  }
+}
+
+const alternatePath = getAlternatePath(currentPath, lang);
+const homePath = lang === 'fr' ? '/fr/' : '/';
+---
+
+<div class="footer-nav">
+  <div class="lang-switch">
+    <a
+      href={lang === 'en' ? `/fr${currentPath}` : currentPath.replace(/^\/fr/, '') || '/'}
+      class:list={['lang-switch__link', { 'lang-switch__link--active': lang === 'fr' }]}
+      title="Français"
+    >
+      <svg class="lang-switch__flag" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="213.3" height="480" fill="#002395"/>
+        <rect x="213.3" width="213.4" height="480" fill="#fff"/>
+        <rect x="426.7" width="213.3" height="480" fill="#ed2939"/>
+      </svg>
+    </a>
+    <a
+      href={lang === 'fr' ? currentPath.replace(/^\/fr/, '') || '/' : currentPath}
+      class:list={['lang-switch__link', { 'lang-switch__link--active': lang === 'en' }]}
+      title="English"
+    >
+      <svg class="lang-switch__flag" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#012169" d="M0 0h640v480H0z"/>
+        <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z"/>
+        <path fill="#C8102E" d="m424 281 216 159v40L369 281zm-184 20 6 35L54 480H0zM640 0v3L391 191l2-44L590 0zM0 0l239 176h-60L0 42z"/>
+        <path fill="#FFF" d="M241 0v480h160V0zM0 160v160h640V160z"/>
+        <path fill="#C8102E" d="M0 193v96h640v-96zM273 0v480h96V0z"/>
+      </svg>
+    </a>
+  </div>
+
+  <a href={homePath} class="footer-nav__home">
+    HOME
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </a>
+</div>

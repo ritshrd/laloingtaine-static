@@ -1,0 +1,29 @@
+---
+import { useTranslations, getLocalizedPath } from '../i18n/utils';
+
+interface Props {
+  lang: 'en' | 'fr';
+  activeSection?: string;
+}
+
+const { lang, activeSection = '' } = Astro.props;
+const t = useTranslations(lang);
+
+const navItems = [
+  { key: 'delight', label: t('nav.delight'), path: '/delight/' },
+  { key: 'learning', label: t('nav.learning'), path: '/learning/' },
+  { key: 'discovery', label: t('nav.discovery'), path: '/discovery/' },
+  { key: 'sharing', label: t('nav.sharing'), path: '/sharing/' },
+];
+---
+
+<nav class="main-nav" aria-label="Main navigation">
+  {navItems.map((item) => (
+    <a
+      href={getLocalizedPath(item.path, lang)}
+      class:list={['main-nav__link', { 'main-nav__link--active': activeSection === item.key }]}
+    >
+      {item.label}
+    </a>
+  ))}
+</nav>
