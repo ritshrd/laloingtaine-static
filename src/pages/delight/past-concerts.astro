@@ -1,5 +1,31 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import ConcertCard from '../../components/ConcertCard.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const now = new Date();
+
+// Get all English concerts
+const allConcerts = await getCollection('concerts', (entry) => {
+  return entry.id.startsWith('en/');
+});
+
+// Filter past concerts (date < today) and sort by date descending
+const pastConcerts = allConcerts
+  .filter((c) => new Date(c.data.date) < now)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Group by year
+const concertsByYear: Record<number, typeof pastConcerts> = {};
+pastConcerts.forEach((concert) => {
+  const year = new Date(concert.data.date).getFullYear();
+  if (!concertsByYear[year]) concertsByYear[year] = [];
+  concertsByYear[year].push(concert);
+});
+
+const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
 ---
 
 <SectionLayout title="Past Concerts" section="delight" activePage="past" description="Archive of past chamber music concerts at La Loingtaine since 2005.">
@@ -10,24 +36,31 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
   </p>
 
   <div class="concerts-archive">
-    <div class="year-section">
-      <h3 class="year-heading">2025</h3>
-      <div class="concert-list-compact">
-        <div class="concert-item">
-          <span class="concert-item__date">March 8</span>
-          <span class="concert-item__title">International Women's Day Concert</span>
-          <span class="concert-item__artists">Natsumi Dempo, Lana Herazymenko, Emily Davies, Louise de Crombrugghe, Marta Medan, Simon Adda-Reyss</span>
+    {years.map((year) => (
+      <div class="year-section">
+        <h3 class="year-heading">{year}</h3>
+        <div class="concert-list-compact">
+          {concertsByYear[year].map((concert) => (
+            <ConcertCard
+              title={concert.data.title}
+              date={new Date(concert.data.date)}
+              musicians={concert.data.musicians}
+              compact={true}
+              lang={lang}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    ))}
+
+    {years.length === 0 && (
+      <div class="coming-soon">
+        <p>Concert archive being compiled...</p>
+      </div>
+    )}
 
     <div class="year-section">
-      <h3 class="year-heading">2024</h3>
-      <p class="coming-soon">Concert archive being compiled...</p>
-    </div>
-
-    <div class="year-section">
-      <h3 class="year-heading">2005–2023</h3>
+      <h3 class="year-heading">2005–2024</h3>
       <p class="coming-soon">
         A comprehensive archive of our concert history is being prepared.
         For information about past events, please <a href="mailto:info@laloingtaine.org">contact us</a>.
@@ -59,34 +92,6 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
     gap: var(--space-md);
   }
 
-  .concert-item {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: var(--space-sm) var(--space-lg);
-    padding: var(--space-md);
-    background: var(--color-cream-light);
-    border-left: 3px solid var(--color-border);
-    border-radius: 0 4px 4px 0;
-  }
-
-  .concert-item__date {
-    font-weight: 700;
-    color: var(--color-burgundy);
-    font-family: var(--font-nav);
-    font-size: 0.85rem;
-  }
-
-  .concert-item__title {
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .concert-item__artists {
-    grid-column: 2;
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-  }
-
   .coming-soon {
     font-style: italic;
     color: var(--color-brown);
@@ -94,15 +99,5 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
     background: var(--color-cream-light);
     border-radius: 4px;
     text-align: center;
-  }
-
-  @media (max-width: 600px) {
-    .concert-item {
-      grid-template-columns: 1fr;
-    }
-
-    .concert-item__artists {
-      grid-column: 1;
-    }
   }
 </style>

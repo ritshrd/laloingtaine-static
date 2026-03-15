@@ -1,22 +1,68 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import ConcertCard from '../../../components/ConcertCard.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const now = new Date();
+
+const allConcerts = await getCollection('concerts', (entry) => {
+  return entry.id.startsWith('fr/');
+});
+
+const pastConcerts = allConcerts
+  .filter((c) => new Date(c.data.date) < now)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const concertsByYear: Record<number, typeof pastConcerts> = {};
+pastConcerts.forEach((concert) => {
+  const year = new Date(concert.data.date).getFullYear();
+  if (!concertsByYear[year]) concertsByYear[year] = [];
+  concertsByYear[year].push(concert);
+});
+
+const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
 ---
 
 <SectionLayout title="Concerts Passés" section="delight" activePage="past" description="Archives des concerts de musique de chambre à La Loingtaine depuis 2005.">
   <h2>Concerts Passés</h2>
-  <p class="page-intro">Plus de 200 concerts ont été organisés à La Loingtaine depuis 2005.</p>
-  <div class="concerts-archive" style="max-width:800px;margin:0 auto">
-    <div class="year-section"><h3 class="year-heading">2025</h3><div class="concert-item"><span class="ci-date">8 mars</span><span class="ci-title">Concert Journée Internationale des Femmes</span><span class="ci-artists">Natsumi Dempo, Lana Herazymenko, Emily Davies, Louise de Crombrugghe, Marta Medan, Simon Adda-Reyss</span></div></div>
-    <div class="year-section"><h3 class="year-heading">2024</h3><p class="coming-soon">Archives en cours de compilation...</p></div>
-    <div class="year-section"><h3 class="year-heading">2005–2023</h3><p class="coming-soon">Des archives complètes sont en préparation. Pour plus d'informations, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.</p></div>
+  <p class="page-intro">
+    Plus de 200 concerts ont été organisés à La Loingtaine depuis 2005. Voici les archives de notre riche histoire musicale.
+  </p>
+
+  <div class="concerts-archive">
+    {years.map((year) => (
+      <div class="year-section">
+        <h3 class="year-heading">{year}</h3>
+        <div class="concert-list-compact">
+          {concertsByYear[year].map((concert) => (
+            <ConcertCard
+              title={concert.data.title}
+              date={new Date(concert.data.date)}
+              musicians={concert.data.musicians}
+              compact={true}
+              lang={lang}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <div class="year-section">
+      <h3 class="year-heading">2005–2024</h3>
+      <p class="coming-soon">
+        Une archive complète de notre histoire est en préparation.
+        Pour plus d'informations, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.
+      </p>
+    </div>
   </div>
 </SectionLayout>
+
 <style>
+  .concerts-archive { max-width: 800px; margin: 0 auto; }
   .year-section { margin-bottom: var(--space-2xl); }
   .year-heading { font-size: 1.6rem; padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-burgundy); margin-bottom: var(--space-lg); }
-  .concert-item { display: grid; grid-template-columns: 100px 1fr; gap: var(--space-sm) var(--space-lg); padding: var(--space-md); background: var(--color-cream-light); border-left: 3px solid var(--color-border); border-radius: 0 4px 4px 0; }
-  .ci-date { font-weight: 700; color: var(--color-burgundy); font-family: var(--font-nav); font-size: 0.85rem; }
-  .ci-title { font-weight: 600; }
-  .ci-artists { grid-column: 2; font-size: 0.85rem; color: var(--color-text-light); }
+  .concert-list-compact { display: flex; flex-direction: column; gap: var(--space-md); }
   .coming-soon { font-style: italic; color: var(--color-brown); padding: var(--space-lg); background: var(--color-cream-light); border-radius: 4px; text-align: center; }
 </style>

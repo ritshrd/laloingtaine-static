@@ -1,5 +1,6 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import GoogleMap from '../../../components/GoogleMap.astro';
 ---
 
 <SectionLayout title="Comment Venir" section="about" activePage="howto" description="Comment venir à La Loingtaine — accès par train et voiture.">
@@ -7,6 +8,15 @@ import SectionLayout from '../../../layouts/SectionLayout.astro';
   <p class="page-intro">La Loingtaine se trouve près de la forêt de Fontainebleau, dans le village de Montigny-sur-Loing.</p>
   <div style="max-width:800px;margin:0 auto">
     <div class="address-card"><h3>📍 Adresse</h3><p class="address"><strong>La Loingtaine</strong><br />40 rue Grande, Sorques<br />77690 Montigny sur Loing<br />France</p></div>
+
+    <!-- Google Map -->
+    <GoogleMap
+      address="40 rue Grande, Sorques, 77690 Montigny sur Loing, France"
+      zoom={15}
+      height="400px"
+      title="Localisation de La Loingtaine"
+    />
+
     <div class="transport-options">
       <div class="tc"><h3>🚆 En Train</h3><p>Depuis Paris, prendre le train à la <strong>Gare de Lyon</strong> vers <strong>Moret-Veneux-les-Sablons</strong> ou <strong>Montigny-sur-Loing</strong>. Trajet d'environ <strong>1 heure</strong>.</p></div>
       <div class="tc"><h3>🚗 En Voiture</h3><p>Depuis Paris, prendre l'<strong>autoroute A6</strong> direction Lyon/Fontainebleau. Sortir à <strong>Fontainebleau</strong>. Trajet d'environ <strong>1h15</strong>.</p></div>
