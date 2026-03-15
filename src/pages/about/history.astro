@@ -1,0 +1,51 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="La Loingtaine" section="about" activePage="history" description="La Loingtaine — an 18th century farmhouse near Fontainebleau dedicated to music, culture, and the arts.">
+  <h2>La Loingtaine</h2>
+
+  <div class="two-col">
+    <div class="section-image">
+      <img
+        src="/images/site/home-hero.jpg"
+        alt="La Loingtaine — an 18th century farmhouse near the forest of Fontainebleau"
+        width="600"
+        height="450"
+        loading="eager"
+      />
+    </div>
+    <div>
+      <p>
+        La Loingtaine is an <strong>18th-century farmhouse</strong> nestled near the
+        forest of Fontainebleau, transformed into a living cultural space where music,
+        ideas, and human connections flourish.
+      </p>
+      <p>
+        More than a venue, it is a <strong>borderless space for intercultural dialogue</strong>,
+        where musicians, thinkers, and audiences from around the world come together
+        in an intimate, welcoming setting.
+      </p>
+      <p>
+        Since 2005, La Loingtaine has hosted over 200 chamber music concerts,
+        welcomed hundreds of young musicians through its academies and masterclasses,
+        and facilitated countless conversations about art, science, and the human experience.
+      </p>
+      <p>
+        The name "La Loingtaine" evokes both the place — <em>lointaine</em>, meaning "far away"
+        in French — and the aspiration to reach beyond the everyday, toward something deeper
+        and more meaningful.
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(139, 117, 101, 0.2);
+  }
+</style>

@@ -1,0 +1,6 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Livres" section="sharing" activePage="books"><h2>Livres</h2><p class="page-intro">Les Éditions La Loingtaine apportent le mot écrit à notre mission de partage culturel.</p><div style="max-width:800px;margin:0 auto"><div class="book-sections"><a href="publishing/" class="bsc"><h3>Éditions La Loingtaine</h3><p>Maison d'édition internationale fondée en 2018 au Japon.</p><span class="cl">Explorer →</span></a><a href="virtual-library/" class="bsc"><h3>Bibliothèque Virtuelle</h3><p>Bibliographie annotée sur l'UNESCO, la science et l'écologie.</p><span class="cl">Explorer →</span></a></div></div></SectionLayout>
+<style>.book-sections{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-top:var(--space-xl)}.bsc{display:block;background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;padding:var(--space-xl);text-decoration:none;transition:all var(--transition-normal)}.bsc:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(139,117,101,.15);text-decoration:none}.bsc h3{font-size:1.2rem;margin-bottom:var(--space-md)}.bsc p{color:var(--color-text-light);font-size:.9rem}.cl{font-weight:600;color:var(--color-burgundy);font-size:.9rem}@media(max-width:768px){.book-sections{grid-template-columns:1fr}}</style>

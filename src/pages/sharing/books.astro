@@ -1,0 +1,83 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Books" section="sharing" activePage="books" description="Books and publications from La Loingtaine Publishing.">
+  <h2>Books</h2>
+  <p class="page-intro">
+    La Loingtaine Publishing brings the written word to our mission of cultural sharing.
+  </p>
+
+  <div class="books-content">
+    <p>
+      Explore works published by <strong>La Loingtaine Publishing</strong> and our
+      <strong>Virtual Library</strong> project.
+    </p>
+
+    <div class="book-sections">
+      <a href="publishing/" class="book-section-card">
+        <h3>La Loingtaine Publishing</h3>
+        <p>International publishing house founded in 2018 in Japan, publishing musicians, writers, and painters.</p>
+        <span class="card-link">Explore →</span>
+      </a>
+
+      <a href="virtual-library/" class="book-section-card">
+        <h3>Virtual Library Project</h3>
+        <p>An annotated bibliography focusing on UNESCO, science, and ecology publications.</p>
+        <span class="card-link">Explore →</span>
+      </a>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .books-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .book-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  .book-section-card {
+    display: block;
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+  }
+
+  .book-section-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 117, 101, 0.15);
+    text-decoration: none;
+  }
+
+  .book-section-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .book-section-card p {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+
+  .card-link {
+    font-weight: 600;
+    color: var(--color-burgundy);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .book-sections {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

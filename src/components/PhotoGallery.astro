@@ -1,0 +1,377 @@
+---
+/**
+ * PhotoGallery.astro
+ * Filterable photo gallery grid with lightbox modal.
+ * Supports year-based filtering and click-to-enlarge.
+ */
+interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+  year?: number;
+  category?: string;
+}
+
+interface Props {
+  photos: Photo[];
+  showFilters?: boolean;
+  columns?: number;
+  id?: string;
+}
+
+const {
+  photos,
+  showFilters = true,
+  columns = 3,
+  id = 'photo-gallery',
+} = Astro.props;
+
+// Extract unique years for filters
+const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) => (b || 0) - (a || 0));
+---
+
+<div class="photo-gallery" id={id}>
+  {showFilters && years.length > 1 && (
+    <div class="gallery-filters" data-gallery={id}>
+      <button class="filter-btn filter-btn--active" data-filter="all">All</button>
+      {years.map((year) => (
+        <button class="filter-btn" data-filter={year?.toString()}>{year}</button>
+      ))}
+    </div>
+  )}
+
+  <div class="gallery-grid" style={`--gallery-columns: ${columns}`}>
+    {photos.map((photo, i) => (
+      <div
+        class="gallery-grid__item"
+        data-year={photo.year?.toString()}
+        data-category={photo.category}
+        data-index={i}
+      >
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          loading="lazy"
+          class="gallery-grid__img"
+        />
+        {photo.caption && (
+          <div class="gallery-grid__overlay">
+            <span class="gallery-grid__caption">{photo.caption}</span>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id={`${id}-lightbox`} role="dialog" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Close" type="button">&times;</button>
+    <button class="lightbox__prev" aria-label="Previous" type="button">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <div class="lightbox__content">
+      <img class="lightbox__img" src="" alt="" />
+      <p class="lightbox__caption"></p>
+    </div>
+    <button class="lightbox__next" aria-label="Next" type="button">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.photo-gallery').forEach((gallery) => {
+      const el = gallery as HTMLElement;
+      const galleryId = el.id;
+      const items = el.querySelectorAll('.gallery-grid__item');
+      const filters = el.querySelector('.gallery-filters');
+      const lightbox = el.querySelector('.lightbox') as HTMLElement;
+      const lightboxImg = lightbox?.querySelector('.lightbox__img') as HTMLImageElement;
+      const lightboxCaption = lightbox?.querySelector('.lightbox__caption') as HTMLElement;
+      const closeBtn = lightbox?.querySelector('.lightbox__close');
+      const prevBtn = lightbox?.querySelector('.lightbox__prev');
+      const nextBtn = lightbox?.querySelector('.lightbox__next');
+      let currentIndex = 0;
+      let visibleItems: HTMLElement[] = [];
+
+      function updateVisible() {
+        visibleItems = Array.from(items).filter(
+          (item) => (item as HTMLElement).style.display !== 'none'
+        ) as HTMLElement[];
+      }
+
+      // Filtering
+      filters?.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement;
+        if (!btn) return;
+        const filter = btn.dataset.filter;
+
+        filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
+        btn.classList.add('filter-btn--active');
+
+        items.forEach((item) => {
+          const el = item as HTMLElement;
+          const show = filter === 'all' || el.dataset.year === filter;
+          el.style.display = show ? '' : 'none';
+          if (show) el.style.animation = 'galleryFadeIn 0.3s ease';
+        });
+        updateVisible();
+      });
+
+      // Lightbox
+      function openLightbox(index: number) {
+        updateVisible();
+        currentIndex = index;
+        showSlide();
+        lightbox.classList.add('lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function showSlide() {
+        const item = visibleItems[currentIndex];
+        if (!item) return;
+        const img = item.querySelector('img') as HTMLImageElement;
+        const caption = item.querySelector('.gallery-grid__caption');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption?.textContent || '';
+      }
+
+      items.forEach((item, i) => {
+        item.addEventListener('click', () => {
+          updateVisible();
+          const visibleIndex = visibleItems.indexOf(item as HTMLElement);
+          openLightbox(visibleIndex >= 0 ? visibleIndex : 0);
+        });
+      });
+
+      closeBtn?.addEventListener('click', closeLightbox);
+      lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      prevBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        showSlide();
+      });
+
+      nextBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % visibleItems.length;
+        showSlide();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('lightbox--open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length; showSlide(); }
+        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleItems.length; showSlide(); }
+      });
+
+      updateVisible();
+    });
+  });
+</script>
+
+<style>
+  /* --- Filters --- */
+  .gallery-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .filter-btn {
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-brown);
+    font-family: var(--font-nav);
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all var(--transition-fast);
+  }
+
+  .filter-btn:hover,
+  .filter-btn--active {
+    background: var(--color-burgundy);
+    color: var(--color-white);
+    border-color: var(--color-burgundy);
+  }
+
+  /* --- Grid --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--gallery-columns, 3), 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .gallery-grid__item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .gallery-grid__item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px rgba(139, 117, 101, 0.15);
+  }
+
+  .gallery-grid__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+  }
+
+  .gallery-grid__item:hover .gallery-grid__img {
+    transform: scale(1.05);
+  }
+
+  .gallery-grid__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+
+  .gallery-grid__item:hover .gallery-grid__overlay {
+    opacity: 1;
+  }
+
+  .gallery-grid__caption {
+    color: var(--color-white);
+    font-size: 0.8rem;
+  }
+
+  /* --- Lightbox --- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .lightbox--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox__content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lightbox__img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox__caption {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    margin-top: var(--space-md);
+    text-align: center;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    color: var(--color-white);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    transition: transform var(--transition-fast);
+  }
+
+  .lightbox__close:hover {
+    transform: scale(1.2);
+  }
+
+  .lightbox__prev,
+  .lightbox__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast);
+    z-index: 1001;
+  }
+
+  .lightbox__prev:hover,
+  .lightbox__next:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .lightbox__prev svg,
+  .lightbox__next svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-white);
+  }
+
+  .lightbox__prev { left: var(--space-lg); }
+  .lightbox__next { right: var(--space-lg); }
+
+  @keyframes galleryFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

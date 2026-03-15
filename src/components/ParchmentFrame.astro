@@ -1,0 +1,29 @@
+---
+/**
+ * ParchmentFrame.astro
+ * Reusable parchment frame component — the signature La Loingtaine look.
+ * Wraps any content inside the decorative border with paper texture overlay.
+ */
+interface Props {
+  class?: string;
+  noPadding?: boolean;
+}
+
+const { class: className, noPadding = false } = Astro.props;
+---
+
+<div class:list={["parchment-border", { "parchment-border--no-padding": noPadding }, className]}>
+  <div class="parchment-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .parchment-border--no-padding {
+    padding: 0;
+  }
+
+  .parchment-border--no-padding .parchment-content {
+    padding: 0;
+  }
+</style>

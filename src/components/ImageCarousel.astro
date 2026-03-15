@@ -1,0 +1,235 @@
+---
+/**
+ * ImageCarousel.astro
+ * Image slider with previous/next navigation and dots indicator.
+ * Uses vanilla JS — no external dependencies.
+ */
+interface Slide {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  slides: Slide[];
+  autoplay?: boolean;
+  interval?: number;
+  id?: string;
+}
+
+const {
+  slides,
+  autoplay = true,
+  interval = 5000,
+  id = 'carousel-' + Math.random().toString(36).substring(7),
+} = Astro.props;
+---
+
+{slides.length > 0 && (
+  <div class="carousel" id={id} data-autoplay={autoplay.toString()} data-interval={interval.toString()}>
+    <div class="carousel__track">
+      {slides.map((slide, i) => (
+        <div class:list={["carousel__slide", { "carousel__slide--active": i === 0 }]} data-index={i}>
+          <img src={slide.src} alt={slide.alt} loading={i === 0 ? "eager" : "lazy"} />
+          {slide.caption && <span class="carousel__caption">{slide.caption}</span>}
+        </div>
+      ))}
+    </div>
+
+    {slides.length > 1 && (
+      <>
+        <button class="carousel__btn carousel__btn--prev" aria-label="Previous slide" type="button">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+        </button>
+        <button class="carousel__btn carousel__btn--next" aria-label="Next slide" type="button">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </button>
+
+        <div class="carousel__dots">
+          {slides.map((_, i) => (
+            <button
+              class:list={["carousel__dot", { "carousel__dot--active": i === 0 }]}
+              data-index={i}
+              aria-label={`Go to slide ${i + 1}`}
+              type="button"
+            />
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+)}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.carousel').forEach((carousel) => {
+      const el = carousel as HTMLElement;
+      const slides = el.querySelectorAll('.carousel__slide');
+      const dots = el.querySelectorAll('.carousel__dot');
+      const prevBtn = el.querySelector('.carousel__btn--prev');
+      const nextBtn = el.querySelector('.carousel__btn--next');
+      const shouldAutoplay = el.dataset.autoplay === 'true';
+      const interval = parseInt(el.dataset.interval || '5000', 10);
+      let current = 0;
+      let timer: ReturnType<typeof setInterval> | null = null;
+
+      function goTo(index: number) {
+        slides[current]?.classList.remove('carousel__slide--active');
+        dots[current]?.classList.remove('carousel__dot--active');
+        current = (index + slides.length) % slides.length;
+        slides[current]?.classList.add('carousel__slide--active');
+        dots[current]?.classList.add('carousel__dot--active');
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function startAutoplay() {
+        if (shouldAutoplay && slides.length > 1) {
+          timer = setInterval(next, interval);
+        }
+      }
+
+      function stopAutoplay() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      prevBtn?.addEventListener('click', () => { stopAutoplay(); prev(); startAutoplay(); });
+      nextBtn?.addEventListener('click', () => { stopAutoplay(); next(); startAutoplay(); });
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          stopAutoplay();
+          goTo(parseInt((dot as HTMLElement).dataset.index || '0', 10));
+          startAutoplay();
+        });
+      });
+
+      el.addEventListener('mouseenter', stopAutoplay);
+      el.addEventListener('mouseleave', startAutoplay);
+
+      startAutoplay();
+    });
+  });
+</script>
+
+<style>
+  .carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-black);
+  }
+
+  .carousel__track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+
+  .carousel__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .carousel__slide--active {
+    opacity: 1;
+  }
+
+  .carousel__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: var(--color-white);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Navigation Buttons */
+  .carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel__btn:hover {
+    background: var(--color-white);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel__btn svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-text);
+  }
+
+  .carousel__btn--prev { left: var(--space-md); }
+  .carousel__btn--next { right: var(--space-md); }
+
+  /* Dots */
+  .carousel__dots {
+    position: absolute;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-sm);
+    z-index: 10;
+  }
+
+  .carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--color-white);
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+  }
+
+  .carousel__dot--active,
+  .carousel__dot:hover {
+    background: var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    .carousel__btn {
+      width: 32px;
+      height: 32px;
+    }
+
+    .carousel__btn svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+</style>

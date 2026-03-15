@@ -1,0 +1,98 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Conferences" section="sharing" activePage="conferences" description="Conferences at La Loingtaine — guest speakers on art, science, music, and heritage.">
+  <h2>Conferences</h2>
+  <p class="page-intro">
+    Distinguished speakers share their insights on art, science, music, and heritage
+    at La Loingtaine.
+  </p>
+
+  <div class="conferences-content">
+    <div class="speaker-list">
+      <div class="speaker-card">
+        <h3>Dr. Denis Le Bihan</h3>
+        <p class="speaker-topic">Brain Imaging and Music</p>
+        <p>
+          A pioneering researcher in brain imaging, Dr. Le Bihan explores the fascinating
+          connections between how our brains process music and the neural pathways
+          involved in musical perception.
+        </p>
+      </div>
+
+      <div class="speaker-card">
+        <h3>Georges Kutukdjian</h3>
+        <p class="speaker-topic">UNESCO and Cultural Heritage</p>
+        <p>
+          A distinguished figure in international cultural policy, Georges Kutukdjian
+          brings decades of UNESCO experience to discussions about preserving and
+          promoting cultural heritage.
+        </p>
+      </div>
+    </div>
+
+    <div class="conference-cta">
+      <p>
+        Interested in attending or proposing a conference?<br />
+        Contact: <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .conferences-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .speaker-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .speaker-card {
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+    transition: transform var(--transition-normal);
+  }
+
+  .speaker-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .speaker-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .speaker-topic {
+    font-family: var(--font-nav);
+    font-size: 0.8rem;
+    color: var(--color-white);
+    background: var(--color-burgundy);
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-bottom: var(--space-md);
+  }
+
+  .conference-cta {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--color-cream-light);
+    border: 1px dashed var(--color-border);
+    border-radius: 6px;
+  }
+
+  @media (max-width: 768px) {
+    .speaker-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Prochains Concerts" section="delight" activePage="upcoming" description="Prochains concerts de musique de chambre à La Loingtaine.">
+  <h2>Prochains Concerts</h2>
+  <p class="page-intro">Rejoignez-nous pour nos prochaines représentations à La Loingtaine. Réservation recommandée — 01 64 45 83 14 ou 06 22 85 11 86.</p>
+
+  <div class="concert-list">
+    <article class="concert-card concert-card--featured">
+      <div class="concert-date"><span class="concert-day">3</span><span class="concert-month">Mai</span><span class="concert-year">2025</span></div>
+      <div class="concert-details">
+        <h3>Lydia Shelley & Thuy Anh Vuong</h3>
+        <p class="concert-time">16h à La Loingtaine</p>
+        <p class="concert-performers"><strong>Lydia Shelley</strong> — Violoncelle<br /><strong>Thuy Anh Vuong</strong> — Piano</p>
+        <p>Un après-midi de sublime duo violoncelle et piano dans le cadre intime de La Loingtaine.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="concert-cta">
+    <p>Pour le programme complet et les réservations :</p>
+    <p class="contact-info"><strong>Tél :</strong> 01 64 45 83 14 / 06 22 85 11 86<br /><strong>Email :</strong> <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p>
+  </div>
+</SectionLayout>
+
+<style>
+  .concert-list { max-width: 800px; margin: 0 auto var(--space-2xl); }
+  .concert-card { display: flex; gap: var(--space-xl); padding: var(--space-xl); background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; margin-bottom: var(--space-lg); transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
+  .concert-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(139,117,101,0.12); }
+  .concert-card--featured { border-left: 4px solid var(--color-burgundy); }
+  .concert-date { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 80px; padding: var(--space-md); background: var(--color-burgundy); color: var(--color-white); border-radius: 6px; text-align: center; }
+  .concert-day { font-size: 2.2rem; font-weight: 700; line-height: 1; font-family: var(--font-heading); }
+  .concert-month { font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .concert-year { font-size: 0.75rem; opacity: 0.8; }
+  .concert-details h3 { font-size: 1.3rem; margin-bottom: var(--space-xs); }
+  .concert-time { font-weight: 600; color: var(--color-burgundy); margin-bottom: var(--space-sm); }
+  .concert-cta { text-align: center; padding: var(--space-xl); background: var(--color-cream-light); border: 1px dashed var(--color-border); border-radius: 6px; max-width: 500px; margin: 0 auto; }
+  @media (max-width: 600px) { .concert-card { flex-direction: column; align-items: stretch; } .concert-date { flex-direction: row; gap: var(--space-sm); min-width: auto; } }
+</style>

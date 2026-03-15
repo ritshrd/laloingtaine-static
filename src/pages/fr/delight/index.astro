@@ -1,0 +1,24 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Émotion" section="delight" description="Musique de chambre à La Loingtaine — concerts, galeries, et la joie de la musique.">
+  <div class="two-col">
+    <div class="section-image">
+      <img src="/images/site/home-hero.jpg" alt="La Loingtaine — une ferme du XVIIIe siècle dédiée à la musique" width="600" height="450" loading="eager" />
+    </div>
+    <div class="section-text">
+      <h2>Émotion</h2>
+      <blockquote class="page-quote">"La musique est la voix éternelle de l'âme"</blockquote>
+      <p>Les concerts de musique de chambre sont l'activité principale de La Loingtaine depuis 2005, dirigée par <strong>Aki Saulière</strong> et <strong>Raphael Bell</strong>. Ils mettent en vedette des musiciens internationaux de haut niveau qui se retrouvent souvent uniquement à La Loingtaine.</p>
+      <p>Après chaque concert, thé et friandises sont partagés entre le public et les musiciens, créant un lien chaleureux et personnel au cœur de notre mission.</p>
+      <p>Plus de <strong>200 concerts</strong> ont été organisés depuis 2005 par l'Association Schubertiades, apportant une musique de chambre exceptionnelle dans ce cadre intime près de Fontainebleau.</p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .section-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 20px rgba(139,117,101,0.2); }
+  .section-text { display: flex; flex-direction: column; justify-content: center; }
+  .page-quote { font-family: var(--font-heading); font-style: italic; font-size: 1.2rem; color: var(--color-brown); border-left: 3px solid var(--color-burgundy); padding-left: var(--space-lg); margin-bottom: var(--space-xl); }
+</style>

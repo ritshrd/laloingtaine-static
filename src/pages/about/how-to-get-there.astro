@@ -1,0 +1,130 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import GoogleMap from '../../components/GoogleMap.astro';
+---
+
+<SectionLayout title="How to Get There" section="about" activePage="howto" description="How to get to La Loingtaine — directions by train and car to Montigny-sur-Loing.">
+  <h2>How to Get There</h2>
+  <p class="page-intro">
+    La Loingtaine is located near the beautiful forest of Fontainebleau,
+    in the village of Montigny-sur-Loing.
+  </p>
+
+  <div class="directions-content">
+    <div class="address-card">
+      <h3>📍 Address</h3>
+      <p class="address">
+        <strong>La Loingtaine</strong><br />
+        40 rue Grande, Sorques<br />
+        77690 Montigny sur Loing<br />
+        France
+      </p>
+    </div>
+
+    <!-- Google Map -->
+    <GoogleMap
+      address="40 rue Grande, Sorques, 77690 Montigny sur Loing, France"
+      zoom={15}
+      height="400px"
+    />
+
+    <div class="transport-options">
+      <div class="transport-card">
+        <h3>🚆 By Train</h3>
+        <p>
+          From Paris, take the train from <strong>Gare de Lyon</strong> towards
+          <strong>Moret-Veneux-les-Sablons</strong> or <strong>Montigny-sur-Loing</strong>.
+        </p>
+        <p>
+          The journey takes approximately <strong>1 hour</strong>.
+          La Loingtaine is a short walk from the station.
+        </p>
+      </div>
+
+      <div class="transport-card">
+        <h3>🚗 By Car</h3>
+        <p>
+          From Paris, take the <strong>A6 motorway</strong> towards Lyon/Fontainebleau.
+          Exit at <strong>Fontainebleau</strong> and follow signs to Montigny-sur-Loing.
+        </p>
+        <p>
+          The drive takes approximately <strong>1 hour 15 minutes</strong> from central Paris.
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>📞 Reservations</h3>
+      <p>
+        <strong>Phone:</strong> 01 64 45 83 14 / 06 22 85 11 86<br />
+        <strong>Email:</strong> <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .directions-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .address-card {
+    text-align: center;
+    background: var(--color-burgundy);
+    color: var(--color-white);
+    padding: var(--space-xl);
+    border-radius: 6px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .address-card h3 {
+    color: var(--color-white);
+    font-size: 1.3rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .address {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  .transport-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .transport-card {
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+  }
+
+  .transport-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-card {
+    text-align: center;
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+  }
+
+  .contact-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .transport-options {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

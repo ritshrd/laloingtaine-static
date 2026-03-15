@@ -1,0 +1,36 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Académies" section="learning" activePage="academies" description="Académie de cordes à La Loingtaine — éducation musicale immersive estivale.">
+  <h2>Académies</h2>
+  <p class="page-intro">L'Académie de Cordes de La Loingtaine se tient chaque été fin juillet et août.</p>
+  <div style="max-width:900px;margin:0 auto">
+    <div class="academy-card">
+      <h3>Académie de Cordes 2025</h3>
+      <p>L'académie offre un environnement intensif et bienveillant où les étudiants travaillent en étroite collaboration avec des professeurs de renommée internationale.</p>
+      <h4>Professeurs</h4>
+      <ul class="professor-list"><li><strong>Anna Gebert</strong></li><li><strong>Silvia Simionescu</strong></li><li><strong>Aki Saulière</strong></li><li><strong>Raphaël Bell</strong></li></ul>
+    </div>
+    <div class="highlights">
+      <div class="hl"><span>🎵</span><h4>Cours Quotidiens</h4><p>Instruction individuelle avec des professeurs de classe mondiale</p></div>
+      <div class="hl"><span>🎶</span><h4>Musique de Chambre</h4><p>Coaching d'ensemble et apprentissage collaboratif</p></div>
+      <div class="hl"><span>🎻</span><h4>Concerts</h4><p>Récitals d'étudiants et concerts informels</p></div>
+      <div class="hl"><span>🌿</span><h4>Vie Immersive</h4><p>Partagez repas et conversations avec les professionnels</p></div>
+    </div>
+  </div>
+</SectionLayout>
+<style>
+  .academy-card { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; padding: var(--space-xl); margin-bottom: var(--space-2xl); }
+  .academy-card h3 { text-align: center; margin-bottom: var(--space-lg); }
+  .academy-card h4 { color: var(--color-burgundy); margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+  .professor-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-xl); }
+  .professor-list li { display: flex; align-items: center; gap: var(--space-xs); }
+  .professor-list li::before { content: '●'; color: var(--color-burgundy); font-size: 0.6rem; }
+  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); }
+  .hl { text-align: center; padding: var(--space-lg); background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; transition: transform var(--transition-normal); }
+  .hl:hover { transform: translateY(-3px); }
+  .hl span { font-size: 2rem; display: block; margin-bottom: var(--space-sm); }
+  .hl h4 { font-size: 1rem; margin-bottom: var(--space-xs); }
+  .hl p { font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0; }
+</style>

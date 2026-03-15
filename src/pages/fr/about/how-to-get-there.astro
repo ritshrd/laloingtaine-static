@@ -1,0 +1,27 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Comment Venir" section="about" activePage="howto" description="Comment venir à La Loingtaine — accès par train et voiture.">
+  <h2>Comment Venir</h2>
+  <p class="page-intro">La Loingtaine se trouve près de la forêt de Fontainebleau, dans le village de Montigny-sur-Loing.</p>
+  <div style="max-width:800px;margin:0 auto">
+    <div class="address-card"><h3>📍 Adresse</h3><p class="address"><strong>La Loingtaine</strong><br />40 rue Grande, Sorques<br />77690 Montigny sur Loing<br />France</p></div>
+    <div class="transport-options">
+      <div class="tc"><h3>🚆 En Train</h3><p>Depuis Paris, prendre le train à la <strong>Gare de Lyon</strong> vers <strong>Moret-Veneux-les-Sablons</strong> ou <strong>Montigny-sur-Loing</strong>. Trajet d'environ <strong>1 heure</strong>.</p></div>
+      <div class="tc"><h3>🚗 En Voiture</h3><p>Depuis Paris, prendre l'<strong>autoroute A6</strong> direction Lyon/Fontainebleau. Sortir à <strong>Fontainebleau</strong>. Trajet d'environ <strong>1h15</strong>.</p></div>
+    </div>
+    <div class="contact-card"><h3>📞 Réservations</h3><p><strong>Tél :</strong> 01 64 45 83 14 / 06 22 85 11 86<br /><strong>Email :</strong> <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
+  </div>
+</SectionLayout>
+<style>
+  .address-card{text-align:center;background:var(--color-burgundy);color:var(--color-white);padding:var(--space-xl);border-radius:6px;margin-bottom:var(--space-xl)}
+  .address-card h3{color:var(--color-white);font-size:1.3rem;margin-bottom:var(--space-md)}
+  .address{font-size:1.1rem;line-height:1.8;margin-bottom:0}
+  .transport-options{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-bottom:var(--space-xl)}
+  .tc{background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;padding:var(--space-xl)}
+  .tc h3{font-size:1.2rem;margin-bottom:var(--space-md)}
+  .contact-card{text-align:center;background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;padding:var(--space-xl)}
+  .contact-card h3{font-size:1.2rem;margin-bottom:var(--space-md)}
+  @media(max-width:768px){.transport-options{grid-template-columns:1fr}}
+</style>

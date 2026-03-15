@@ -1,0 +1,50 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Sharing" section="sharing" description="Sharing at La Loingtaine — lectures, books, conferences, and the joy of cultural exchange.">
+  <div class="two-col">
+    <div class="section-text">
+      <h2>Sharing</h2>
+      <p>
+        La Loingtaine is a place for <strong>sharing knowledge</strong>, ideas, and culture.
+        Through lectures, publications, and the "Echoes of the Festival" series,
+        we bring together thinkers, artists, and audiences in meaningful dialogue.
+      </p>
+      <p>
+        Our lectures cover a wide range of subjects including art, history, anthropology,
+        and ecology. The <em>Echoes of the Festival</em> series is linked to the prestigious
+        <strong>Château de Fontainebleau International Festival of Art History</strong>.
+      </p>
+      <p>
+        Through <strong>La Loingtaine Publishing</strong>, we extend this mission of sharing
+        to the written word, publishing works by musicians, writers, and painters.
+      </p>
+    </div>
+    <div class="section-image">
+      <img
+        src="/images/site/home-hero.jpg"
+        alt="Sharing culture and knowledge at La Loingtaine"
+        width="600"
+        height="450"
+        loading="eager"
+      />
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(139, 117, 101, 0.2);
+  }
+
+  .section-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+</style>

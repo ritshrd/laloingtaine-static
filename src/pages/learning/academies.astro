@@ -1,0 +1,141 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Academies" section="learning" activePage="academies" description="String Academy at La Loingtaine — immersive summer music education near Fontainebleau.">
+  <h2>Academies</h2>
+  <p class="page-intro">
+    The La Loingtaine String Academy takes place each summer in late July and August,
+    offering an immersive musical experience in the heart of the French countryside.
+  </p>
+
+  <div class="academy-info">
+    <div class="academy-card">
+      <h3>String Academy 2025</h3>
+      <div class="academy-details">
+        <p>
+          The academy provides an intensive yet nurturing environment where students
+          work closely with internationally acclaimed professors on solo and chamber
+          music repertoire.
+        </p>
+        <h4>Professors</h4>
+        <ul class="professor-list">
+          <li><strong>Anna Gebert</strong></li>
+          <li><strong>Silvia Simionescu</strong></li>
+          <li><strong>Aki Saulière</strong></li>
+          <li><strong>Raphaël Bell</strong></li>
+        </ul>
+        <p>
+          Students benefit from daily lessons, ensemble coaching, performance
+          opportunities, and the unique experience of living and making music
+          alongside established professionals.
+        </p>
+      </div>
+    </div>
+
+    <div class="academy-highlights">
+      <div class="highlight">
+        <span class="highlight-icon">🎵</span>
+        <h4>Daily Lessons</h4>
+        <p>Individual instruction with world-class professors</p>
+      </div>
+      <div class="highlight">
+        <span class="highlight-icon">🎶</span>
+        <h4>Chamber Music</h4>
+        <p>Ensemble coaching and collaborative learning</p>
+      </div>
+      <div class="highlight">
+        <span class="highlight-icon">🎻</span>
+        <h4>Performances</h4>
+        <p>Student recitals and informal concerts</p>
+      </div>
+      <div class="highlight">
+        <span class="highlight-icon">🌿</span>
+        <h4>Immersive Living</h4>
+        <p>Share meals and conversations with professionals</p>
+      </div>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .academy-info {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .academy-card {
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .academy-card h3 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .academy-details h4 {
+    color: var(--color-burgundy);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .professor-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-xl);
+  }
+
+  .professor-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .professor-list li::before {
+    content: '●';
+    color: var(--color-burgundy);
+    font-size: 0.6rem;
+  }
+
+  .academy-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .highlight {
+    text-align: center;
+    padding: var(--space-lg);
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    transition: transform var(--transition-normal);
+  }
+
+  .highlight:hover {
+    transform: translateY(-3px);
+  }
+
+  .highlight-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .highlight h4 {
+    font-size: 1rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .highlight p {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-bottom: 0;
+  }
+</style>

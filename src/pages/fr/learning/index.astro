@@ -1,0 +1,20 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Transmission" section="learning" description="Éducation musicale à La Loingtaine — académies, masterclasses et ateliers.">
+  <div class="two-col">
+    <div class="section-text">
+      <h2>Transmission</h2>
+      <blockquote class="page-quote">"Transmission des savoirs et compétences musicales"</blockquote>
+      <p>La Loingtaine se concentre sur l'<strong>approfondissement de l'éducation musicale</strong> à tous les niveaux, particulièrement pour combler l'écart entre technique et maturité musicale chez les étudiants avancés.</p>
+      <p>Notre approche repose sur un <strong>environnement immersif</strong> — partager repas, conversations et concerts avec des musiciens professionnels, créant une expérience éducative holistique.</p>
+    </div>
+    <div class="section-image"><img src="/images/site/home-hero.jpg" alt="Éducation musicale à La Loingtaine" width="600" height="450" loading="eager" /></div>
+  </div>
+</SectionLayout>
+<style>
+  .section-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 20px rgba(139,117,101,0.2); }
+  .section-text { display: flex; flex-direction: column; justify-content: center; }
+  .page-quote { font-family: var(--font-heading); font-style: italic; font-size: 1.2rem; color: var(--color-brown); border-left: 3px solid var(--color-burgundy); padding-left: var(--space-lg); margin-bottom: var(--space-xl); }
+</style>

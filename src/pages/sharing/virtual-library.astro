@@ -1,0 +1,48 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Virtual Library Project" section="sharing" activePage="library" description="Virtual Library Project — an annotated bibliography on UNESCO, science, and ecology.">
+  <h2>Virtual Library Project</h2>
+  <p class="page-intro">
+    An annotated bibliography project focusing on UNESCO, science, and ecology publications.
+  </p>
+
+  <div class="library-content">
+    <p>
+      The Virtual Library Project at La Loingtaine aims to create an accessible,
+      annotated collection of important works in the fields of <strong>UNESCO initiatives</strong>,
+      <strong>scientific research</strong>, and <strong>ecology</strong>.
+    </p>
+    <p>
+      By curating and annotating these works, we hope to make them more accessible
+      to researchers, students, and curious minds everywhere — furthering our mission
+      of sharing knowledge across borders and disciplines.
+    </p>
+
+    <div class="library-note">
+      <p>
+        <em>This project is currently in development. We welcome contributions and suggestions.</em>
+      </p>
+      <p>
+        Contact: <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .library-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .library-note {
+    text-align: center;
+    background: var(--color-cream-light);
+    border: 2px dashed var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+    margin-top: var(--space-2xl);
+  }
+</style>

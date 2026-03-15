@@ -1,0 +1,41 @@
+---
+import PageLayout from './PageLayout.astro';
+import SubNavigation from '../components/SubNavigation.astro';
+import { getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description?: string;
+  section: 'delight' | 'learning' | 'discovery' | 'sharing' | 'about';
+  activePage?: string;
+}
+
+const { title, description, section, activePage = '' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<PageLayout title={title} description={description} section={section}>
+  <SubNavigation lang={lang} section={section} activePage={activePage} />
+  <article class="section-content">
+    <slot />
+  </article>
+</PageLayout>
+
+<style>
+  .section-content {
+    padding: var(--space-md) 0;
+  }
+
+  .section-content :global(h2) {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-content :global(.page-intro) {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--space-xl);
+    font-style: italic;
+    color: var(--color-brown);
+  }
+</style>

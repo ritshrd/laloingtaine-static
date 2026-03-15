@@ -1,0 +1,126 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Calendar" section="about" activePage="calendar" description="Events calendar for La Loingtaine — concerts, masterclasses, and cultural events.">
+  <h2>Calendar</h2>
+  <p class="page-intro">
+    Upcoming events at La Loingtaine — concerts, masterclasses, and cultural gatherings.
+  </p>
+
+  <div class="calendar-content">
+    <div class="calendar-month">
+      <h3>May 2025</h3>
+      <div class="event-item">
+        <div class="event-date">
+          <span class="event-day">3</span>
+          <span class="event-month">May</span>
+        </div>
+        <div class="event-info">
+          <h4>Concert: Lydia Shelley & Thuy Anh Vuong</h4>
+          <p>Cello and Piano — 4:00 PM at La Loingtaine</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-month">
+      <h3>Summer 2025</h3>
+      <div class="event-item">
+        <div class="event-date">
+          <span class="event-day">Jul–Aug</span>
+        </div>
+        <div class="event-info">
+          <h4>String Academy 2025</h4>
+          <p>Intensive summer music education program</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-note">
+      <p>More events will be announced throughout the season.</p>
+      <p>To stay informed, contact: <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .calendar-content {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .calendar-month {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .calendar-month h3 {
+    font-size: 1.4rem;
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--color-burgundy);
+    margin-bottom: var(--space-lg);
+  }
+
+  .event-item {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    margin-bottom: var(--space-md);
+  }
+
+  .event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: var(--space-sm);
+    background: var(--color-burgundy);
+    color: var(--color-white);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .event-day {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    line-height: 1.2;
+  }
+
+  .event-month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .event-info h4 {
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xs);
+  }
+
+  .event-info p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 0;
+  }
+
+  .calendar-note {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--color-cream-light);
+    border: 1px dashed var(--color-border);
+    border-radius: 6px;
+  }
+
+  .calendar-note p {
+    margin-bottom: var(--space-sm);
+  }
+
+  @media (max-width: 600px) {
+    .event-item {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="La Loingtaine Ideas Forum" section="discovery" activePage="forum" description="The Ideas Forum — a community space for conferences, workshops, and exhibitions at La Loingtaine.">
+  <h2>La Loingtaine Ideas Forum</h2>
+  <p class="page-intro">
+    A community space where friends and collaborators can propose conferences,
+    workshops, or exhibitions.
+  </p>
+
+  <div class="forum-content">
+    <p>
+      The Ideas Forum embodies La Loingtaine's spirit of <strong>open intellectual exchange</strong>.
+      It is a space where ideas are welcome, where curiosity is celebrated, and where
+      meaningful dialogue can flourish.
+    </p>
+    <p>
+      Whether you have an idea for a conference, a workshop on a topic close to your heart,
+      or an exhibition you'd like to present, the Ideas Forum is your platform.
+    </p>
+
+    <div class="forum-cta">
+      <h3>Propose an Event</h3>
+      <p>
+        We welcome proposals for events that align with La Loingtaine's mission of
+        cultural exchange and intellectual curiosity.
+      </p>
+      <p>
+        <strong>Contact us:</strong><br />
+        <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .forum-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .forum-cta {
+    text-align: center;
+    background: var(--color-cream-light);
+    border: 2px dashed var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .forum-cta h3 {
+    margin-bottom: var(--space-md);
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Ateliers" section="learning" activePage="workshops" description="Ateliers d'étude orchestrale à La Loingtaine.">
+  <h2>Ateliers</h2>
+  <p class="page-intro">Étude orchestrale pour les auditions, dirigée par des musiciens d'orchestre expérimentés.</p>
+  <div style="max-width:800px;margin:0 auto">
+    <p>Les ateliers de La Loingtaine se concentrent sur l'<strong>étude du répertoire orchestral</strong>, préparant les jeunes musiciens aux auditions professionnelles.</p>
+    <div class="features">
+      <div class="feat"><h3>Préparation aux Auditions</h3><p>Travail ciblé sur les traits d'orchestre standards et techniques d'audition.</p></div>
+      <div class="feat"><h3>Projet Propellor</h3><p>Programme éducatif innovant pour enfants de <strong>6 à 11 ans</strong>, créé par <strong>Yuko Mori</strong>, axé sur l'individualité et la créativité à travers la musique de chambre.</p></div>
+    </div>
+  </div>
+</SectionLayout>
+<style>
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin-top: var(--space-xl); }
+  .feat { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; padding: var(--space-xl); }
+  .feat h3 { font-size: 1.2rem; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-burgundy); }
+  @media (max-width: 768px) { .features { grid-template-columns: 1fr; } }
+</style>

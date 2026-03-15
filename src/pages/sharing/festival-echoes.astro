@@ -1,0 +1,53 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Festival Echoes" section="sharing" activePage="echoes" description="Echoes of the Festival — lectures linked to the Château de Fontainebleau International Festival of Art History.">
+  <h2>Festival Echoes</h2>
+  <p class="page-intro">
+    Linked to the Château de Fontainebleau International Festival of Art History,
+    the "Echoes of the Festival" series brings art historical insights to La Loingtaine.
+  </p>
+
+  <div class="echoes-content">
+    <p>
+      Each year, the <strong>Château de Fontainebleau International Festival of Art History</strong>
+      brings together scholars, curators, and art lovers from around the world. La Loingtaine
+      participates in this celebration of art history through our <em>Echoes of the Festival</em>
+      lecture series.
+    </p>
+    <p>
+      These lectures extend the themes of the festival to our intimate setting, where
+      audiences can engage more deeply with the ideas and discoveries presented.
+    </p>
+
+    <div class="info-box">
+      <h3>About the Festival</h3>
+      <p>
+        The Festival de l'Histoire de l'Art is held annually at the Château de Fontainebleau,
+        just a short distance from La Loingtaine. It is a unique event that gathers art
+        historians, museum professionals, students, and the general public.
+      </p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .echoes-content {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .info-box {
+    background: var(--color-cream-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  .info-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-md);
+  }
+</style>

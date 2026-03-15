@@ -1,0 +1,26 @@
+---
+import SectionLayout from '../../../layouts/SectionLayout.astro';
+---
+
+<SectionLayout title="Calendrier" section="about" activePage="calendar" description="Calendrier des événements de La Loingtaine.">
+  <h2>Calendrier</h2>
+  <p class="page-intro">Prochains événements à La Loingtaine — concerts, masterclasses et rencontres culturelles.</p>
+  <div style="max-width:750px;margin:0 auto">
+    <div class="calendar-month"><h3>Mai 2025</h3>
+      <div class="event-item"><div class="event-date"><span class="ed">3</span><span class="em">Mai</span></div><div class="ei"><h4>Concert : Lydia Shelley & Thuy Anh Vuong</h4><p>Violoncelle et Piano — 16h à La Loingtaine</p></div></div>
+    </div>
+    <div class="calendar-month"><h3>Été 2025</h3>
+      <div class="event-item"><div class="event-date"><span class="ed">Jul–Août</span></div><div class="ei"><h4>Académie de Cordes 2025</h4><p>Programme intensif d'éducation musicale estivale</p></div></div>
+    </div>
+    <div class="cn"><p>D'autres événements seront annoncés. Contact : <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
+  </div>
+</SectionLayout>
+<style>
+  .calendar-month{margin-bottom:var(--space-2xl)}.calendar-month h3{font-size:1.4rem;padding-bottom:var(--space-sm);border-bottom:2px solid var(--color-burgundy);margin-bottom:var(--space-lg)}
+  .event-item{display:flex;gap:var(--space-lg);padding:var(--space-lg);background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;margin-bottom:var(--space-md)}
+  .event-date{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:70px;padding:var(--space-sm);background:var(--color-burgundy);color:var(--color-white);border-radius:6px;text-align:center}
+  .ed{font-size:1.5rem;font-weight:700;font-family:var(--font-heading);line-height:1.2}.em{font-size:.75rem;text-transform:uppercase}
+  .ei h4{color:var(--color-burgundy);margin-bottom:var(--space-xs)}.ei p{font-size:.9rem;color:var(--color-text-light);margin-bottom:0}
+  .cn{text-align:center;padding:var(--space-xl);background:var(--color-cream-light);border:1px dashed var(--color-border);border-radius:6px}
+  @media(max-width:600px){.event-item{flex-direction:column}}
+</style>
