@@ -1,53 +1,35 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import PhotoGallery from '../../../components/PhotoGallery.astro';
+
+const photos = [
+  { src: '/images/site/home-hero.jpg', alt: 'Salle de concert à La Loingtaine', caption: 'Salle de concert', year: 2025, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'Musique de chambre à La Loingtaine', caption: 'Concert de musique de chambre', year: 2025, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine extérieur', caption: 'La ferme en automne', year: 2024, category: 'general' },
+  { src: '/images/site/home-hero.jpg', alt: 'Académie de musique', caption: 'Académie d\'été 2024', year: 2024, category: 'academies' },
+  { src: '/images/site/home-hero.jpg', alt: 'Concert à La Loingtaine', caption: 'Rendez-vous avec Amadeus', year: 2023, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'Étudiants de l\'académie', caption: 'Performance de l\'académie 2023', year: 2023, category: 'academies' },
+  { src: '/images/site/home-hero.jpg', alt: 'Festival de piano', caption: 'Festival Piano Mon Amour', year: 2022, category: 'events' },
+  { src: '/images/site/home-hero.jpg', alt: 'Jardin de La Loingtaine', caption: 'Le parc le long du Loing', year: 2022, category: 'general' },
+  { src: '/images/site/home-hero.jpg', alt: 'Ensemble à La Loingtaine', caption: 'Camerata La Loingtaine', year: 2021, category: 'concerts' },
+];
 ---
 
-<SectionLayout title="Galerie Photos" section="delight" activePage="gallery" description="Galerie photos des concerts, événements et vie à La Loingtaine.">
+<SectionLayout title="Galerie Photos" section="delight" activePage="gallery" description="Galerie photos des concerts, événements et de la vie à La Loingtaine.">
   <h2>Galerie Photos</h2>
-  <p class="page-intro">Moments capturés de nos concerts, académies et événements culturels depuis 2005.</p>
-  <div class="gallery-filters" id="gallery-filters">
-    <button class="filter-btn filter-btn--active" data-year="all">Tous</button>
-    <button class="filter-btn" data-year="2026">2026</button>
-    <button class="filter-btn" data-year="2025">2025</button>
-    <button class="filter-btn" data-year="2024">2024</button>
-    <button class="filter-btn" data-year="2023">2023</button>
-  </div>
-  <div class="gallery-grid" id="gallery-grid">
-    <div class="gallery-item" data-year="2026"><div class="gallery-placeholder"><span class="gp-year">2026</span><span class="gp-label">Trio Cécile</span></div></div>
-    <div class="gallery-item" data-year="2025"><div class="gallery-placeholder"><span class="gp-year">2025</span><span class="gp-label">Concert Journée des Femmes</span></div></div>
-    <div class="gallery-item" data-year="2024"><div class="gallery-placeholder"><span class="gp-year">2024</span><span class="gp-label">Saison de Concerts</span></div></div>
-    <div class="gallery-item" data-year="2023"><div class="gallery-placeholder"><span class="gp-year">2023</span><span class="gp-label">Académie d'Été</span></div></div>
-  </div>
-  <p class="gallery-note">D'autres photos seront ajoutées. Pour des photos spécifiques, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.</p>
+  <p class="page-intro">
+    Des moments capturés de nos concerts, académies et événements culturels depuis 2005.
+  </p>
+
+  <PhotoGallery
+    photos={photos}
+    showFilters={true}
+    columns={3}
+    id="delight-gallery-fr"
+  />
+
+  <p class="gallery-note">
+    D'autres photos seront ajoutées au fur et à mesure de la migration de notre ancien site.
+    Pour des photos spécifiques, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.
+  </p>
 </SectionLayout>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filters = document.getElementById('gallery-filters');
-    const grid = document.getElementById('gallery-grid');
-    if (!filters || !grid) return;
-    filters.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement;
-      if (!btn) return;
-      const year = btn.dataset.year;
-      filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
-      btn.classList.add('filter-btn--active');
-      grid.querySelectorAll('.gallery-item').forEach(item => {
-        const el = item as HTMLElement;
-        if (year === 'all' || el.dataset.year === year) { el.style.display = ''; el.style.animation = 'fadeIn 0.3s ease'; }
-        else { el.style.display = 'none'; }
-      });
-    });
-  });
-</script>
-<style>
-  .gallery-filters { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl); }
-  .filter-btn { padding: var(--space-xs) var(--space-md); border: 1px solid var(--color-border); background: transparent; color: var(--color-brown); font-family: var(--font-nav); font-size: 0.8rem; cursor: pointer; border-radius: 20px; transition: all var(--transition-fast); }
-  .filter-btn:hover, .filter-btn--active { background: var(--color-burgundy); color: var(--color-white); border-color: var(--color-burgundy); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl); }
-  .gallery-item { aspect-ratio: 4/3; overflow: hidden; border-radius: 6px; border: 1px solid var(--color-border); }
-  .gallery-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-light) 100%); gap: var(--space-sm); }
-  .gp-year { font-family: var(--font-heading); font-size: 2rem; color: var(--color-burgundy); font-weight: 700; }
-  .gp-label { font-size: 0.85rem; color: var(--color-brown); }
-  .gallery-note { text-align: center; font-style: italic; color: var(--color-brown); font-size: 0.9rem; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-</style>

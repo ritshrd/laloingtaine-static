@@ -1,37 +1,73 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ImageCarousel from '../components/ImageCarousel.astro';
 import { useTranslations } from '../i18n/utils';
+import { getCollection } from 'astro:content';
 
 const lang = 'en';
 const t = useTranslations(lang);
+const now = new Date();
+
+// Get next upcoming featured concert
+const allConcerts = await getCollection('concerts', (entry) => {
+  return entry.id.startsWith('en/');
+});
+
+const upcomingConcerts = allConcerts
+  .filter((c) => new Date(c.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConcerts[0];
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const slides = [
+  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine — 18th Century Farmhouse' },
+  { src: '/images/site/home-hero.jpg', alt: 'Chamber Music Concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'Music Academy for Young Professionals' },
+];
 ---
 
 <PageLayout title="Home" section="home">
-  <!-- Hero: Image + Content split -->
+  <!-- Hero: Carousel + Content split -->
   <div class="home-split">
     <div class="home-split__image">
-      <img
-        src="/images/site/home-hero.jpg"
-        alt="La Loingtaine at night — a charming 18th century farmhouse"
-        width="600"
-        height="500"
-        loading="eager"
+      <ImageCarousel 
+        slides={slides} 
+        interval={5000} 
+        height="500px"
+        id="home-hero-carousel"
       />
     </div>
     <div class="home-split__content">
-      <div class="home-announcement">
-        <h2 class="announcement-title">International Women's Day Concert</h2>
-        <p class="announcement-detail">March 8 at 4 p.m. at La Loingtaine</p>
-        <p><strong>Musicians</strong></p>
-        <p>
-          Natsumi Dempo (Japan),<br />
-          Lana Herazymenko (Ukraine)<br />
-          Emily Davies (New Zealand)<br />
-          Louise de Crombrugghe (Belgium)<br />
-          Marta Medan (Serbia)<br />
-          accompanied by Simon Adda-Reyss
-        </p>
-      </div>
+      {nextConcert ? (
+        <div class="home-announcement">
+          <h2 class="announcement-title">{nextConcert.data.title}</h2>
+          <p class="announcement-detail">
+            {months[new Date(nextConcert.data.date).getMonth()]} {new Date(nextConcert.data.date).getDate()}
+            {nextConcert.data.time && ` at ${nextConcert.data.time}`}
+            {` at ${nextConcert.data.location || 'La Loingtaine'}`}
+          </p>
+          {nextConcert.data.musicians && nextConcert.data.musicians.length > 0 && (
+            <>
+              <p><strong>Musicians</strong></p>
+              <p>
+                {nextConcert.data.musicians.map((m, i) => (
+                  <>
+                    {m.name}{m.country ? ` (${m.country})` : ''}{m.instrument ? `, ${m.instrument}` : ''}
+                    {i < nextConcert.data.musicians!.length - 1 && <br />}
+                  </>
+                ))}
+              </p>
+            </>
+          )}
+        </div>
+      ) : (
+        <div class="home-announcement">
+          <h2 class="announcement-title">Welcome to La Loingtaine</h2>
+          <p>Au plus près de la culture et de la musique</p>
+        </div>
+      )}
 
       <div class="home-ctas">
         <a href="/delight/upcoming-concerts/" class="btn btn--primary">

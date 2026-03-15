@@ -1,5 +1,12 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getCollection } from 'astro:content';
+
+const team = await getCollection('artists', (entry) => {
+  return entry.id.startsWith('en/') && (entry.data as any).order !== undefined;
+});
+
+const sortedTeam = team.sort((a, b) => ((a.data as any).order || 99) - ((b.data as any).order || 99));
 ---
 
 <SectionLayout title="Who Are We?" section="about" activePage="whoarewe" description="Meet the team behind La Loingtaine — Aki Saulière, Raphael Bell, Masako Saulière, and Claude Saulière.">
@@ -9,49 +16,15 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
   </p>
 
   <div class="team-grid">
-    <div class="team-card">
-      <div class="team-info">
-        <h3>Aki Saulière</h3>
-        <span class="team-role">Artistic Director</span>
-        <p>
-          Violinist and artistic visionary, Aki directs the concert programming and
-          educational activities, bringing together exceptional musicians from around the world.
-        </p>
+    {sortedTeam.map((member) => (
+      <div class="team-card">
+        <div class="team-info">
+          <h3>{member.data.name}</h3>
+          <span class="team-role">{member.data.instrument}</span>
+          <p>{member.body}</p>
+        </div>
       </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-info">
-        <h3>Raphael Bell</h3>
-        <span class="team-role">Co-Director, Music</span>
-        <p>
-          Cellist and co-director of the concert series, Raphael ensures the highest
-          level of artistic quality and mentors young musicians through the academy.
-        </p>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-info">
-        <h3>Masako Saulière</h3>
-        <span class="team-role">Research & Communications</span>
-        <p>
-          Masako manages research partnerships, communications, and the publishing
-          activities of La Loingtaine, bridging connections between East and West.
-        </p>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-info">
-        <h3>Claude Saulière</h3>
-        <span class="team-role">Accommodation & Logistics</span>
-        <p>
-          Claude ensures that everyone who visits La Loingtaine — musicians, students,
-          and audiences alike — feels welcomed and at home.
-        </p>
-      </div>
-    </div>
+    ))}
   </div>
 </SectionLayout>
 

@@ -1,5 +1,20 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import PhotoGallery from '../../components/PhotoGallery.astro';
+
+// Placeholder photos until real images are migrated from WordPress
+// These will be replaced with actual concert/event photos
+const photos = [
+  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine concert hall', caption: 'Concert hall at La Loingtaine', year: 2025, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'Chamber music at La Loingtaine', caption: 'Chamber music performance', year: 2025, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine exterior', caption: 'The farmhouse in autumn', year: 2024, category: 'general' },
+  { src: '/images/site/home-hero.jpg', alt: 'Music academy session', caption: 'Summer Academy 2024', year: 2024, category: 'academies' },
+  { src: '/images/site/home-hero.jpg', alt: 'Concert at La Loingtaine', caption: 'Rendezvous with Amadeus', year: 2023, category: 'concerts' },
+  { src: '/images/site/home-hero.jpg', alt: 'Academy students performing', caption: 'Academy performance 2023', year: 2023, category: 'academies' },
+  { src: '/images/site/home-hero.jpg', alt: 'Piano festival', caption: 'Piano Mon Amour Festival', year: 2022, category: 'events' },
+  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine garden', caption: 'The park along the Loing river', year: 2022, category: 'general' },
+  { src: '/images/site/home-hero.jpg', alt: 'Ensemble at La Loingtaine', caption: 'Camerata La Loingtaine', year: 2021, category: 'concerts' },
+];
 ---
 
 <SectionLayout title="Photo Gallery" section="delight" activePage="gallery" description="Photo gallery of concerts, events, and life at La Loingtaine.">
@@ -8,162 +23,15 @@ import SectionLayout from '../../layouts/SectionLayout.astro';
     Moments captured from our concerts, academies, and cultural events since 2005.
   </p>
 
-  <!-- Year Filter -->
-  <div class="gallery-filters" id="gallery-filters">
-    <button class="filter-btn filter-btn--active" data-year="all">All</button>
-    <button class="filter-btn" data-year="2026">2026</button>
-    <button class="filter-btn" data-year="2025">2025</button>
-    <button class="filter-btn" data-year="2024">2024</button>
-    <button class="filter-btn" data-year="2023">2023</button>
-    <button class="filter-btn" data-year="2022">2022</button>
-    <button class="filter-btn" data-year="2021">2021</button>
-    <button class="filter-btn" data-year="2020">2020</button>
-    <button class="filter-btn" data-year="2019">2019</button>
-    <button class="filter-btn" data-year="2018">2018</button>
-  </div>
-
-  <div class="gallery-grid" id="gallery-grid">
-    <div class="gallery-item" data-year="2026">
-      <div class="gallery-placeholder">
-        <span class="gallery-placeholder__year">2026</span>
-        <span class="gallery-placeholder__label">Trio Cécile</span>
-      </div>
-    </div>
-    <div class="gallery-item" data-year="2025">
-      <div class="gallery-placeholder">
-        <span class="gallery-placeholder__year">2025</span>
-        <span class="gallery-placeholder__label">Women's Day Concert</span>
-      </div>
-    </div>
-    <div class="gallery-item" data-year="2024">
-      <div class="gallery-placeholder">
-        <span class="gallery-placeholder__year">2024</span>
-        <span class="gallery-placeholder__label">Concert Season</span>
-      </div>
-    </div>
-    <div class="gallery-item" data-year="2023">
-      <div class="gallery-placeholder">
-        <span class="gallery-placeholder__year">2023</span>
-        <span class="gallery-placeholder__label">Summer Academy</span>
-      </div>
-    </div>
-  </div>
+  <PhotoGallery
+    photos={photos}
+    showFilters={true}
+    columns={3}
+    id="delight-gallery"
+  />
 
   <p class="gallery-note">
     More photos will be added as the migration from our previous site is completed.
     For specific event photos, please <a href="mailto:info@laloingtaine.org">contact us</a>.
   </p>
 </SectionLayout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const filters = document.getElementById('gallery-filters');
-    const grid = document.getElementById('gallery-grid');
-    if (!filters || !grid) return;
-
-    filters.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement;
-      if (!btn) return;
-
-      const year = btn.dataset.year;
-
-      // Update active state
-      filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
-      btn.classList.add('filter-btn--active');
-
-      // Filter items
-      grid.querySelectorAll('.gallery-item').forEach(item => {
-        const el = item as HTMLElement;
-        if (year === 'all' || el.dataset.year === year) {
-          el.style.display = '';
-          el.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          el.style.display = 'none';
-        }
-      });
-    });
-  });
-</script>
-
-<style>
-  .gallery-filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
-  }
-
-  .filter-btn {
-    padding: var(--space-xs) var(--space-md);
-    border: 1px solid var(--color-border);
-    background: transparent;
-    color: var(--color-brown);
-    font-family: var(--font-nav);
-    font-size: 0.8rem;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: all var(--transition-fast);
-  }
-
-  .filter-btn:hover,
-  .filter-btn--active {
-    background: var(--color-burgundy);
-    color: var(--color-white);
-    border-color: var(--color-burgundy);
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
-  }
-
-  .gallery-item {
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    border-radius: 6px;
-    border: 1px solid var(--color-border);
-  }
-
-  .gallery-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-cream-light) 100%);
-    gap: var(--space-sm);
-    transition: background var(--transition-normal);
-  }
-
-  .gallery-placeholder:hover {
-    background: linear-gradient(135deg, var(--color-cream-light) 0%, var(--color-cream) 100%);
-  }
-
-  .gallery-placeholder__year {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    color: var(--color-burgundy);
-    font-weight: 700;
-  }
-
-  .gallery-placeholder__label {
-    font-size: 0.85rem;
-    color: var(--color-brown);
-  }
-
-  .gallery-note {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    font-size: 0.9rem;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
