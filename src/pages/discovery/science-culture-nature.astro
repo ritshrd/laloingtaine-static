@@ -1,3 +1,14 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/science-culture-nature');
+if (!entry) {
+  throw new Error('Science Culture Nature page content not found');
+}
+const { Content } = await render(entry);
+---
+
 <SectionLayout 
   title={entry.data.title} 
   section="discovery" 
