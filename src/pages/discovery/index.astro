@@ -1,50 +1,37 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/discovery');
+if (!entry) {
+  throw new Error('Discovery page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Discovery" section="discovery" description="Discovery at La Loingtaine — cultivating knowledge in science, culture, and nature.">
-  <div class="two-col">
-    <div class="section-image">
-      <img
-        src="/images/site/home-hero.jpg"
-        alt="Discovery and knowledge at La Loingtaine"
-        width="600"
-        height="450"
-        loading="eager"
-      />
-    </div>
-    <div class="section-text">
-      <h2>Discovery</h2>
-      <p>
-        La Loingtaine's ambition extends beyond art and music to
-        <strong>cultivate knowledge</strong> across science, culture, and nature.
-      </p>
-      <p>
-        In collaboration with <strong>Kyoto University (IRU-AFS)</strong> and an
-        international network of research institutes, we explore "paradigm shifts"
-        in governance and universal laws that connect the sciences and the humanities.
-      </p>
-      <p>
-        La Loingtaine serves as the <strong>European arm</strong> of this international
-        scientific network, known as the <em>Fontainebleau Dialogues</em>, which
-        brings together 15 research institutes around the world.
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  description="Discovery at La Loingtaine — cultivating knowledge in science, culture, and nature."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .section-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(139, 117, 101, 0.2);
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
-
-  .section-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
 </style>

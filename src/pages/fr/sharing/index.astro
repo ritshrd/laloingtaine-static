@@ -1,19 +1,37 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/sharing');
+if (!entry) {
+  throw new Error('Sharing page content not found (FR)');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Partage" section="sharing" description="Partage à La Loingtaine — conférences, livres et échange culturel.">
-  <div class="two-col">
-    <div class="section-text">
-      <h2>Partage</h2>
-      <p>La Loingtaine est un lieu de <strong>partage du savoir</strong>, des idées et de la culture. À travers conférences, publications et la série « Échos du Festival », nous réunissons penseurs, artistes et publics.</p>
-      <p>Nos conférences couvrent un large éventail de sujets incluant l'art, l'histoire, l'anthropologie et l'écologie. Les <em>Échos du Festival</em> sont liés au prestigieux <strong>Festival International de l'Histoire de l'Art au Château de Fontainebleau</strong>.</p>
-      <p>À travers les <strong>Éditions La Loingtaine</strong>, nous étendons cette mission au mot écrit.</p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  description="Partage à La Loingtaine — conférences, livres et échange culturel."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
-    <div class="section-image"><img src="/images/site/home-hero.jpg" alt="Partage culturel à La Loingtaine" width="600" height="450" loading="eager" /></div>
   </div>
 </SectionLayout>
+
 <style>
-  .section-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 20px rgba(139,117,101,0.2); }
-  .section-text { display: flex; flex-direction: column; justify-content: center; }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
 </style>

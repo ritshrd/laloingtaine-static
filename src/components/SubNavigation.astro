@@ -1,5 +1,5 @@
 ---
-import { useTranslations, getLocalizedPath } from '../i18n/utils';
+import { useTranslations, getLocalizedPath } from "../i18n/utils";
 
 interface NavItem {
   key: string;
@@ -8,59 +8,179 @@ interface NavItem {
 }
 
 interface Props {
-  lang: 'en' | 'fr';
+  lang: "en" | "fr";
   section: string;
   activePage?: string;
 }
 
-const { lang, section, activePage = '' } = Astro.props;
+const { lang, section, activePage = "" } = Astro.props;
 const t = useTranslations(lang);
 
 const sectionNavs: Record<string, NavItem[]> = {
   delight: [
-    { key: 'labande', label: t('nav.labande'), path: '/delight/la-bande/' },
-    { key: 'upcoming', label: t('nav.upcoming'), path: '/delight/upcoming-concerts/' },
-    { key: 'past', label: t('nav.past'), path: '/delight/past-concerts/' },
-    { key: 'schubertiades', label: t('nav.schubertiades'), path: '/delight/schubertiades/' },
-    { key: 'gallery', label: t('nav.gallery'), path: '/delight/gallery/' },
+    { key: "labande", label: t("nav.labande"), path: "/delight/la-bande/" },
+    {
+      key: "upcoming",
+      label: t("nav.upcoming"),
+      path: "/delight/upcoming-concerts/",
+    },
+    { key: "past", label: t("nav.past"), path: "/delight/past-concerts/" },
+    {
+      key: "schubertiades",
+      label: t("nav.schubertiades"),
+      path: "/delight/schubertiades/",
+    },
+    { key: "gallery", label: t("nav.gallery"), path: "/delight/gallery/" },
   ],
   learning: [
-    { key: 'academies', label: t('nav.academies'), path: '/learning/academies/' },
-    { key: 'masterclasses', label: t('nav.masterclasses'), path: '/learning/masterclasses/' },
-    { key: 'workshops', label: t('nav.workshops'), path: '/learning/workshops/' },
+    {
+      key: "academies",
+      label: t("nav.academies"),
+      path: "/learning/academies/",
+    },
+    {
+      key: "masterclasses",
+      label: t("nav.masterclasses"),
+      path: "/learning/masterclasses/",
+    },
+    {
+      key: "workshops",
+      label: t("nav.workshops"),
+      path: "/learning/workshops/",
+    },
+    { key: "test", label: t("nav.test"), path: "/learning/test/" },
   ],
   discovery: [
-    { key: 'science', label: t('nav.science'), path: '/discovery/science-culture-nature/' },
-    { key: 'forum', label: t('nav.forum'), path: '/discovery/ideas-forum/' },
+    {
+      key: "science",
+      label: t("nav.science"),
+      path: "/discovery/science-culture-nature/",
+    },
+    { key: "forum", label: t("nav.forum"), path: "/discovery/ideas-forum/" },
   ],
   sharing: [
-    { key: 'books', label: t('nav.books'), path: '/sharing/books/' },
-    { key: 'publishing', label: t('nav.publishing'), path: '/sharing/publishing/' },
-    { key: 'library', label: t('nav.library'), path: '/sharing/virtual-library/' },
-    { key: 'echoes', label: t('nav.echoes'), path: '/sharing/festival-echoes/' },
-    { key: 'conferences', label: t('nav.conferences'), path: '/sharing/conferences/' },
+    { key: "books", label: t("nav.books"), path: "/sharing/books/" },
+    {
+      key: "publishing",
+      label: t("nav.publishing"),
+      path: "/sharing/publishing/",
+    },
+    {
+      key: "library",
+      label: t("nav.library"),
+      path: "/sharing/virtual-library/",
+    },
+    {
+      key: "echoes",
+      label: t("nav.echoes"),
+      path: "/sharing/festival-echoes/",
+    },
+    {
+      key: "conferences",
+      label: t("nav.conferences"),
+      path: "/sharing/conferences/",
+    },
   ],
   about: [
-    { key: 'history', label: t('nav.laloingtaine'), path: '/about/history/' },
-    { key: 'whynew', label: t('nav.whynew'), path: '/about/why-new-site/' },
-    { key: 'whoarewe', label: t('nav.whoarewe'), path: '/about/who-are-we/' },
-    { key: 'calendar', label: t('nav.calendar'), path: '/about/calendar/' },
-    { key: 'howto', label: t('nav.howto'), path: '/about/how-to-get-there/' },
+    { key: "history", label: t("nav.laloingtaine"), path: "/about/history/" },
+    { key: "whynew", label: t("nav.whynew"), path: "/about/why-new-site/" },
+    { key: "whoarewe", label: t("nav.whoarewe"), path: "/about/who-are-we/" },
+    { key: "calendar", label: t("nav.calendar"), path: "/about/calendar/" },
+    { key: "howto", label: t("nav.howto"), path: "/about/how-to-get-there/" },
   ],
 };
 
 const navItems = sectionNavs[section] || [];
 ---
 
-{navItems.length > 0 && (
-  <nav class="sub-nav" aria-label={`${section} navigation`}>
-    {navItems.map((item) => (
-      <a
-        href={getLocalizedPath(item.path, lang)}
-        class:list={['sub-nav__link', { 'sub-nav__link--active': activePage === item.key }]}
-      >
-        {item.label}
-      </a>
-    ))}
-  </nav>
-)}
+{
+  navItems.length > 0 && (
+    <nav class="sub-nav" aria-label={`${section} navigation`}>
+      {navItems.map((item, index) => (
+        <div class="nav-item-wrapper">
+          <a
+            href={getLocalizedPath(item.path, lang)}
+            class:list={[
+              "sub-nav__link",
+              { "sub-nav__link--active": activePage === item.key },
+            ]}
+            set:html={item.label}
+          />
+          <span
+            class:list={[
+              "indicator",
+              { "indicator--active": activePage === item.key },
+            ]}
+          />
+          {index < navItems.length - 1 && <span class="separator">|</span>}
+        </div>
+      ))}
+    </nav>
+  )
+}
+
+<style>
+  .sub-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.8rem;
+    color: white;
+  }
+
+  .nav-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sub-nav__link {
+    color: white;
+    text-decoration: none;
+    line-height: 1.1;
+    transition: opacity 0.2s ease;
+    white-space: normal;
+    text-align: center;
+    max-width: 130px;
+    display: inline-block;
+    text-transform: capitalize;
+  }
+
+  .sub-nav__link:hover {
+    opacity: 0.8;
+  }
+
+  .sub-nav__link--active {
+    font-weight: 500;
+  }
+
+  .indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .indicator--active {
+    background: #e6dfd1; /* A light parchment color for the active dot inside */
+    border-color: white;
+  }
+
+  .separator {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    margin-left: 4px;
+    font-weight: 300;
+  }
+
+  @media (max-width: 900px) {
+    .sub-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

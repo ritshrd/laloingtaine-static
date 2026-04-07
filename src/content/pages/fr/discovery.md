@@ -1,17 +1,14 @@
 ---
-title: "Découverte"
+title: Découverte
 section: discovery
 order: 1
 ---
+**Aller au-delà de l’univers musical**
 
-## Recherche et débat
+Notre ambition est de faire de la Loingtaine un lieu de découvertes de différentes recherches scientifiques dépassant l’univers musical proprement dit.
 
-La Loingtaine sert d'espace pour les débats et la recherche au-delà de la musique. En collaboration avec l'**Université de Kyoto**, La Loingtaine est devenue un forum pour le dialogue multidisciplinaire sur les lois universelles et la gouvernance des organismes vivants.
+Nous nous appuyons sur 2 outils dans ce but :
 
-## Science, Culture et Nature
+l’espace Forum des idées, pour lequel nous vous invitons à proposer des thèmes de réflexion pour l’enrichir;
 
-Située près de la magnifique forêt de Fontainebleau, La Loingtaine offre une inspiration naturelle aux artistes, chercheurs et penseurs. Notre objectif est d'éclairer les changements de paradigme dans la science et la culture en incluant la dimension essentielle de la nature.
-
-## S'émerveiller de la nature
-
-Nous proposons des promenades guidées et des ateliers axés sur la biodiversité, encourageant les visiteurs à découvrir et apprécier l'environnement naturel remarquable qui entoure La Loingtaine.
+le réseau de scientifiques créé par l’Université de Kyoto en Asie, aux Etats-Unis et en Europe. A sa demande, la Loingtaine lui sert de relais pour l’élargir en invitant des artistes et des spécialistes de la culture à participer à ses travaux.

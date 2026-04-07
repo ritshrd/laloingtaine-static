@@ -1,9 +1,8 @@
 ---
-title: "La Loingtaine"
+title: La Loingtaine
 section: about
 order: 1
 ---
-
 ## Le Site
 
 La Loingtaine est une ferme du XVIIIe siècle, rénovée avec soin au début des années 1900, nichée près de la magnifique forêt de Fontainebleau dans le village de Montigny-sur-Loing.

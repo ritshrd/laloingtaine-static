@@ -1,53 +1,52 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/festival-echoes');
+if (!entry) {
+  throw new Error('Festival Echoes page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Festival Echoes" section="sharing" activePage="echoes" description="Echoes of the Festival — lectures linked to the Château de Fontainebleau International Festival of Art History.">
-  <h2>Festival Echoes</h2>
-  <p class="page-intro">
-    Linked to the Château de Fontainebleau International Festival of Art History,
-    the "Echoes of the Festival" series brings art historical insights to La Loingtaine.
-  </p>
-
-  <div class="echoes-content">
-    <p>
-      Each year, the <strong>Château de Fontainebleau International Festival of Art History</strong>
-      brings together scholars, curators, and art lovers from around the world. La Loingtaine
-      participates in this celebration of art history through our <em>Echoes of the Festival</em>
-      lecture series.
-    </p>
-    <p>
-      These lectures extend the themes of the festival to our intimate setting, where
-      audiences can engage more deeply with the ideas and discoveries presented.
-    </p>
-
-    <div class="info-box">
-      <h3>About the Festival</h3>
-      <p>
-        The Festival de l'Histoire de l'Art is held annually at the Château de Fontainebleau,
-        just a short distance from La Loingtaine. It is a unique event that gathers art
-        historians, museum professionals, students, and the general public.
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="echoes" 
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"} 
+  description="Echoes of the Festival — lectures linked to the Château de Fontainebleau International Festival of Art History."
+>
+  <div class="echoes-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .echoes-content {
-    max-width: 750px;
-    margin: 0 auto;
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
-
-  .info-box {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-xl);
-    margin-top: var(--space-xl);
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
   }
-
-  .info-box h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-md);
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .info-card {
+    background: #fdfaf2;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 4px;
+    margin-top: 40px;
   }
 </style>

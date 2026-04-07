@@ -1,5 +1,5 @@
 ---
-title: "Pourquoi ce nouveau site ?"
+title: Pourquoi ce nouveau site ?
 section: about
 order: 2
 ---

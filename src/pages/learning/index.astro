@@ -1,63 +1,37 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/learning');
+if (!entry) {
+  throw new Error('Learning page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Learning (Music)" section="learning" description="Music education at La Loingtaine — academies, masterclasses, and workshops for emerging musicians.">
-  <div class="two-col">
-    <div class="section-text">
-      <h2>Learning (Music)</h2>
-      <blockquote class="page-quote">
-        "Transmission of musical skills and knowledge"
-      </blockquote>
-      <p>
-        La Loingtaine focuses on <strong>deepening musical education</strong> for all levels,
-        particularly addressing the gap between technique and musical maturity
-        for postgraduate students.
-      </p>
-      <p>
-        Our approach is built on an <strong>immersive environment</strong> — sharing meals,
-        conversations, and concerts with professional musicians, creating a holistic
-        educational experience that nurtures both technical skill and artistic identity.
-      </p>
-      <p>
-        Through our academies, masterclasses, and workshops, young musicians find a
-        unique space where they can develop their personal musical voice.
-      </p>
-    </div>
-    <div class="section-image">
-      <img
-        src="/images/site/home-hero.jpg"
-        alt="Music education at La Loingtaine"
-        width="600"
-        height="450"
-        loading="eager"
-      />
+<SectionLayout 
+  title={entry.data.title} 
+  section="learning" 
+  description="Music education at La Loingtaine — academies, masterclasses, and workshops for emerging musicians."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .section-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(139, 117, 101, 0.2);
-  }
-
-  .section-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .page-quote {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--color-brown);
-    border-left: 3px solid var(--color-burgundy);
-    padding-left: var(--space-lg);
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
     margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
 </style>

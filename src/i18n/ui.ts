@@ -12,20 +12,22 @@ export const ui = {
     'nav.learning': 'Learning (music)',
     'nav.discovery': 'Discovery',
     'nav.sharing': 'Sharing',
+    'nav.about': 'About',
     'nav.home': 'HOME',
 
     // Sub-navigation: Delight
-    'nav.labande': 'La Bande La Loingtaine',
+    'nav.labande': 'La Bande<br/>La Loingtaine',
     'nav.concerts': 'Concerts',
-    'nav.upcoming': 'Upcoming concerts',
-    'nav.past': 'Past concerts',
-    'nav.schubertiades': 'Association Schubertiades',
+    'nav.upcoming': 'Upcoming<br/>concerts',
+    'nav.past': 'Past<br/>concerts',
+    'nav.schubertiades': 'Association<br/>Schubertiades',
     'nav.gallery': 'Photo gallery',
 
     // Sub-navigation: Learning
     'nav.academies': 'Academies',
     'nav.masterclasses': 'Masterclasses',
     'nav.workshops': 'Workshops',
+    'nav.test': 'Test',
 
     // Sub-navigation: Discovery
     'nav.science': 'Science, Culture and Nature',
@@ -60,20 +62,22 @@ export const ui = {
     'nav.learning': 'Transmission',
     'nav.discovery': 'Découverte',
     'nav.sharing': 'Partage',
+    'nav.about': 'À Propos',
     'nav.home': 'ACCUEIL',
 
     // Sub-navigation: Delight
-    'nav.labande': 'La Bande La Loingtaine',
+    'nav.labande': 'La Bande<br/>La Loingtaine',
     'nav.concerts': 'Concerts',
-    'nav.upcoming': 'Prochains concerts',
-    'nav.past': 'Concerts passés',
-    'nav.schubertiades': 'Association Schubertiades',
+    'nav.upcoming': 'Prochains<br/>concerts',
+    'nav.past': 'Concerts<br/>passés',
+    'nav.schubertiades': 'Association<br/>Schubertiades',
     'nav.gallery': 'Galerie photos',
 
     // Sub-navigation: Learning
     'nav.academies': 'Académies',
     'nav.masterclasses': 'Masterclasses',
     'nav.workshops': 'Ateliers',
+    'nav.test': 'Teste',
 
     // Sub-navigation: Discovery
     'nav.science': 'Science, Culture et Nature',

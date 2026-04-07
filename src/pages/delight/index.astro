@@ -1,64 +1,37 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/delight');
+if (!entry) {
+  throw new Error('Delight page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Delight" section="delight" description="Chamber music at La Loingtaine — concerts, galleries, and the joy of music.">
-  <div class="two-col">
-    <div class="section-image">
-      <img
-        src="/images/site/home-hero.jpg"
-        alt="La Loingtaine — a charming 18th century farmhouse dedicated to music"
-        width="600"
-        height="450"
-        loading="eager"
-      />
-    </div>
-    <div class="section-text">
-      <h2>Delight</h2>
-      <blockquote class="page-quote">
-        "Music is the eternal voice of the soul"
-      </blockquote>
-      <p>
-        Chamber music concerts have been the core activity at La Loingtaine since 2005,
-        directed by <strong>Aki Saulière</strong> and <strong>Raphael Bell</strong>.
-        They feature high-level international musicians who often perform together
-        only at La Loingtaine.
-      </p>
-      <p>
-        After each concert, tea and treats are shared between audience and musicians,
-        creating a warm and personal connection that is at the heart of our mission.
-      </p>
-      <p>
-        Over <strong>200 concerts</strong> have been organized since 2005 by
-        the Association Schubertiades, bringing exceptional chamber music to
-        this intimate setting near Fontainebleau.
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="delight" 
+  description="Chamber music at La Loingtaine — concerts, galleries, and the joy of music."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .section-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(139, 117, 101, 0.2);
-  }
-
-  .section-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .page-quote {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--color-brown);
-    border-left: 3px solid var(--color-burgundy);
-    padding-left: var(--space-lg);
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
     margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
 </style>

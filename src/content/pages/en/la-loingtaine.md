@@ -1,9 +1,9 @@
 ---
-title: "La Loingtaine"
+title: La Loingtaine
 section: about
 order: 1
+image: /images/decouverte_home.jpg
 ---
-
 ## The Site
 
 La Loingtaine is an 18th-century farmhouse, lovingly renovated in the early 1900s, nestled near the magnificent forest of Fontainebleau in the village of Montigny-sur-Loing.

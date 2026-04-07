@@ -1,48 +1,52 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/virtual-library');
+if (!entry) {
+  throw new Error('Virtual Library page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Virtual Library Project" section="sharing" activePage="library" description="Virtual Library Project — an annotated bibliography on UNESCO, science, and ecology.">
-  <h2>Virtual Library Project</h2>
-  <p class="page-intro">
-    An annotated bibliography project focusing on UNESCO, science, and ecology publications.
-  </p>
-
-  <div class="library-content">
-    <p>
-      The Virtual Library Project at La Loingtaine aims to create an accessible,
-      annotated collection of important works in the fields of <strong>UNESCO initiatives</strong>,
-      <strong>scientific research</strong>, and <strong>ecology</strong>.
-    </p>
-    <p>
-      By curating and annotating these works, we hope to make them more accessible
-      to researchers, students, and curious minds everywhere — furthering our mission
-      of sharing knowledge across borders and disciplines.
-    </p>
-
-    <div class="library-note">
-      <p>
-        <em>This project is currently in development. We welcome contributions and suggestions.</em>
-      </p>
-      <p>
-        Contact: <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="library" 
+  description="Virtual Library Project — an annotated bibliography on UNESCO, science, and ecology."
+  heroImage={entry.data.image}
+>
+  <div class="library-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .library-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .library-note {
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
     text-align: center;
-    background: var(--color-cream-light);
-    border: 2px dashed var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-xl);
-    margin-top: var(--space-2xl);
+  }
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .status-box {
+    text-align: center;
+    background: #fdfaf2;
+    border: 1px dashed #c9b08a;
+    padding: 30px;
+    margin-top: 50px;
   }
 </style>

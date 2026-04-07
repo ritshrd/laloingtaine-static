@@ -1,27 +1,115 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/la-bande');
+const enEntry = await getEntry('pages', 'en/la-bande');
+const { Content: PageContent } = entry ? await render(entry) : { Content: null };
+
+const artists = await getCollection('artists', (entry) => {
+  return entry.id.startsWith('fr/');
+});
+
+// Sort by order
+const sortedArtists = artists.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
 ---
 
-<SectionLayout title="La Bande La Loingtaine" section="delight" activePage="labande" description="L'ensemble principal de La Loingtaine — des musiciens dévoués au cœur de nos concerts.">
-  <h2>La Bande La Loingtaine</h2>
-  <p class="page-intro">L'ensemble au cœur de La Loingtaine, réunissant des musiciens de renommée internationale partageant une passion pour la musique de chambre dans un cadre intime.</p>
+<SectionLayout 
+  title={entry?.data.title || "La Bande La Loingtaine"} 
+  section="delight" 
+  activePage="labande" 
+  description="L'ensemble principal de La Loingtaine — des musiciens dévoués au cœur de nos concerts."
+  heroImage={entry?.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="la-bande-content">
+    <h2>{entry?.data.title || "La Bande"}</h2>
+    <div class="intro-text">
+      {PageContent ? <PageContent /> : (
+        <p>
+          L'ensemble au cœur de La Loingtaine, réunissant des musiciens de renommée internationale 
+          partageant une passion pour la musique de chambre dans un cadre intime.
+        </p>
+      )}
+    </div>
 
-  <div class="artist-grid">
-    <div class="artist-card"><div class="artist-info"><h3>Aki Saulière</h3><span class="artist-instrument">Violon</span><p>Directrice artistique et cofondatrice de la série de concerts à La Loingtaine.</p></div></div>
-    <div class="artist-card"><div class="artist-info"><h3>Raphael Bell</h3><span class="artist-instrument">Violoncelle</span><p>Co-directeur de la série de concerts. Raphael apporte un engagement total envers les plus hauts standards artistiques.</p></div></div>
-    <div class="artist-card"><div class="artist-info"><h3>David Quiggle</h3><span class="artist-instrument">Alto</span><p>Membre précieux de la bande, David apporte richesse et chaleur à l'ensemble.</p></div></div>
-    <div class="artist-card"><div class="artist-info"><h3>Joseph Carver</h3><span class="artist-instrument">Contrebasse</span><p>Joseph apporte une base solide aux œuvres d'ensemble plus larges.</p></div></div>
-    <div class="artist-card"><div class="artist-info"><h3>Maria Bader-Kubizek</h3><span class="artist-instrument">Violon</span><p>Violoniste accomplie alliant précision et passion dans chaque concert.</p></div></div>
-    <div class="artist-card"><div class="artist-info"><h3>Matthew Hunt</h3><span class="artist-instrument">Clarinette</span><p>La clarinette de Matthew ajoute une couleur distinctive à l'ensemble.</p></div></div>
+    <div class="artist-list">
+      {sortedArtists.map(async (artist) => {
+        const { Content } = await render(artist);
+        return (
+          <div class="artist-entry">
+            <div class="artist-header">
+              <h3>{artist.data.name}</h3>
+              <span class="artist-instrument">{artist.data.instrument}</span>
+            </div>
+            <div class="bio-content">
+              <Content />
+            </div>
+          </div>
+        );
+      })}
+    </div>
   </div>
 </SectionLayout>
 
 <style>
-  .artist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-xl); margin-top: var(--space-xl); }
-  .artist-card { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
-  .artist-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(139,117,101,0.15); }
-  .artist-info { padding: var(--space-lg); }
-  .artist-info h3 { font-size: 1.3rem; margin-bottom: var(--space-xs); }
-  .artist-instrument { display: inline-block; font-family: var(--font-nav); font-size: 0.8rem; color: var(--color-white); background: var(--color-burgundy); padding: 2px 10px; border-radius: 12px; margin-bottom: var(--space-md); }
-  @media (max-width: 768px) { .artist-grid { grid-template-columns: 1fr; } }
+  .la-bande-content {
+    color: var(--color-text);
+  }
+
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .intro-text p {
+    margin-bottom: 1rem;
+  }
+
+  .artist-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .artist-entry {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 30px;
+  }
+
+  .artist-entry:last-child {
+    border-bottom: none;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+
+  .artist-instrument {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-burgundy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .bio-content {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #444;
+  }
 </style>

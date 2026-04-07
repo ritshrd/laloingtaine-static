@@ -1,37 +1,79 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
 import PhotoGallery from '../../components/PhotoGallery.astro';
+import { getCollection, getEntry, render } from 'astro:content';
 
-// Placeholder photos until real images are migrated from WordPress
-// These will be replaced with actual concert/event photos
-const photos = [
-  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine concert hall', caption: 'Concert hall at La Loingtaine', year: 2025, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'Chamber music at La Loingtaine', caption: 'Chamber music performance', year: 2025, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine exterior', caption: 'The farmhouse in autumn', year: 2024, category: 'general' },
-  { src: '/images/site/home-hero.jpg', alt: 'Music academy session', caption: 'Summer Academy 2024', year: 2024, category: 'academies' },
-  { src: '/images/site/home-hero.jpg', alt: 'Concert at La Loingtaine', caption: 'Rendezvous with Amadeus', year: 2023, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'Academy students performing', caption: 'Academy performance 2023', year: 2023, category: 'academies' },
-  { src: '/images/site/home-hero.jpg', alt: 'Piano festival', caption: 'Piano Mon Amour Festival', year: 2022, category: 'events' },
-  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine garden', caption: 'The park along the Loing river', year: 2022, category: 'general' },
-  { src: '/images/site/home-hero.jpg', alt: 'Ensemble at La Loingtaine', caption: 'Camerata La Loingtaine', year: 2021, category: 'concerts' },
-];
+const entry = await getEntry('pages', 'en/gallery');
+const { Content } = entry ? await render(entry) : { Content: null };
+
+const galleryEntries = await getCollection('gallery');
+
+// Flatten and map gallery entries into a flat array of photos
+const photos = galleryEntries.flatMap((entry) => 
+  entry.data.photos.map((photo) => ({
+    src: photo.image,
+    alt: photo.caption || entry.data.title,
+    caption: photo.caption,
+    year: entry.data.year,
+    category: entry.data.category
+  }))
+).sort((a, b) => (b.year || 0) - (a.year || 0));
 ---
 
-<SectionLayout title="Photo Gallery" section="delight" activePage="gallery" description="Photo gallery of concerts, events, and life at La Loingtaine.">
-  <h2>Photo Gallery</h2>
-  <p class="page-intro">
-    Moments captured from our concerts, academies, and cultural events since 2005.
-  </p>
+<SectionLayout 
+  title={entry?.data.title || "Photo Gallery"} 
+  section="delight" 
+  activePage="gallery" 
+  description="Photo gallery of concerts, events, and life at La Loingtaine."
+  heroImage={entry?.data.image}
+>
+  <div class="gallery-page-container">
+    <h2>{entry?.data.title || "Photo Gallery"}</h2>
+    
+    <div class="content-body">
+      {Content ? <Content /> : <p>Moments captured from our concerts, academies, and cultural events since 2005.</p>}
+    </div>
 
-  <PhotoGallery
-    photos={photos}
-    showFilters={true}
-    columns={3}
-    id="delight-gallery"
-  />
-
-  <p class="gallery-note">
-    More photos will be added as the migration from our previous site is completed.
-    For specific event photos, please <a href="mailto:info@laloingtaine.org">contact us</a>.
-  </p>
+    <div class="gallery-wrapper">
+      <PhotoGallery
+        photos={photos}
+        showFilters={true}
+        columns={3}
+        id="delight-gallery"
+      />
+    </div>
+  </div>
 </SectionLayout>
+
+<style>
+  .gallery-page-container {
+    color: var(--color-text);
+  }
+
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .gallery-wrapper {
+    margin-top: 20px;
+  }
+
+  .gallery-note {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fdfaf2;
+    text-align: center;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+</style>

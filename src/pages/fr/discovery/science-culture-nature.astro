@@ -1,16 +1,64 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/science-culture-nature');
+const enEntry = await getEntry('pages', 'en/science-culture-nature');
+if (!entry) {
+  throw new Error('Science, Culture and Nature page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Science, Culture et Nature" section="discovery" activePage="science" description="Les Dialogues de Fontainebleau à La Loingtaine.">
-  <h2>Science, Culture et Nature</h2>
-  <p class="page-intro">La Loingtaine est le bras européen d'un réseau scientifique international, les Dialogues de Fontainebleau, impliquant 15 instituts de recherche.</p>
-  <div style="max-width:750px;margin:0 auto">
-    <p>En partenariat avec l'<strong>Université de Kyoto</strong> et l'<strong>IRU-AFS</strong>, La Loingtaine accueille dialogues et séminaires sur les connexions entre recherche scientifique et développement humain.</p>
-    <div class="network-info"><h3>Le Réseau International</h3><p>Le réseau réunit <strong>15 instituts de recherche</strong> sur plusieurs continents. Les sujets explorés incluent l'écologie, le développement durable, la relation entre art et science, et le rôle de la culture dans la transformation sociale.</p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  activePage="science" 
+  description="Science, Culture et Nature — les Dialogues de Fontainebleau à La Loingtaine."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="discovery-content">
+          Les sujets explorés incluent l'écologie, le développement durable, la relation entre 
+          art et science, et le rôle de la culture dans la transformation sociale.
+        </p>
+      </div>
+    </div>
   </div>
 </SectionLayout>
+
 <style>
-  .network-info { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; padding: var(--space-xl); margin-top: var(--space-xl); }
-  .network-info h3 { font-size: 1.2rem; margin-bottom: var(--space-md); }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .main-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .info-card {
+    background: #fdfaf2;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 4px;
+    margin-top: 40px;
+  }
+
+  .info-card h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+    color: var(--color-burgundy);
+  }
 </style>

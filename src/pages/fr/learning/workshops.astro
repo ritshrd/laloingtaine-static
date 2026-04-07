@@ -1,21 +1,57 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/workshops');
+if (!entry) {
+  throw new Error('Workshops page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Ateliers" section="learning" activePage="workshops" description="Ateliers d'étude orchestrale à La Loingtaine.">
-  <h2>Ateliers</h2>
-  <p class="page-intro">Étude orchestrale pour les auditions, dirigée par des musiciens d'orchestre expérimentés.</p>
-  <div style="max-width:800px;margin:0 auto">
-    <p>Les ateliers de La Loingtaine se concentrent sur l'<strong>étude du répertoire orchestral</strong>, préparant les jeunes musiciens aux auditions professionnelles.</p>
-    <div class="features">
-      <div class="feat"><h3>Préparation aux Auditions</h3><p>Travail ciblé sur les traits d'orchestre standards et techniques d'audition.</p></div>
-      <div class="feat"><h3>Projet Propellor</h3><p>Programme éducatif innovant pour enfants de <strong>6 à 11 ans</strong>, créé par <strong>Yuko Mori</strong>, axé sur l'individualité et la créativité à travers la musique de chambre.</p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="learning" 
+  activePage="workshops" 
+  description="Ateliers d'étude orchestrale à La Loingtaine."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="learning-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="body-text">
+      <Content />
     </div>
+
+    {entry.data.highlights && (
+      <div class="features-grid">
+        {entry.data.highlights.map((h) => (
+          <div class="feature-card">
+            <span class="feat-icon">{h.icon}</span>
+            <h3>{h.title}</h3>
+            <p>{h.description}</p>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 </SectionLayout>
+
 <style>
-  .features { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin-top: var(--space-xl); }
-  .feat { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; padding: var(--space-xl); }
-  .feat h3 { font-size: 1.2rem; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-burgundy); }
-  @media (max-width: 768px) { .features { grid-template-columns: 1fr; } }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
 </style>

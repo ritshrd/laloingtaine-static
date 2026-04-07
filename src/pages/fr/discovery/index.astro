@@ -1,19 +1,37 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/discovery');
+if (!entry) {
+  throw new Error('Discovery page content not found (FR)');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Découverte" section="discovery" description="Découverte à La Loingtaine — cultiver le savoir en science, culture et nature.">
-  <div class="two-col">
-    <div class="section-image"><img src="/images/site/home-hero.jpg" alt="Découverte et connaissance à La Loingtaine" width="600" height="450" loading="eager" /></div>
-    <div class="section-text">
-      <h2>Découverte</h2>
-      <p>L'ambition de La Loingtaine s'étend au-delà de l'art et de la musique pour <strong>cultiver le savoir</strong> en science, culture et nature.</p>
-      <p>En collaboration avec l'<strong>Université de Kyoto (IRU-AFS)</strong> et un réseau international d'instituts de recherche, nous explorons les « changements de paradigme » en gouvernance et en lois universelles.</p>
-      <p>La Loingtaine est le <strong>bras européen</strong> de ce réseau scientifique international, les <em>Dialogues de Fontainebleau</em>, qui réunit 15 instituts de recherche à travers le monde.</p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  description="Découverte à La Loingtaine — cultiver le savoir en science, culture et nature."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
+
 <style>
-  .section-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 20px rgba(139,117,101,0.2); }
-  .section-text { display: flex; flex-direction: column; justify-content: center; }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
 </style>

@@ -1,0 +1,218 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  getAlternatePaths,
+  getLocalizedPath,
+} from "../i18n/utils";
+
+interface Props {
+  title: string;
+  description?: string;
+  heroImage?: string;
+}
+
+const {
+  title,
+  description,
+  heroImage = "/images/site/home-hero.jpg",
+} = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { en: enPath, fr: frPath } = getAlternatePaths(Astro.url);
+
+const navItems = [
+  { label: t("nav.delight"), path: "/delight/", key: "delight" },
+  { label: t("nav.learning"), path: "/learning/", key: "learning" },
+  { label: t("nav.discovery"), path: "/discovery/", key: "discovery" },
+  { label: t("nav.sharing"), path: "/sharing/", key: "sharing" },
+];
+
+const homePath = lang === "fr" ? "/fr/" : "/";
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <div class="layout-container">
+    <div class="layout-card decorative-frame">
+      <div class="layout-columns">
+        <!-- Left: Large Image with Overlay Nav -->
+        <div class="layout-image-side">
+          <img src={heroImage} alt="La Loingtaine" />
+
+          <div class="main-nav-overlay">
+            {
+              navItems.map((item) => (
+                <a href={getLocalizedPath(item.path, lang)} class="nav-button">
+                  {item.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Right: Content Column -->
+        <div class="layout-content-side">
+          <header class="home-header">
+            <h1 class="site-title">La Loingtaine</h1>
+            <p class="tagline">Au plus près de la culture et de la musique</p>
+            <div class="header-line"></div>
+          </header>
+
+          <main class="home-dynamic-content layout-scroll-pane">
+            <slot />
+          </main>
+        </div>
+      </div>
+
+      <!-- Footer Bar -->
+      <footer class="layout-footer">
+        <div class="footer-spacer"></div>
+        <div class="footer-utility">
+          <div class="lang-switch">
+            <a
+              href={enPath}
+              class={lang === "en" ? "active" : ""}
+              title="English">🇬🇧</a
+            >
+            <span class="sep">|</span>
+            <a
+              href={frPath}
+              class={lang === "fr" ? "active" : ""}
+              title="Français">🇫🇷</a
+            >
+          </div>
+          <a href={homePath} class="home-link">
+            HOME <span class="home-icon">🏠︎</span>
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- External Footer Info -->
+    <div class="layout-external-info">
+      <p>
+        40 rue Grande, Sorques, 77690 Montigny sur Loing. Réservation: 01 64 45
+        83 14 / 06 22 85 11 86. Copyright © 2026. La loingtaine. All rights
+        reserved.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body {
+    background: #d4c4a8;
+    margin: 0;
+  }
+</style>
+
+<style>
+  .main-nav-overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .nav-button {
+    background: #8b1e1e; /* Burgundy buttons */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition:
+      transform 0.2s,
+      background 0.2s;
+  }
+
+  .nav-button:hover {
+    transform: translateY(-2px);
+    background: #a32424;
+  }
+
+  /* Specific tweaks for Home */
+  .layout-content-side {
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-title {
+    font-family: var(--font-logo);
+    font-size: 2.5rem;
+    color: #8b1e1e;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .tagline {
+    font-family: var(--font-logo);
+    font-size: 1.1rem;
+    color: #4a3728;
+    margin: 10px 0 20px;
+    letter-spacing: 1px;
+  }
+
+  .header-line {
+    width: 100%;
+    max-width: 300px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #c9b08a, transparent);
+    margin-bottom: 40px;
+  }
+
+  .home-dynamic-content {
+    width: 100%;
+  }
+
+  .footer-utility {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+
+    padding: 0px 0px 7px 0px;
+  }
+
+  .lang-switch a {
+    text-decoration: none;
+    opacity: 0.5;
+  }
+
+  .lang-switch a.active {
+    opacity: 1;
+  }
+
+  .home-link {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .main-nav-overlay {
+      flex-wrap: wrap;
+      bottom: 10px;
+      left: 10px;
+    }
+    .site-title {
+      font-size: 2.5rem;
+    }
+  }
+</style>

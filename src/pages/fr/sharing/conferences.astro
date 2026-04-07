@@ -1,24 +1,81 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/conferences');
+const enEntry = await getEntry('pages', 'en/conferences');
+if (!entry) {
+  throw new Error('Conferences page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Conférences" section="sharing" activePage="conferences" description="Conférences à La Loingtaine — intervenants distingués.">
-  <h2>Conférences</h2>
-  <p class="page-intro">Des intervenants distingués partagent leurs réflexions sur l'art, la science, la musique et le patrimoine.</p>
-  <div style="max-width:800px;margin:0 auto">
-    <div class="speaker-list">
-      <div class="speaker-card"><h3>Dr. Denis Le Bihan</h3><p class="speaker-topic">Imagerie Cérébrale et Musique</p><p>Chercheur pionnier en imagerie cérébrale, explorant les connexions fascinantes entre le cerveau et la musique.</p></div>
-      <div class="speaker-card"><h3>Georges Kutukdjian</h3><p class="speaker-topic">UNESCO et Patrimoine Culturel</p><p>Figure distinguée de la politique culturelle internationale avec des décennies d'expérience à l'UNESCO.</p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="conferences" 
+  description="Conférences à La Loingtaine — intervenants invités sur l'art, la science, la musique et le patrimonio."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="conferences-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
-    <div class="conference-cta"><p>Intéressé à assister ou proposer une conférence ?<br />Contact : <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
   </div>
 </SectionLayout>
+
 <style>
-  .speaker-list{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-bottom:var(--space-2xl)}
-  .speaker-card{background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;padding:var(--space-xl);transition:transform var(--transition-normal)}
-  .speaker-card:hover{transform:translateY(-3px)}
-  .speaker-card h3{font-size:1.2rem;margin-bottom:var(--space-xs)}
-  .speaker-topic{font-family:var(--font-nav);font-size:.8rem;color:var(--color-white);background:var(--color-burgundy);display:inline-block;padding:2px 10px;border-radius:12px;margin-bottom:var(--space-md)}
-  .conference-cta{text-align:center;padding:var(--space-xl);background:var(--color-cream-light);border:1px dashed var(--color-border);border-radius:6px}
-  @media(max-width:768px){.speaker-list{grid-template-columns:1fr}}
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+  .speaker-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .speaker-item {
+    background: #fdfaf2;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+  }
+  .topic-tag {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    color: white;
+    background: var(--color-burgundy);
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .speaker-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  .speaker-item p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+  }
+  .footer-cta {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed #ccc;
+  }
 </style>

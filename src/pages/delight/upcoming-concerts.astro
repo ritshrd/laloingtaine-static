@@ -18,72 +18,94 @@ const upcomingConcerts = allConcerts
   .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
 ---
 
-<SectionLayout title="Upcoming Concerts" section="delight" activePage="upcoming" description="Upcoming chamber music concerts at La Loingtaine near Fontainebleau.">
-  <h2>Upcoming Concerts</h2>
-  <p class="page-intro">
-    Join us for our next performances at La Loingtaine.
-    Reservations recommended — contact us at 01 64 45 83 14 or 06 22 85 11 86.
-  </p>
-
-  <div class="concert-list">
-    {upcomingConcerts.length > 0 ? (
-      upcomingConcerts.map((concert) => (
-        <ConcertCard
-          title={concert.data.title}
-          date={new Date(concert.data.date)}
-          time={concert.data.time}
-          location={concert.data.location}
-          musicians={concert.data.musicians}
-          featured={concert.data.featured}
-          lang={lang}
-        />
-      ))
-    ) : (
-      <div class="no-concerts">
-        <p>No upcoming concerts currently scheduled. Please check back soon!</p>
-        <p>For the latest information, contact us:</p>
-        <p class="contact-info">
-          <strong>Phone:</strong> 01 64 45 83 14 / 06 22 85 11 86<br />
-          <strong>Email:</strong> <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-        </p>
-      </div>
-    )}
-  </div>
-
-  <div class="concert-cta">
-    <p>For the complete concert program and reservations:</p>
-    <p class="contact-info">
-      <strong>Phone:</strong> 01 64 45 83 14 / 06 22 85 11 86<br />
-      <strong>Email:</strong> <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+<SectionLayout 
+  title="Upcoming Concerts" 
+  section="delight" 
+  activePage="upcoming" 
+  description="Upcoming chamber music concerts at La Loingtaine near Fontainebleau."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="concerts-container">
+    <h2>Upcoming Concerts</h2>
+    <p class="intro">
+      Join us for our next performances at La Loingtaine.
+      Reservations recommended.
     </p>
+
+    <div class="concert-scroll-list">
+      {upcomingConcerts.length > 0 ? (
+        upcomingConcerts.map((concert) => (
+          <ConcertCard
+            title={concert.data.title}
+            date={new Date(concert.data.date)}
+            time={concert.data.time}
+            location={concert.data.location}
+            musicians={concert.data.musicians}
+            featured={concert.data.featured}
+            lang={lang}
+          />
+        ))
+      ) : (
+        <div class="no-concerts">
+          <p>No upcoming concerts currently scheduled. Please check back soon!</p>
+        </div>
+      )}
+    </div>
+
+    <div class="reservation-info">
+      <h3>Reservations</h3>
+      <p>
+        01 64 45 83 14 / 06 22 85 11 86<br />
+        <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+      </p>
+    </div>
   </div>
 </SectionLayout>
 
 <style>
-  .concert-list {
-    max-width: 800px;
-    margin: 0 auto var(--space-2xl);
+  .concerts-container {
+    color: var(--color-text);
   }
 
-  .concert-cta {
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
     text-align: center;
-    padding: var(--space-xl);
-    background: var(--color-cream-light);
-    border: 1px dashed var(--color-border);
-    border-radius: 6px;
-    max-width: 500px;
-    margin: 0 auto;
   }
 
-  .contact-info {
-    font-size: 0.95rem;
+  .intro {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: var(--space-2xl);
+    color: var(--color-brown);
+  }
+
+  .concert-scroll-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .reservation-info {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl);
+    background: #fdfaf2;
+    border-top: 2px solid var(--color-burgundy);
+    text-align: center;
+  }
+
+  .reservation-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: var(--space-sm);
   }
 
   .no-concerts {
     text-align: center;
-    padding: var(--space-2xl);
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
+    padding: 40px;
+    background: #fdfaf2;
+    border-radius: 4px;
+    color: var(--color-text-light);
   }
 </style>

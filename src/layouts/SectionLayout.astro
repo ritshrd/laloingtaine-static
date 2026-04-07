@@ -1,41 +1,194 @@
 ---
-import PageLayout from './PageLayout.astro';
-import SubNavigation from '../components/SubNavigation.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import BaseLayout from "./BaseLayout.astro";
+import SubNavigation from "../components/SubNavigation.astro";
+import {
+  getLangFromUrl,
+  useTranslations,
+  getAlternatePaths,
+} from "../i18n/utils";
 
 interface Props {
   title: string;
   description?: string;
-  section: 'delight' | 'learning' | 'discovery' | 'sharing' | 'about';
+  section: "delight" | "learning" | "discovery" | "sharing" | "about";
   activePage?: string;
+  heroImage?: string;
 }
 
-const { title, description, section, activePage = '' } = Astro.props;
+const {
+  title,
+  description,
+  section,
+  activePage = "",
+  heroImage = "/images/site/home-hero.jpg",
+} = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const homePath = lang === "fr" ? "/fr/" : "/";
+const t = useTranslations(lang);
+const { en: enPath, fr: frPath } = getAlternatePaths(Astro.url);
+
+// Colors based on reference image
+const sectionColors = {
+  delight: "#8b1e1e",
+  learning: "#2c4a3e",
+  discovery: "#4a6b8c",
+  sharing: "#8c6a4a",
+  about: "#9e8465",
+};
 ---
 
-<PageLayout title={title} description={description} section={section}>
-  <SubNavigation lang={lang} section={section} activePage={activePage} />
-  <article class="section-content">
-    <slot />
-  </article>
-</PageLayout>
+<BaseLayout title={title} description={description} lang={lang}>
+  <div class="layout-container">
+    <div class="layout-card decorative-frame">
+      <div class="layout-columns">
+        <!-- Left: Image -->
+        <div class="layout-image-side">
+          <img src={heroImage} alt={title} />
+        </div>
+
+        <!-- Right: Scrolling Content -->
+        <article class="layout-content-side">
+          <div class="layout-scroll-pane">
+            <slot />
+          </div>
+        </article>
+      </div>
+
+      <!-- Footer: Identity and Navigation -->
+      <footer class="layout-footer">
+        <div class="footer-left">
+          <h1 class="section-title">{section}</h1>
+        </div>
+
+        <div class="footer-center">
+          <SubNavigation
+            lang={lang}
+            section={section}
+            activePage={activePage}
+          />
+        </div>
+
+        <div class="footer-right">
+          <div class="lang-switcher">
+            <a
+              href={enPath}
+              class={lang === "en" ? "active" : ""}
+              title="English">🇬🇧</a
+            >
+            <span class="sep">|</span>
+            <a
+              href={frPath}
+              class={lang === "fr" ? "active" : ""}
+              title="Français">🇫🇷</a
+            >
+          </div>
+          <a href={homePath} class="home-btn">
+            HOME <span class="home-icon">🏠︎</span>
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="layout-external-info">
+      40 rue Grande, Sorques, 77690 Montigny sur Loing. Réservation: 01 64 45 83
+      14 / 06 22 85 11 86. Copyright © 2026. La loingtaine. All rights reserved.
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Ensure the background covers everything */
+  body {
+    background: #d4c4a8; /* Parchment-like background color */
+    margin: 0;
+    padding: 0;
+  }
+</style>
 
 <style>
-  .section-content {
-    padding: var(--space-md) 0;
+  /* Custom Scrollbar for layout-scroll-pane */
+  .layout-scroll-pane::-webkit-scrollbar {
+    width: 6px;
+  }
+  .layout-scroll-pane::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  .layout-scroll-pane::-webkit-scrollbar-thumb {
+    background: #9e8465;
+    border-radius: 10px;
   }
 
-  .section-content :global(h2) {
-    text-align: center;
-    margin-bottom: var(--space-xl);
-  }
-
-  .section-content :global(.page-intro) {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto var(--space-xl);
+  .section-title {
+    font-family: var(--font-logo);
+    font-size: 2rem;
+    margin: 0;
+    color: #7e1417;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
+    text-transform: capitalize;
     font-style: italic;
-    color: var(--color-brown);
+  }
+
+  .footer-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+
+    padding: 0px 0px 7px 0px;
+  }
+
+  .lang-switcher a {
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .lang-switcher a:hover,
+  .lang-switcher a.active {
+    opacity: 1;
+  }
+
+  .lang-switcher .sep {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .home-btn {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 1px;
+    transition: transform 0.2s;
+  }
+
+  .home-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .home-icon {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 900px) {
+    .footer-center {
+      padding: 0;
+    }
   }
 </style>

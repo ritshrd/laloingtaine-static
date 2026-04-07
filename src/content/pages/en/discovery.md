@@ -1,17 +1,9 @@
 ---
-title: "Discovery"
+title: Discovery
 section: discovery
 order: 1
+image: ""
 ---
+We want La Loingtaine to be a place where knowledge and passion for subjects about and beyond music and art, may be cultivated and shared freely, perhaps leading to new inspiring ideas and perspectives. To facilitate the realization of this ambition we have created a space for debates and research in our programme. We are encouraging our friends to propose ideas and subjects to La Loingtaine for these activities.
 
-## Research and Debate
-
-La Loingtaine serves as a space for debates and research beyond music. In collaboration with **Kyoto University**, La Loingtaine has become a forum for multidisciplinary dialogue on universal laws and the governance of living organisms.
-
-## Science, Culture, and Nature
-
-Located near the magnificent Fontainebleau forest, La Loingtaine provides natural inspiration for artists, researchers, and thinkers. Our goal is to throw light on paradigm shifts in science and culture by including the essential dimension of nature.
-
-## Marveling at Nature
-
-"S'émerveiller de la nature" — we offer guided walks and workshops focused on biodiversity, encouraging visitors to discover and appreciate the remarkable natural environment that surrounds La Loingtaine.
+In line with this wider intellectual goal, La Loingtaine has accepted the invitation of the University of Kyoto to serve as a forum for dialogue related to multi-disciplinary integration for paradigm shifts in the exploration of universal laws and emerging principles for the governance of living organisms and the surrounding world. In particular, La Loingtaine will contribute to the creation of a European arm of the international network of scientists created by the New Integrated Sciences Project at Kyoto University and aim to throw light on emerging paradigm shifts in science and culture by including the cultural dimension of human existence and nature into the research agenda.

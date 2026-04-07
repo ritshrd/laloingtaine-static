@@ -1,55 +1,66 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/ideas-forum');
+if (!entry) {
+  throw new Error('Ideas Forum page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="La Loingtaine Ideas Forum" section="discovery" activePage="forum" description="The Ideas Forum — a community space for conferences, workshops, and exhibitions at La Loingtaine.">
-  <h2>La Loingtaine Ideas Forum</h2>
-  <p class="page-intro">
-    A community space where friends and collaborators can propose conferences,
-    workshops, or exhibitions.
-  </p>
-
-  <div class="forum-content">
-    <p>
-      The Ideas Forum embodies La Loingtaine's spirit of <strong>open intellectual exchange</strong>.
-      It is a space where ideas are welcome, where curiosity is celebrated, and where
-      meaningful dialogue can flourish.
-    </p>
-    <p>
-      Whether you have an idea for a conference, a workshop on a topic close to your heart,
-      or an exhibition you'd like to present, the Ideas Forum is your platform.
-    </p>
-
-    <div class="forum-cta">
-      <h3>Propose an Event</h3>
-      <p>
-        We welcome proposals for events that align with La Loingtaine's mission of
-        cultural exchange and intellectual curiosity.
-      </p>
-      <p>
-        <strong>Contact us:</strong><br />
-        <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  activePage="forum" 
+  description="The Ideas Forum — a community space for conferences, workshops, and exhibitions at La Loingtaine."
+  heroImage={entry.data.image}
+>
+  <div class="forum-container">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .forum-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .forum-cta {
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
     text-align: center;
-    background: var(--color-cream-light);
-    border: 2px dashed var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-2xl);
-    margin-top: var(--space-2xl);
   }
 
-  .forum-cta h3 {
-    margin-bottom: var(--space-md);
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .cta-box {
+    text-align: center;
+    background: #fdfaf2;
+    border: 1px dashed #c9b08a;
+    border-radius: 4px;
+    padding: 40px;
+    margin-top: 50px;
+  }
+
+  .cta-box h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+    color: var(--color-burgundy);
+  }
+
+  .contact-link {
+    margin-top: 20px;
   }
 </style>

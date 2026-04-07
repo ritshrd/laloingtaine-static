@@ -1,75 +1,78 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/masterclasses');
+if (!entry) {
+  throw new Error('Masterclasses page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Masterclasses" section="learning" activePage="masterclasses" description="Monthly masterclasses at La Loingtaine led by Aki Saulière for conservatory students.">
-  <h2>Masterclasses</h2>
-  <p class="page-intro">
-    Monthly opportunities for conservatory students to develop their musical identity
-    under the guidance of Aki Saulière.
-  </p>
-
-  <div class="masterclass-content">
-    <p>
-      The masterclasses at La Loingtaine offer a unique opportunity for young musicians
-      to work on developing their <strong>personal musical identity</strong>. Beyond
-      technique, students explore interpretation, phrasing, and the deeper qualities
-      that transform a performance into a profound musical experience.
-    </p>
-    <p>
-      Led by <strong>Aki Saulière</strong>, these monthly sessions provide individual
-      attention in an encouraging and supportive environment. Students perform for
-      their peers, receive detailed feedback, and gain insights that go beyond
-      what traditional conservatory training can offer.
-    </p>
-
-    <div class="info-box">
-      <h3>Masterclass Information</h3>
-      <ul>
-        <li><strong>Frequency:</strong> Monthly (October – June)</li>
-        <li><strong>Director:</strong> Aki Saulière</li>
-        <li><strong>For:</strong> Conservatory-level string students</li>
-        <li><strong>Location:</strong> La Loingtaine, Montigny-sur-Loing</li>
-      </ul>
-      <p>
-        For information and registration, contact:
-        <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="learning" 
+  activePage="masterclasses" 
+  description="Monthly masterclasses at La Loingtaine led by Aki Saulière for conservatory students."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="learning-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="body-text">
+      <Content />
     </div>
+
+    {entry.data.details && (
+      <div class="info-card">
+        <h3>Masterclass Information</h3>
+        <ul class="details-list">
+          {entry.data.details.map((detail) => (
+            <li><strong>{detail.label}:</strong> {detail.value}</li>
+          ))}
+        </ul>
+        <div class="registration">
+          <p>For information and registration:</p>
+          <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
+        </div>
+      </div>
+    )}
   </div>
 </SectionLayout>
 
 <style>
-  .masterclass-content {
-    max-width: 750px;
-    margin: 0 auto;
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
-
-  .info-box {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .info-card {
+    background: #fdfaf2;
+    padding: 30px;
+    border-radius: 4px;
     border-left: 4px solid var(--color-burgundy);
-    border-radius: 0 6px 6px 0;
-    padding: var(--space-xl);
-    margin-top: var(--space-xl);
   }
-
-  .info-box h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-md);
+  .info-card h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
   }
-
-  .info-box ul {
+  .details-list {
     list-style: none;
     padding: 0;
+    margin-bottom: 20px;
   }
-
-  .info-box li {
-    padding: var(--space-xs) 0;
-    border-bottom: 1px solid var(--color-border);
+  .details-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
   }
-
-  .info-box li:last-child {
-    border-bottom: none;
+  .registration {
+    margin-top: 20px;
+    font-style: italic;
   }
 </style>

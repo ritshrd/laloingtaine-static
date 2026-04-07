@@ -1,36 +1,122 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/academies');
+if (!entry) {
+  throw new Error('Academies page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Académies" section="learning" activePage="academies" description="Académie de cordes à La Loingtaine — éducation musicale immersive estivale.">
-  <h2>Académies</h2>
-  <p class="page-intro">L'Académie de Cordes de La Loingtaine se tient chaque été fin juillet et août.</p>
-  <div style="max-width:900px;margin:0 auto">
-    <div class="academy-card">
-      <h3>Académie de Cordes 2025</h3>
-      <p>L'académie offre un environnement intensif et bienveillant où les étudiants travaillent en étroite collaboration avec des professeurs de renommée internationale.</p>
-      <h4>Professeurs</h4>
-      <ul class="professor-list"><li><strong>Anna Gebert</strong></li><li><strong>Silvia Simionescu</strong></li><li><strong>Aki Saulière</strong></li><li><strong>Raphaël Bell</strong></li></ul>
+<SectionLayout 
+  title={entry.data.title} 
+  section="learning" 
+  activePage="academies" 
+  description="Académie de cordes à La Loingtaine — éducation musicale immersive estivale."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="academy-info">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="main-text">
+      <Content />
     </div>
-    <div class="highlights">
-      <div class="hl"><span>🎵</span><h4>Cours Quotidiens</h4><p>Instruction individuelle avec des professeurs de classe mondiale</p></div>
-      <div class="hl"><span>🎶</span><h4>Musique de Chambre</h4><p>Coaching d'ensemble et apprentissage collaboratif</p></div>
-      <div class="hl"><span>🎻</span><h4>Concerts</h4><p>Récitals d'étudiants et concerts informels</p></div>
-      <div class="hl"><span>🌿</span><h4>Vie Immersive</h4><p>Partagez repas et conversations avec les professionnels</p></div>
-    </div>
+
+    {entry.data.professors && (
+      <div class="professors-section">
+        <h3>Professeurs</h3>
+        <ul class="professor-list">
+          {entry.data.professors.map((prof) => (
+            <li><strong>{prof}</strong></li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {entry.data.highlights && (
+      <div class="highlights-grid">
+        {entry.data.highlights.map((h) => (
+          <div class="highlight-item">
+            <span class="hl-icon">{h.icon}</span>
+            <h4>{h.title}</h4>
+            <p>{h.description}</p>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 </SectionLayout>
+
 <style>
-  .academy-card { background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; padding: var(--space-xl); margin-bottom: var(--space-2xl); }
-  .academy-card h3 { text-align: center; margin-bottom: var(--space-lg); }
-  .academy-card h4 { color: var(--color-burgundy); margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
-  .professor-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-xl); }
-  .professor-list li { display: flex; align-items: center; gap: var(--space-xs); }
-  .professor-list li::before { content: '●'; color: var(--color-burgundy); font-size: 0.6rem; }
-  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg); }
-  .hl { text-align: center; padding: var(--space-lg); background: var(--color-cream-light); border: 1px solid var(--color-border); border-radius: 6px; transition: transform var(--transition-normal); }
-  .hl:hover { transform: translateY(-3px); }
-  .hl span { font-size: 2rem; display: block; margin-bottom: var(--space-sm); }
-  .hl h4 { font-size: 1rem; margin-bottom: var(--space-xs); }
-  .hl p { font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0; }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .main-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .professors-section {
+    background: #fdfaf2;
+    padding: 30px;
+    border-radius: 4px;
+    margin-bottom: 40px;
+  }
+
+  .professors-section h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    color: var(--color-burgundy);
+  }
+
+  .professor-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+  }
+
+  .professor-list li::before {
+    content: '●';
+    color: var(--color-burgundy);
+    margin-right: 10px;
+    font-size: 0.7rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .highlight-item {
+    padding: 20px;
+    background: white;
+    border: 1px solid #eee;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .hl-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .highlight-item h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .highlight-item p {
+    font-size: 0.85rem;
+    color: #666;
+  }
 </style>

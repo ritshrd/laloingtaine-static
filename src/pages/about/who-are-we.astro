@@ -1,6 +1,9 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/who-are-we');
+const { Content } = entry ? await render(entry) : { Content: null };
 
 const team = await getCollection('artists', (entry) => {
   return entry.id.startsWith('en/') && (entry.data as any).order !== undefined;
@@ -9,63 +12,70 @@ const team = await getCollection('artists', (entry) => {
 const sortedTeam = team.sort((a, b) => ((a.data as any).order || 99) - ((b.data as any).order || 99));
 ---
 
-<SectionLayout title="Who Are We?" section="about" activePage="whoarewe" description="Meet the team behind La Loingtaine — Aki Saulière, Raphael Bell, Masako Saulière, and Claude Saulière.">
-  <h2>Who Are We?</h2>
-  <p class="page-intro">
-    The dedicated team behind La Loingtaine's cultural mission.
-  </p>
+<SectionLayout 
+  title={entry?.data.title || "Who Are We?"} 
+  section="about" 
+  activePage="whoarewe" 
+  description="Meet the core team behind La Loingtaine — Aki Saulière, Raphael Bell, Masako Saulière, and Claude Saulière."
+  heroImage={entry?.data.image}
+>
+  <div class="team-page">
+    <h2>{entry?.data.title || "Who Are We?"}</h2>
+    <div class="intro">
+      {Content ? <Content /> : <p>The dedicated team behind La Loingtaine's cultural mission.</p>}
+    </div>
 
-  <div class="team-grid">
-    {sortedTeam.map((member) => (
-      <div class="team-card">
-        <div class="team-info">
-          <h3>{member.data.name}</h3>
-          <span class="team-role">{member.data.instrument}</span>
-          <p>{member.body}</p>
-        </div>
-      </div>
-    ))}
+    <div class="team-list">
+      {sortedTeam.map(async (member) => {
+        const { Content } = await render(member);
+        return (
+          <div class="team-member">
+            <div class="member-header">
+              <h3>{member.data.name}</h3>
+              <span class="member-role">{member.data.instrument}</span>
+            </div>
+            <div class="member-bio">
+              <Content />
+            </div>
+          </div>
+        );
+      })}
+    </div>
   </div>
 </SectionLayout>
 
 <style>
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-xl);
-    margin-top: var(--space-xl);
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
   }
 
-  .team-card {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    overflow: hidden;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  .team-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
 
-  .team-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(139, 117, 101, 0.15);
+  .team-member {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 30px;
   }
 
-  .team-info {
-    padding: var(--space-lg);
+  .team-member:last-child {
+    border-bottom: none;
   }
 
-  .team-info h3 {
-    font-size: 1.3rem;
-    margin-bottom: var(--space-xs);
+  .member-role {
+    font-size: 0.85rem;
+    color: var(--color-burgundy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
   }
 
-  .team-role {
-    display: inline-block;
-    font-family: var(--font-nav);
-    font-size: 0.75rem;
-    color: var(--color-white);
-    background: var(--color-burgundy);
-    padding: 2px 10px;
-    border-radius: 12px;
-    margin-bottom: var(--space-md);
+  .member-bio {
+    margin-top: 15px;
   }
 </style>

@@ -1,80 +1,58 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/workshops');
+if (!entry) {
+  throw new Error('Workshops page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Workshops" section="learning" activePage="workshops" description="Orchestral study workshops at La Loingtaine — preparation for auditions and professional development.">
-  <h2>Workshops</h2>
-  <p class="page-intro">
-    Orchestral study for auditions, led by experienced orchestra members following
-    the traditions of maestros like Abbado and Harnoncourt.
-  </p>
-
-  <div class="workshop-content">
-    <p>
-      The workshops at La Loingtaine focus on <strong>orchestral repertoire study</strong>,
-      providing essential preparation for young musicians who aspire to join professional
-      orchestras.
-    </p>
-    <p>
-      Led by experienced orchestra members who carry the performance traditions of
-      great maestros like <strong>Claudio Abbado</strong> and <strong>Nikolaus Harnoncourt</strong>,
-      these workshops bridge the gap between conservatory training and the demands
-      of professional orchestral life.
-    </p>
-
-    <div class="workshop-features">
-      <div class="feature">
-        <h3>Audition Preparation</h3>
-        <p>Focused work on standard orchestral excerpts and audition techniques,
-           with personalized feedback from seasoned orchestral musicians.</p>
-      </div>
-      <div class="feature">
-        <h3>Propellor Project</h3>
-        <p>
-          An innovative educational program for children aged <strong>6–11</strong>,
-          created by <strong>Yuko Mori</strong>. This unique approach focuses on
-          individuality and creativity through chamber music, nurturing young
-          musicians' imagination from the earliest age.
-        </p>
-      </div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="learning" 
+  activePage="workshops" 
+  description="Orchestral study workshops at La Loingtaine — preparation for auditions and professional development."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="learning-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="body-text">
+      <Content />
     </div>
+
   </div>
 </SectionLayout>
 
 <style>
-  .workshop-content {
-    max-width: 800px;
-    margin: 0 auto;
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
-
-  .workshop-features {
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .features-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-    margin-top: var(--space-xl);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
   }
-
-  .feature {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-xl);
+  .feature-card {
+    background: #fdfaf2;
+    padding: 25px;
+    border-radius: 4px;
+    text-align: center;
+    border: 1px solid #eee;
   }
-
-  .feature h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 2px solid var(--color-burgundy);
-  }
-
-  .feature p {
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 768px) {
-    .workshop-features {
-      grid-template-columns: 1fr;
-    }
+  .feat-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
   }
 </style>

@@ -1,35 +1,59 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
 import PhotoGallery from '../../../components/PhotoGallery.astro';
+import { getCollection, getEntry, render } from 'astro:content';
 
-const photos = [
-  { src: '/images/site/home-hero.jpg', alt: 'Salle de concert à La Loingtaine', caption: 'Salle de concert', year: 2025, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'Musique de chambre à La Loingtaine', caption: 'Concert de musique de chambre', year: 2025, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine extérieur', caption: 'La ferme en automne', year: 2024, category: 'general' },
-  { src: '/images/site/home-hero.jpg', alt: 'Académie de musique', caption: 'Académie d\'été 2024', year: 2024, category: 'academies' },
-  { src: '/images/site/home-hero.jpg', alt: 'Concert à La Loingtaine', caption: 'Rendez-vous avec Amadeus', year: 2023, category: 'concerts' },
-  { src: '/images/site/home-hero.jpg', alt: 'Étudiants de l\'académie', caption: 'Performance de l\'académie 2023', year: 2023, category: 'academies' },
-  { src: '/images/site/home-hero.jpg', alt: 'Festival de piano', caption: 'Festival Piano Mon Amour', year: 2022, category: 'events' },
-  { src: '/images/site/home-hero.jpg', alt: 'Jardin de La Loingtaine', caption: 'Le parc le long du Loing', year: 2022, category: 'general' },
-  { src: '/images/site/home-hero.jpg', alt: 'Ensemble à La Loingtaine', caption: 'Camerata La Loingtaine', year: 2021, category: 'concerts' },
-];
+const entry = await getEntry('pages', 'fr/gallery');
+const enEntry = await getEntry('pages', 'en/gallery');
+const { Content } = entry ? await render(entry) : { Content: null };
+
+const galleryEntries = await getCollection('gallery');
+
+const photos = galleryEntries.flatMap((entry) => 
+  entry.data.photos.map((photo) => ({
+    src: photo.image,
+    alt: photo.caption || entry.data.title,
+    caption: photo.caption, 
+    year: entry.data.year,
+    category: entry.data.category
+  }))
+).sort((a, b) => (b.year || 0) - (a.year || 0));
 ---
 
-<SectionLayout title="Galerie Photos" section="delight" activePage="gallery" description="Galerie photos des concerts, événements et de la vie à La Loingtaine.">
-  <h2>Galerie Photos</h2>
-  <p class="page-intro">
-    Des moments capturés de nos concerts, académies et événements culturels depuis 2005.
-  </p>
+<SectionLayout 
+  title={entry?.data.title || "Galerie Photos"} 
+  section="delight" 
+  activePage="gallery" 
+  description="Galerie photos des concerts, événements et de la vie à La Loingtaine."
+  heroImage={entry?.data.image || enEntry?.data.image}
+>
+  <div class="gallery-page-container">
+    <h2>{entry?.data.title || "Galerie Photos"}</h2>
+    
+    <div class="content-body">
+      {Content ? <Content /> : <p>Des moments capturés de nos concerts, académies et événements culturels depuis 2005.</p>}
+    </div>
 
-  <PhotoGallery
-    photos={photos}
-    showFilters={true}
-    columns={3}
-    id="delight-gallery-fr"
-  />
-
-  <p class="gallery-note">
-    D'autres photos seront ajoutées au fur et à mesure de la migration de notre ancien site.
-    Pour des photos spécifiques, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.
-  </p>
+    <div class="gallery-wrapper">
+      <PhotoGallery
+        photos={photos}
+        showFilters={true}
+        columns={3}
+        id="delight-gallery-fr"
+      />
+    </div>
+  </div>
 </SectionLayout>
+
+<style>
+  .gallery-page-container {
+    color: var(--color-text);
+  }
+
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+</style>

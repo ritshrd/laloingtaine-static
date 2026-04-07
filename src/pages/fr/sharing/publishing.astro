@@ -1,13 +1,52 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/publishing');
+const enEntry = await getEntry('pages', 'en/publishing');
+if (!entry) {
+  throw new Error('Publishing page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Éditions La Loingtaine" section="sharing" activePage="publishing" description="Éditions La Loingtaine — maison d'édition internationale.">
-  <h2>Éditions La Loingtaine</h2>
-  <p class="page-intro">Maison d'édition internationale fondée en 2018 au Japon, publiant musiciens, écrivains et peintres.</p>
-  <div style="max-width:750px;margin:0 auto">
-    <p>Les <strong>Éditions La Loingtaine</strong> étendent notre mission culturelle à la page imprimée. Fondée en 2018, la maison d'édition jette un pont entre l'Orient et l'Occident.</p>
-    <div class="info-box"><h3>Renseignements</h3><p>Pour des informations sur nos publications : <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="publishing" 
+  description="Éditions La Loingtaine — maison d'édition internationale."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="publishing-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
+    </div>
   </div>
 </SectionLayout>
-<style>.info-box{background:var(--color-cream-light);border:1px solid var(--color-border);border-left:4px solid var(--color-burgundy);border-radius:0 6px 6px 0;padding:var(--space-xl);margin-top:var(--space-xl)}.info-box h3{font-size:1.1rem;margin-bottom:var(--space-md)}</style>
+
+<style>
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .contact-card {
+    background: #fdfaf2;
+    border-left: 4px solid var(--color-burgundy);
+    padding: 30px;
+    margin-top: 40px;
+  }
+</style>

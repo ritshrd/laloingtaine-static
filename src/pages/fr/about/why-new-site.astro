@@ -1,25 +1,92 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/why-this-new-site');
+const enEntry = await getEntry('pages', 'en/why-this-new-site');
+if (!entry) {
+  throw new Error('Why New Site page content not found (FR)');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Pourquoi Ce Nouveau Site ?" section="about" activePage="whynew" description="L'évolution de La Loingtaine — de lieu de musique à institut culturel.">
-  <h2>Pourquoi Ce Nouveau Site ?</h2>
-  <div style="max-width:750px;margin:0 auto">
-    <p>La Loingtaine a évolué d'un <strong>lieu de musique</strong> à un <strong>"institut" pour le développement humain</strong>, inspiré par l'œuvre d'Edgar Faure <em>"Apprendre à Être"</em>.</p>
-    <p>Ce nouveau site reflète mieux notre mission élargie autour de quatre piliers :</p>
-    <div class="pillars">
-      <div class="pillar"><h3>Émotion</h3><p>Concerts de musique de chambre</p></div>
-      <div class="pillar"><h3>Transmission</h3><p>Éducation musicale</p></div>
-      <div class="pillar"><h3>Découverte</h3><p>Exploration scientifique</p></div>
-      <div class="pillar"><h3>Partage</h3><p>Livres, conférences et échanges</p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="about" 
+  activePage="whynew" 
+  description="L'évolution de La Loingtaine — de lieu de musique à institut culturel."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="why-new-site">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <h3>Émotion</h3>
+        <p>Concerts de musique de chambre</p>
+      </div>
+      <div class="pillar">
+        <h3>Transmission</h3>
+        <p>Éducation musicale qui nourrit tout l'artiste</p>
+      </div>
+      <div class="pillar">
+        <h3>Découverte</h3>
+        <p>Exploration scientifique et intellectuelle</p>
+      </div>
+      <div class="pillar">
+        <h3>Partage</h3>
+        <p>Livres, conférences et échanges culturels</p>
+      </div>
     </div>
   </div>
 </SectionLayout>
+
 <style>
-  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);margin:var(--space-xl) 0}
-  .pillar{text-align:center;padding:var(--space-lg) var(--space-md);background:var(--color-cream-light);border:1px solid var(--color-border);border-top:3px solid var(--color-burgundy);border-radius:0 0 6px 6px}
-  .pillar h3{font-size:1.1rem;margin-bottom:var(--space-xs)}
-  .pillar p{font-size:.85rem;color:var(--color-text-light);margin-bottom:0}
-  @media(max-width:768px){.pillars{grid-template-columns:1fr 1fr}}
-  @media(max-width:480px){.pillars{grid-template-columns:1fr}}
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .content-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pillar {
+    background: #fdfaf2;
+    padding: 20px;
+    border-top: 3px solid var(--color-burgundy);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .pillar p {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  @media (max-width: 600px) {
+    .pillars-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

@@ -28,76 +28,90 @@ pastConcerts.forEach((concert) => {
 const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
 ---
 
-<SectionLayout title="Past Concerts" section="delight" activePage="past" description="Archive of past chamber music concerts at La Loingtaine since 2005.">
-  <h2>Past Concerts</h2>
-  <p class="page-intro">
-    Over 200 concerts have been organized at La Loingtaine since 2005. Here is an archive
-    of our rich musical history.
-  </p>
+<SectionLayout 
+  title="Past Concerts" 
+  section="delight" 
+  activePage="past" 
+  description="Archive of past chamber music concerts at La Loingtaine since 2005."
+  heroImage="/images/site/home-hero.jpg"
+>
+  <div class="archive-container">
+    <h2>Concert Archive</h2>
+    <p class="intro">
+      Over 200 concerts have been organized at La Loingtaine since 2005. 
+      Here is an archive of our rich musical history.
+    </p>
 
-  <div class="concerts-archive">
-    {years.map((year) => (
-      <div class="year-section">
-        <h3 class="year-heading">{year}</h3>
-        <div class="concert-list-compact">
-          {concertsByYear[year].map((concert) => (
-            <ConcertCard
-              title={concert.data.title}
-              date={new Date(concert.data.date)}
-              musicians={concert.data.musicians}
-              compact={true}
-              lang={lang}
-            />
-          ))}
+    <div class="years-list">
+      {years.map((year) => (
+        <div class="year-block">
+          <h3 class="year-label">{year}</h3>
+          <div class="year-concerts">
+            {concertsByYear[year].map((concert) => (
+              <ConcertCard
+                title={concert.data.title}
+                date={new Date(concert.data.date)}
+                musicians={concert.data.musicians}
+                compact={true}
+                lang={lang}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
 
-    {years.length === 0 && (
-      <div class="coming-soon">
-        <p>Concert archive being compiled...</p>
-      </div>
-    )}
-
-    <div class="year-section">
-      <h3 class="year-heading">2005–2024</h3>
-      <p class="coming-soon">
-        A comprehensive archive of our concert history is being prepared.
-        For information about past events, please <a href="mailto:info@laloingtaine.org">contact us</a>.
-      </p>
+      {years.length === 0 && (
+        <div class="placeholder">
+          <p>The archive is currently being updated...</p>
+        </div>
+      )}
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .concerts-archive {
-    max-width: 800px;
-    margin: 0 auto;
+  .archive-container {
+    color: var(--color-text);
   }
 
-  .year-section {
-    margin-bottom: var(--space-2xl);
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
 
-  .year-heading {
-    font-size: 1.6rem;
-    padding-bottom: var(--space-sm);
-    border-bottom: 2px solid var(--color-burgundy);
-    margin-bottom: var(--space-lg);
-  }
-
-  .concert-list-compact {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .coming-soon {
+  .intro {
+    text-align: center;
     font-style: italic;
     color: var(--color-brown);
-    padding: var(--space-lg);
-    background: var(--color-cream-light);
-    border-radius: 4px;
+    margin-bottom: var(--space-2xl);
+    line-height: 1.6;
+  }
+
+  .year-block {
+    margin-bottom: 40px;
+  }
+
+  .year-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--color-burgundy);
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+  }
+
+  .year-concerts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .placeholder {
     text-align: center;
+    padding: 30px;
+    background: #fdfaf2;
+    font-style: italic;
   }
 </style>

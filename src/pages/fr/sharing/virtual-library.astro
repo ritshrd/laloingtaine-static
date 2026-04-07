@@ -1,13 +1,53 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/virtual-library');
+const enEntry = await getEntry('pages', 'en/virtual-library');
+if (!entry) {
+  throw new Error('Virtual Library page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Bibliothèque Virtuelle" section="sharing" activePage="library" description="Projet de Bibliothèque Virtuelle — bibliographie annotée.">
-  <h2>Projet Bibliothèque Virtuelle</h2>
-  <p class="page-intro">Bibliographie annotée sur l'UNESCO, la science et l'écologie.</p>
-  <div style="max-width:700px;margin:0 auto">
-    <p>Le projet de Bibliothèque Virtuelle vise à créer une collection annotée d'œuvres importantes dans les domaines de l'<strong>UNESCO</strong>, la <strong>recherche scientifique</strong> et l'<strong>écologie</strong>.</p>
-    <div class="library-note"><p><em>Ce projet est actuellement en développement. Nous accueillons contributions et suggestions.</em></p><p>Contact : <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="library" 
+  description="Projet de Bibliothèque Virtuelle — bibliographie annotée sur l'UNESCO, la science et l'écologie."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="library-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
+    </div>
   </div>
 </SectionLayout>
-<style>.library-note{text-align:center;background:var(--color-cream-light);border:2px dashed var(--color-border);border-radius:6px;padding:var(--space-xl);margin-top:var(--space-2xl)}</style>
+
+<style>
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .status-box {
+    text-align: center;
+    background: #fdfaf2;
+    border: 1px dashed #c9b08a;
+    padding: 30px;
+    margin-top: 50px;
+  }
+</style>

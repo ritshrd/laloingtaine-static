@@ -1,0 +1,124 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images"
+public_folder: "/images"
+
+locale: 'en'
+
+i18n:
+  structure: multiple_folders
+  locales: [en, fr]
+  default_locale: en
+
+collections:
+  # --- Concerts ---
+  - name: "concerts"
+    label: "Concerts"
+    folder: "src/content/concerts"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    i18n: true
+    sortable_fields: ['date', 'title']
+    fields:
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Time", name: "time", widget: "string", required: false }
+      - { label: "Location", name: "location", widget: "string", default: "La Loingtaine" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - label: "Musicians"
+        name: "musicians"
+        widget: "list"
+        i18n: true
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Instrument", name: "instrument", widget: "string", required: false }
+          - { label: "Country", name: "country", widget: "string", required: false }
+      - label: "Program"
+        name: "program"
+        widget: "list"
+        required: false
+        i18n: true
+        fields:
+          - { label: "Composer", name: "composer", widget: "string" }
+          - { label: "Piece", name: "piece", widget: "string" }
+      - { label: "Program Details", name: "body", widget: "markdown", i18n: true }
+
+  # --- Artists ---
+  - name: "artists"
+    label: "Artists / Musicians"
+    folder: "src/content/artists"
+    create: true
+    i18n: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Instrument", name: "instrument", widget: "string", i18n: true }
+      - { label: "Country", name: "country", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Order", name: "order", widget: "number", default: 0 }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Biography", name: "body", widget: "markdown", i18n: true }
+      - { label: "Website", name: "website", widget: "string", required: false }
+
+  # --- Pages ---
+  - name: "pages"
+    label: "Pages"
+    folder: "src/content/pages"
+    create: true
+    i18n: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - label: "Section"
+        name: "section"
+        widget: "select"
+        options:
+          - { label: "Delight", value: "delight" }
+          - { label: "Learning (music)", value: "learning" }
+          - { label: "Discovery", value: "discovery" }
+          - { label: "Sharing", value: "sharing" }
+          - { label: "About", value: "about" }
+      - { label: "Order", name: "order", widget: "number", default: 0 }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - label: "Highlights"
+        name: "highlights"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Icon (Emoji)", name: "icon", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+      - label: "Professors"
+        name: "professors"
+        widget: "list"
+        required: false
+        field: { label: "Name", name: "name", widget: "string" }
+      - label: "Technical Details (Info Box)"
+        name: "details"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+
+  # --- Gallery ---
+  - name: "gallery"
+    label: "Photo Gallery"
+    folder: "src/content/gallery"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Year", name: "year", widget: "number" }
+      - { label: "Category", name: "category", widget: "select",
+          options: ["concerts", "academies", "events", "general"] }
+      - label: "Photos"
+        name: "photos"
+        widget: "list"
+        fields:
+          - { label: "Image", name: "image", widget: "image" }
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+          - { label: "Photographer", name: "photographer", widget: "string", required: false }

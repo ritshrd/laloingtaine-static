@@ -1,6 +1,5 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import ImageCarousel from '../../components/ImageCarousel.astro';
+import HomeLayout from '../../layouts/HomeLayout.astro';
 import { useTranslations } from '../../i18n/utils';
 import { getCollection } from 'astro:content';
 
@@ -20,100 +19,116 @@ const upcomingConcerts = allConcerts
 const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConcerts[0];
 
 const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-
-const slides = [
-  { src: '/images/site/home-hero.jpg', alt: 'La Loingtaine — Ferme du XVIIIe siècle' },
-  { src: '/images/site/home-hero.jpg', alt: 'Concerts de musique de chambre' },
-  { src: '/images/site/home-hero.jpg', alt: 'Académie de musique pour jeunes professionnels' },
-];
 ---
 
-<PageLayout title="Accueil" section="home">
-  <!-- Hero: Carousel + Content split -->
-  <div class="home-split">
-    <div class="home-split__image">
-      <ImageCarousel 
-        slides={slides} 
-        interval={5000} 
-        height="500px"
-        id="home-hero-carousel-fr"
-      />
-    </div>
-    <div class="home-split__content">
-      {nextConcert ? (
-        <div class="home-announcement">
-          <h2 class="announcement-title">{nextConcert.data.title}</h2>
-          <p class="announcement-detail">
-            {new Date(nextConcert.data.date).getDate()} {months[new Date(nextConcert.data.date).getMonth()]}
-            {nextConcert.data.time && ` à ${nextConcert.data.time}`}
-            {` à ${nextConcert.data.location || 'La Loingtaine'}`}
-          </p>
-          {nextConcert.data.musicians && nextConcert.data.musicians.length > 0 && (
-            <>
-              <p><strong>Musicians</strong></p>
-              <p>
-                {nextConcert.data.musicians.map((m, i) => (
-                  <>
-                    {m.name}{m.country ? ` (${m.country})` : ''}{m.instrument ? `, ${m.instrument}` : ''}
-                    {i < nextConcert.data.musicians!.length - 1 && <br />}
-                  </>
-                ))}
-              </p>
-            </>
-          )}
-        </div>
-      ) : (
-        <div class="home-announcement">
-          <h2 class="announcement-title">Bienvenue à La Loingtaine</h2>
-          <p>Au plus près de la culture et de la musique</p>
-        </div>
-      )}
-
-      <div class="home-ctas">
-        <a href="/fr/delight/upcoming-concerts/" class="btn btn--primary">
-          cliquez pour le programme des concerts
-        </a>
-        <a href="/fr/learning/academies/" class="btn">
-          découvrir l'académie de musique
-        </a>
+<HomeLayout title="Accueil" heroImage="/images/site/home-hero.jpg">
+  <div class="home-internal-content">
+    {nextConcert ? (
+      <div class="upcoming-announcement">
+        <p class="announcement-date">
+          {new Date(nextConcert.data.date).getDate()} {months[new Date(nextConcert.data.date).getMonth()]} à {nextConcert.data.time || '16:00'}
+        </p>
+        <h3 class="announcement-title">{nextConcert.data.title}</h3>
+        {nextConcert.data.musicians && nextConcert.data.musicians.slice(0, 2).map(m => (
+          <p class="musician-info">{m.name} ({m.instrument})</p>
+        ))}
       </div>
+    ) : (
+      <div class="welcome-msg">
+        <p>Vivez la culture et la musique au cœur de la nature.</p>
+      </div>
+    )}
 
-      <!-- About Links -->
-      <nav class="about-links">
-        <a href="/fr/about/history/">La Loingtaine</a>
-        <a href="/fr/about/why-new-site/">Pourquoi ce nouveau site?</a>
-        <a href="/fr/about/who-are-we/">Qui sommes-nous?</a>
-        <a href="/fr/about/calendar/">Calendrier</a>
-        <a href="/fr/about/how-to-get-there/">Comment y aller?</a>
-      </nav>
+    <div class="action-buttons">
+      <a href="/fr/delight/upcoming-concerts/" class="btn-main">cliquez pour le programme des concerts</a>
+      <a href="/fr/learning/academies/" class="btn-main">découvrir l'académie de musique</a>
     </div>
+
+    <!-- About Sub-navigation -->
+    <nav class="about-subnav">
+      <a href="/fr/about/history/">La Loingtaine</a>
+      <a href="/fr/about/why-new-site/">Pourquoi ce nouveau site?</a>
+      <a href="/fr/about/who-are-we/">Qui sommes-nous?</a>
+      <a href="/fr/about/calendar/">Calendrier</a>
+      <a href="/fr/about/how-to-get-there/">Comment y aller?</a>
+    </nav>
   </div>
-</PageLayout>
+</HomeLayout>
 
 <style>
-  .home-announcement {
-    text-align: center;
-    margin-bottom: var(--space-xl);
-  }
-
-  .announcement-title {
-    font-size: 1.3rem;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-sm);
-    font-weight: 700;
-  }
-
-  .announcement-detail {
-    font-weight: 700;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-md);
-  }
-
-  .home-ctas {
+  .home-internal-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-md);
-    margin-bottom: var(--space-xl);
+    width: 100%;
+  }
+
+  .upcoming-announcement {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .announcement-date {
+    color: #8b1e1e;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .announcement-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #4a3728;
+    margin-bottom: 10px;
+  }
+
+  .musician-info {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  .btn-main {
+    background: #8b1e1e;
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    transition: background 0.2s;
+  }
+
+  .btn-main:hover {
+    background: #4a3728;
+  }
+
+  .about-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px 25px;
+    margin-top: 20px;
+  }
+
+  .about-subnav a {
+    color: #8b1e1e;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .about-subnav a:hover {
+    color: #4a3728;
+    text-decoration: underline;
   }
 </style>

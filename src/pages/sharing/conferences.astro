@@ -1,98 +1,80 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/conferences');
+if (!entry) {
+  throw new Error('Conferences page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Conferences" section="sharing" activePage="conferences" description="Conferences at La Loingtaine — guest speakers on art, science, music, and heritage.">
-  <h2>Conferences</h2>
-  <p class="page-intro">
-    Distinguished speakers share their insights on art, science, music, and heritage
-    at La Loingtaine.
-  </p>
-
-  <div class="conferences-content">
-    <div class="speaker-list">
-      <div class="speaker-card">
-        <h3>Dr. Denis Le Bihan</h3>
-        <p class="speaker-topic">Brain Imaging and Music</p>
-        <p>
-          A pioneering researcher in brain imaging, Dr. Le Bihan explores the fascinating
-          connections between how our brains process music and the neural pathways
-          involved in musical perception.
-        </p>
-      </div>
-
-      <div class="speaker-card">
-        <h3>Georges Kutukdjian</h3>
-        <p class="speaker-topic">UNESCO and Cultural Heritage</p>
-        <p>
-          A distinguished figure in international cultural policy, Georges Kutukdjian
-          brings decades of UNESCO experience to discussions about preserving and
-          promoting cultural heritage.
-        </p>
-      </div>
-    </div>
-
-    <div class="conference-cta">
-      <p>
-        Interested in attending or proposing a conference?<br />
-        Contact: <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="sharing" 
+  activePage="conferences" 
+  description="Conferences at La Loingtaine — guest speakers on art, science, music, and heritage."
+  heroImage={entry.data.image}
+>
+  <div class="conferences-page">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .conferences-content {
-    max-width: 800px;
-    margin: 0 auto;
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
-
-  .speaker-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-2xl);
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
   }
-
-  .speaker-card {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-xl);
-    transition: transform var(--transition-normal);
+  .speaker-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
   }
-
-  .speaker-card:hover {
-    transform: translateY(-3px);
+  .speaker-item {
+    background: #fdfaf2;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid #eee;
   }
-
-  .speaker-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-xs);
-  }
-
-  .speaker-topic {
-    font-family: var(--font-nav);
-    font-size: 0.8rem;
-    color: var(--color-white);
+  .topic-tag {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    color: white;
     background: var(--color-burgundy);
     display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    margin-bottom: var(--space-md);
+    padding: 2px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
   }
-
-  .conference-cta {
+  .speaker-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  .speaker-item p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+  }
+  .footer-cta {
     text-align: center;
-    padding: var(--space-xl);
-    background: var(--color-cream-light);
-    border: 1px dashed var(--color-border);
-    border-radius: 6px;
-  }
-
-  @media (max-width: 768px) {
-    .speaker-list {
-      grid-template-columns: 1fr;
-    }
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed #ccc;
   }
 </style>

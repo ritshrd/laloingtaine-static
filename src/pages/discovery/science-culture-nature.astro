@@ -1,59 +1,52 @@
----
-import SectionLayout from '../../layouts/SectionLayout.astro';
----
-
-<SectionLayout title="Science, Culture and Nature" section="discovery" activePage="science" description="Science, Culture and Nature — the Fontainebleau Dialogues at La Loingtaine.">
-  <h2>Science, Culture and Nature</h2>
-  <p class="page-intro">
-    La Loingtaine serves as the European arm of an international scientific network,
-    the Fontainebleau Dialogues, involving 15 research institutes worldwide.
-  </p>
-
-  <div class="content-section">
-    <p>
-      In partnership with <strong>Kyoto University</strong> and the <strong>IRU-AFS</strong>
-      (Institute for the Research of Universal laws — Applied to Financial Sciences),
-      La Loingtaine hosts dialogues and seminars on the connections between scientific
-      research and human development.
-    </p>
-    <p>
-      The <em>Fontainebleau Dialogues</em> explore how emerging paradigm shifts in
-      science can inform better governance and foster a deeper understanding of the
-      universal principles that connect all domains of knowledge.
-    </p>
-
-    <div class="network-info">
-      <h3>The International Network</h3>
-      <p>
-        The network brings together <strong>15 research institutes</strong> across
-        multiple continents, creating a unique space for interdisciplinary exchange
-        that bridges the gap between fundamental research and practical applications
-        for society.
-      </p>
-      <p>
-        Topics explored include ecology, sustainable development, the relationship
-        between art and science, and the role of culture in social transformation.
-      </p>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  activePage="science" 
+  description="Science, Culture and Nature — the Fontainebleau Dialogues at La Loingtaine."
+  heroImage={entry.data.image}
+>
+  <div class="discovery-content">
+    <h2>{entry.data.title}</h2>
+    
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .content-section {
-    max-width: 750px;
-    margin: 0 auto;
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
   }
 
-  .network-info {
-    background: var(--color-cream-light);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: var(--space-xl);
-    margin-top: var(--space-xl);
+  .intro-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+    text-align: center;
+    line-height: 1.6;
   }
 
-  .network-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: var(--space-md);
+  .main-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .info-card {
+    background: #fdfaf2;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 4px;
+    margin-top: 40px;
+  }
+
+  .info-card h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+    color: var(--color-burgundy);
   }
 </style>

@@ -1,7 +1,8 @@
 ---
-title: "Why this new site?"
+title: Why this new site?
 section: about
 order: 2
+image: /images/ideas-forum.jpg
 ---
 
 ## Evolution Since 2005

@@ -1,16 +1,53 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'fr/ideas-forum');
+const enEntry = await getEntry('pages', 'en/ideas-forum');
+if (!entry) {
+  throw new Error('Ideas Forum page content not found');
+}
+const { Content } = await render(entry);
 ---
 
-<SectionLayout title="Forum des Idées" section="discovery" activePage="forum" description="Le Forum des Idées — un espace communautaire pour conférences, ateliers et expositions.">
-  <h2>Forum des Idées de La Loingtaine</h2>
-  <p class="page-intro">Un espace communautaire où amis et collaborateurs peuvent proposer conférences, ateliers ou expositions.</p>
-  <div style="max-width:700px;margin:0 auto">
-    <p>Le Forum des Idées incarne l'esprit d'<strong>échange intellectuel ouvert</strong> de La Loingtaine. C'est un espace où les idées sont les bienvenues, où la curiosité est célébrée.</p>
-    <div class="forum-cta"><h3>Proposer un Événement</h3><p>Nous accueillons les propositions d'événements en accord avec la mission de La Loingtaine.</p><p><strong>Contact :</strong><br /><a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a></p></div>
+<SectionLayout 
+  title={entry.data.title} 
+  section="discovery" 
+  activePage="forum" 
+  description="Le Forum des Idées — un espace communautaire pour des conférences, des ateliers et des expositions à La Loingtaine."
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="forum-container">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
+    </div>
   </div>
 </SectionLayout>
+
 <style>
-  .forum-cta { text-align: center; background: var(--color-cream-light); border: 2px dashed var(--color-border); border-radius: 6px; padding: var(--space-2xl); margin-top: var(--space-2xl); }
-  .forum-cta h3 { margin-bottom: var(--space-md); }
+  h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: 40px;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .cta-box {
+    text-align: center;
+    background: #fdfaf2;
+    border: 1px dashed #c9b08a;
+    border-radius: 4px;
+    padding: 40px;
+    margin-top: 50px;
+  }
 </style>
