@@ -1,26 +1,21 @@
 ---
-title: "Comment Venir"
-section: "about"
+title: Comment y aller
+section: about
 order: 4
 ---
-
-La Loingtaine está situada cerca del hermoso bosque de Fontainebleau, en el pueblo de Montigny-sur-Loing.
 
 ## 📍 Dirección
 
 **La Loingtaine**  
-40 rue Grande, Sorques  
-77690 Montigny sur Loing, France
+40 rue Grande, Sorques, 77690 Montigny-sur-Loing\
+Tel. 01 64 45 83 14
 
-## 🚆 En Tren
+## En train
 
-Desde París, tome el tren desde la **Gare de Lyon** en dirección a **Moret-Veneux-les-Sablons** o **Montigny-sur-Loing**. El trayecto dura aproximadamente 1 hora. La Loingtaine se encuentra a poca distancia de la estación.
+Gare de Lyon – Montigny sur Loing – 55 minutes de voyage.
+Les musiciens ne sont pas tous connus en France. Ils ne se produisent ensemble qu’à La Loingtaine. Après chaque concert, le public partage le thé et des petites friandises créant le lien avec les musiciens et entre eux – ainsi c’est le moment des retrouvailles d’une grande famille.
 
-## 🚗 En Coche
+## En voiture:
 
-Desde París, tome la **autopista A6** en dirección a Lyon/Fontainebleau. Salga en **Fontainebleau** y siga las indicaciones hacia Montigny-sur-Loing. Aproximadamente 1 hora y 15 minutos desde el centro de París.
+París A6 – Fontainebleau sortie 45 km sortie de autoroute – Fontainebleau 16 km Carrefour de l´Obélisque – Sorques 10 km
 
-## 📞 Reservas
-
-01 64 45 83 14 / 06 22 85 11 86  
-[info@laloingtaine.org](mailto:info@laloingtaine.org)

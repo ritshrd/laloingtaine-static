@@ -14,67 +14,14 @@ const { Content } = await render(entry);
   section="sharing" 
   activePage="books" 
   description="Books and publications from La Loingtaine Publishing."
-  heroImage={entry.data.image}
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="books-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-
-  .book-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-
-  .book-card {
-    background: #fdfaf2;
-    border: 1px solid #ddd;
-    padding: 30px;
-    border-radius: 4px;
-    transition: transform 0.2s;
-  }
-
-  .book-card:hover {
-    transform: translateX(5px);
-  }
-
-  .book-card h3 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 10px;
-  }
-
-  .book-card p {
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    color: #555;
-  }
-
-  .btn {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--color-burgundy);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-</style>

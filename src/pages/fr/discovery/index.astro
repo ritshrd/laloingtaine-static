@@ -3,6 +3,7 @@ import SectionLayout from '../../../layouts/SectionLayout.astro';
 import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'fr/discovery');
+const enEntry = await getEntry('pages', 'en/discovery');
 if (!entry) {
   throw new Error('Discovery page content not found (FR)');
 }
@@ -13,7 +14,7 @@ const { Content } = await render(entry);
   title={entry.data.title} 
   section="discovery" 
   description="Découverte à La Loingtaine — cultiver le savoir en science, culture et nature."
-  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
   <div class="section-intro">
     <h2>{entry.data.title}</h2>
@@ -23,15 +24,4 @@ const { Content } = await render(entry);
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .content-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
-</style>
+

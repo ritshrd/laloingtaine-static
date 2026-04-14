@@ -5,7 +5,7 @@ import { getEntry, render } from 'astro:content';
 const entry = await getEntry('pages', 'fr/books');
 const enEntry = await getEntry('pages', 'en/books');
 if (!entry) {
-  throw new Error('Books page content not found');
+  throw new Error('Books page content not found (FR)');
 }
 const { Content } = await render(entry);
 ---
@@ -17,12 +17,12 @@ const { Content } = await render(entry);
   description="Livres et publications des Éditions La Loingtaine."
   heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="books-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
-<style>.book-sections{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);margin-top:var(--space-xl)}.bsc{display:block;background:var(--color-cream-light);border:1px solid var(--color-border);border-radius:6px;padding:var(--space-xl);text-decoration:none;transition:all var(--transition-normal)}.bsc:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(139,117,101,.15);text-decoration:none}.bsc h3{font-size:1.2rem;margin-bottom:var(--space-md)}.bsc p{color:var(--color-text-light);font-size:.9rem}.cl{font-weight:600;color:var(--color-burgundy);font-size:.9rem}@media(max-width:768px){.book-sections{grid-template-columns:1fr}}</style>
+
+

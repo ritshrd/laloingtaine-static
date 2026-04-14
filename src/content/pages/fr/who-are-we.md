@@ -1,23 +1,22 @@
 ---
-title: "Qui sommes-nous ?"
+title: Qui sommes-nous au juste?
 section: about
 order: 3
 ---
+A la fois lieu de villégiature et source d’activités artistiques gravitant autour de la musique et de la culture en général, l’identité de La Loingtaine ne saurait se résumer en un seul mot.
 
-## Domaine La Loingtaine
+**La musique d’abord**
 
-Le Domaine La Loingtaine comprend une maison d'habitation, des appartements, une salle de concert et un parc au bord du Loing. C'est un centre de concerts et d'activités artistiques depuis 2005.
+Les membre de **l’Association** **Schubertiades** fondée en 2005, organise à La Loingtaine des concerts de musique de chambre du plus haut niveau s’adressant à un public de mélomanes de tous âges et issus d’horizons très variés.  On y côtoie, dans la plus grande simplicité, des ingénieurs, enseignants, universitaires, scientifiques, philosophes, peintres, écrivains, architectes, lycéens, étudiants….
 
-### Activités principales
+Tous participent aux activités de La Loingtaine ou s’y impliquent à des degrés divers.
 
-- **Production de programmes musicaux** — Direction : Aki Saulière et Raphaël Oleg
-- **Recherche et développement** — Direction : Masako Saulière
-- **Hébergement de musiciens** — Propriété de Claude Saulière
+**Trois champs d’actions**
 
-### Association Schubertiades
+Trois activités rythment la vie à La Loingtaine :
 
-Créée en 2005, l'Association Schubertiades a été fondée pour organiser des concerts de musique de chambre de haute qualité et soutenir les artistes résidents à La Loingtaine.
+* La conception et la réalisation de programmes musicaux, sous la responsabilité d’ **Aki Saulière** et de **Raphael Bell** eux-mêmes brillants instrumentistes;
+* La recherche et le développement de nouveaux programmes et la communication, sous la houlette de **Masako Saulière**;
+* L’hébergement des musiciens et des artistes au domaine (dont **Claude Saulière**est le propriétaire).
 
-### Notre impact
-
-Plus de 200 concerts ont été organisés depuis 2005. La Loingtaine est devenue un lieu de retraite, de création artistique et de richesse culturelle — un lieu unique où musiciens et public se retrouvent dans un cadre intime et inspirant.
+Celui-ci comporte une maison d’habitation, des appartements, une salle de concerts, et un parc ombragé d’arbres anciens situé en bordure du Loing qui inspira au peintre **Sisley,** né à Moret-sur-Loing tout proche, ses plus beaux tableaux.

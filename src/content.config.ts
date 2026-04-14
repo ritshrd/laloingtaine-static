@@ -51,7 +51,7 @@ const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
   schema: z.object({
     title: z.string(),
-    section: z.enum(['delight', 'learning', 'discovery', 'sharing', 'about']),
+    section: z.enum(['home', 'delight', 'learning', 'discovery', 'sharing', 'about']),
     image: z.string().optional(),
     order: z.number().default(0),
   }),

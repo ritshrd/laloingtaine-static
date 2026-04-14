@@ -17,76 +17,12 @@ const { Content } = await render(entry);
   description="L'évolution de La Loingtaine — de lieu de musique à institut culturel."
   heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="why-new-site">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
-    </div>
-
-    <div class="pillars-grid">
-      <div class="pillar">
-        <h3>Émotion</h3>
-        <p>Concerts de musique de chambre</p>
-      </div>
-      <div class="pillar">
-        <h3>Transmission</h3>
-        <p>Éducation musicale qui nourrit tout l'artiste</p>
-      </div>
-      <div class="pillar">
-        <h3>Découverte</h3>
-        <p>Exploration scientifique et intellectuelle</p>
-      </div>
-      <div class="pillar">
-        <h3>Partage</h3>
-        <p>Livres, conférences et échanges culturels</p>
-      </div>
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .content-body {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
-  }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .pillar {
-    background: #fdfaf2;
-    padding: 20px;
-    border-top: 3px solid var(--color-burgundy);
-    border-radius: 4px;
-    text-align: center;
-  }
-
-  .pillar h3 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-
-  .pillar p {
-    font-size: 0.85rem;
-    color: #666;
-  }
-
-  @media (max-width: 600px) {
-    .pillars-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

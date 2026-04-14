@@ -3,14 +3,9 @@ title: La Loingtaine
 section: about
 order: 1
 ---
-## Le Site
+La Loingtaine est une ancienne ferme du 18ème siècle rénovée au début du siècle dernier proche de la forêt de Fontainebleau. Le Loing coule paisiblement au fond du grand jardin et de nombreux cygnes et canards y ont élu domicile; les arbres centenaires, les écureuils concourent à donner à cet endroit un caractère champêtre et bucolique.
 
-La Loingtaine est une ferme du XVIIIe siècle, rénovée avec soin au début des années 1900, nichée près de la magnifique forêt de Fontainebleau dans le village de Montigny-sur-Loing.
 
-## Un lieu de paix et de création
+Proche de Paris, mais si loin de ses grandes salles de concert et ses coutumes, le cadre chaleureux de La Loingtaine incite à la fois à la contemplation et à la création. Depuis 2005 ce lieu vit essentiellement à travers la musique. Il est maintenant ouvert toutes les formes d’art  et de culture. Il veut donner l’opportunité à de nombreux artistes et spécialistes de s’y produire, d’y séjourner, d’y créer, d’y enseigner, et parfois d’y apprendre… Nous avons ainsi élargi le domaine d’activités  pour couvrir un plus large éventail de sujets. La Loingtaine accueille tous ceux qui partagent notre intérêt pour la dialogue interculturel et ont aussi la joie de partager leurs connaissances et expériences.
 
-Le cadre paisible — avec son parc, ses vieux arbres et le cours tranquille du Loing — invite à la contemplation et à la création. C'est un espace où l'art et la nature s'entrelacent, où le rythme des saisons accompagne le rythme de la musique.
-
-## Un espace sans frontières
-
-La Loingtaine est devenue un « espace sans frontières » pour le dialogue interculturel, où des artistes et des spécialistes du monde entier peuvent se produire, se reposer, réfléchir et enseigner. Après 15 ans d'éducation musicale, de concerts et de recherche, l'objectif reste d'être un havre pour les musiciens tout en s'ouvrant à d'autres expressions artistiques — un espace de liberté, de curiosité et d'émotion.
+![](/images/img_laloingtaine-300x186.webp)

@@ -1,81 +1,27 @@
 ---
 import SectionLayout from '../../layouts/SectionLayout.astro';
-import { getCollection, getEntry, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'en/who-are-we');
-const { Content } = entry ? await render(entry) : { Content: null };
-
-const team = await getCollection('artists', (entry) => {
-  return entry.id.startsWith('en/') && (entry.data as any).order !== undefined;
-});
-
-const sortedTeam = team.sort((a, b) => ((a.data as any).order || 99) - ((b.data as any).order || 99));
+if (!entry) {
+  throw new Error('Who Are We page content not found');
+}
+const { Content } = await render(entry);
 ---
 
 <SectionLayout 
-  title={entry?.data.title || "Who Are We?"} 
+  title={entry.data.title} 
   section="about" 
   activePage="whoarewe" 
   description="Meet the core team behind La Loingtaine — Aki Saulière, Raphael Bell, Masako Saulière, and Claude Saulière."
-  heroImage={entry?.data.image}
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="team-page">
-    <h2>{entry?.data.title || "Who Are We?"}</h2>
-    <div class="intro">
-      {Content ? <Content /> : <p>The dedicated team behind La Loingtaine's cultural mission.</p>}
-    </div>
-
-    <div class="team-list">
-      {sortedTeam.map(async (member) => {
-        const { Content } = await render(member);
-        return (
-          <div class="team-member">
-            <div class="member-header">
-              <h3>{member.data.name}</h3>
-              <span class="member-role">{member.data.instrument}</span>
-            </div>
-            <div class="member-bio">
-              <Content />
-            </div>
-          </div>
-        );
-      })}
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
 
-  .team-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .team-member {
-    border-bottom: 1px dashed #ddd;
-    padding-bottom: 30px;
-  }
-
-  .team-member:last-child {
-    border-bottom: none;
-  }
-
-  .member-role {
-    font-size: 0.85rem;
-    color: var(--color-burgundy);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-  }
-
-  .member-bio {
-    margin-top: 15px;
-  }
-</style>

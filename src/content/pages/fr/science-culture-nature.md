@@ -1,17 +1,14 @@
 ---
-title: "Science, Culture et Nature"
-section: "discovery"
+title: Science, Culture et Nature
+section: discovery
 order: 1
 ---
+***Fontainebleau Dialogue***
 
-La Loingtaine sirve como el brazo europeo de una red científica internacional, los Diálogos de Fontainebleau, que involucra a 15 institutos de investigación en todo el mundo.
+À la suite de l’adoption du Protocole de Kyoto, un traité int
 
-En colaboración con la **Universidad de Kioto** y el **IRU-AFS** (Instituto para la Investigación de las Leyes Universales - Aplicadas a las Ciencias Financieras), La Loingtaine organiza diálogos y seminarios sobre las conexiones entre la investigación científica y el desarrollo humano.
+ernational qui prolonge la Convention-cadre des Nations Unies sur les changements climatiques de 1992, l’Université de Kyoto a créé en 2015 l’Unité internationale de recherche sur les études futures avancées (IRU-AFS) en collaboration avec 12 (aujourd’hui 15) autres organismes de recherche dans la même l’Université de Kyoto (www2.yukawa.kyoto-u.ac.jp/~future/?lang=en) Cette collaboration multi discplinaire, fondée autours du nouveau projet “Sciences créatives intégrées”, vise à conduire aventures intellectuelles pour changer les paradigmes pour arriver aux lois universelles basant sur les principes émergentes de la gouvernance des organismes vivants, des matériaux, de l’esprit, des sociétés humaines, de l’éducation et de l’économie, et pour guider notre avenir à travers des études interdisciplinaires.
 
-Los *Diálogos de Fontainebleau* exploran cómo los cambios de paradigma emergentes en la ciencia pueden informar una mejor gobernanza y fomentar una comprensión más profunda de los principios universales que conectan todos los dominios del conocimiento.
+Pour cet effort novateur de l’Université de Kyoto, La Loingtaine fournie l’espace et les opportunités pour des dialogues et la création de réseau pour une plus grande gamme de scientifiques. La Loingtaine vise à contribuer en proposant d’intégrer la dimension culturelle de l’Homme et de la Nature dans le projet “Sciences créatives intégrées”
 
-### La Red Internacional
-
-La red reúne a **15 institutos de investigación** en varios continentes, creando un espacio único para el intercambio interdisciplinario que cierra la brecha entre la investigación fundamental y las aplicaciones prácticas para la sociedad.
-
-Los temas explorados incluyen la ecología, el desarrollo sostenible, la relación entre el arte y la ciencia, y el papel de la cultura en la transformación social.
+![](/images/science-culture-image.webp)

@@ -1,0 +1,25 @@
+---
+import SectionLayout from "../../../layouts/SectionLayout.astro";
+import { getEntry, render } from "astro:content";
+
+const entry = await getEntry("pages", "fr/propellor-project");
+if (!entry) {
+  throw new Error("Projet Propeller page content not found");
+}
+const { Content } = await render(entry);
+---
+
+<SectionLayout
+  title={entry.data.title}
+  section="learning"
+  activePage="propellor-project"
+  description="String Academy at La Loingtaine — immersive summer music education near Fontainebleau."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
+    </div>
+  </div>
+</SectionLayout>

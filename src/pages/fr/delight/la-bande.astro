@@ -1,115 +1,28 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
-import { getCollection, getEntry, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'fr/la-bande');
 const enEntry = await getEntry('pages', 'en/la-bande');
-const { Content: PageContent } = entry ? await render(entry) : { Content: null };
-
-const artists = await getCollection('artists', (entry) => {
-  return entry.id.startsWith('fr/');
-});
-
-// Sort by order
-const sortedArtists = artists.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+if (!entry) {
+  throw new Error('La Bande page content not found (FR)');
+}
+const { Content } = await render(entry);
 ---
 
 <SectionLayout 
-  title={entry?.data.title || "La Bande La Loingtaine"} 
+  title={entry.data.title} 
   section="delight" 
   activePage="labande" 
   description="L'ensemble principal de La Loingtaine — des musiciens dévoués au cœur de nos concerts."
-  heroImage={entry?.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="la-bande-content">
-    <h2>{entry?.data.title || "La Bande"}</h2>
-    <div class="intro-text">
-      {PageContent ? <PageContent /> : (
-        <p>
-          L'ensemble au cœur de La Loingtaine, réunissant des musiciens de renommée internationale 
-          partageant une passion pour la musique de chambre dans un cadre intime.
-        </p>
-      )}
-    </div>
-
-    <div class="artist-list">
-      {sortedArtists.map(async (artist) => {
-        const { Content } = await render(artist);
-        return (
-          <div class="artist-entry">
-            <div class="artist-header">
-              <h3>{artist.data.name}</h3>
-              <span class="artist-instrument">{artist.data.instrument}</span>
-            </div>
-            <div class="bio-content">
-              <Content />
-            </div>
-          </div>
-        );
-      })}
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  .la-bande-content {
-    color: var(--color-text);
-  }
 
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-
-  .intro-text {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: var(--space-2xl);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .intro-text p {
-    margin-bottom: 1rem;
-  }
-
-  .artist-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .artist-entry {
-    border-bottom: 1px dashed #ddd;
-    padding-bottom: 30px;
-  }
-
-  .artist-entry:last-child {
-    border-bottom: none;
-  }
-
-  h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-  }
-
-  .artist-instrument {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.85rem;
-    color: var(--color-burgundy);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-  }
-
-  .bio-content {
-    margin-top: 15px;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #444;
-  }
-</style>

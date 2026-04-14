@@ -1,17 +1,13 @@
 ---
-title: "Science, Culture and Nature"
-section: "discovery"
+title: "Science, culture and nature: Fontainebleau dialogues"
+section: discovery
 order: 1
+image: /images/ideas-forum.jpg
 ---
+*La Loingtaine Institute of Advanced Future Studies: Science, culture, and ideas for the future* 
 
-La Loingtaine serves as the European arm of an international scientific network, the Fontainebleau Dialogues, involving 15 research institutes worldwide.
+Following the  of the adoption of The Kyoto Protocol, an international treaty, which extends the 1992 United Nations Framework Convention on Climate Change, the International Research Unit for Advanced Future Studies (IRU-AFS) was created in 2015 to stimulate multidisciplinary collaboration and research at Kyoto University. The research activities of the Unit’s ‘New Integrated Sciences Project’ involved 15 separate institutes from Kyoto University as well as a wide range of Asian scholars. Based on emerging principles for the governance of living organisms, materials, mind, human societies, education, and economics, this multi-disciplinary collaboration aims to lead intellectual adventures to change the paradigm for arriving at universal laws, and to guide our future through new research disciplines.
 
-In partnership with **Kyoto University** and the **IRU-AFS** (Institute for the Research of Universal laws — Applied to Financial Sciences), La Loingtaine hosts dialogues and seminars on the connections between scientific research and human development.
+La Loingtaine has accepted the invitation of the University of Kyoto to serve as a forum for dialogue related to these research activities, – especially in terms of the promotion of paradigm shifts related to the exploration of universal laws and emerging principles for the governance of living organisms and the surrounding world. The activities planned in this respect at La Loingtaine will aim to contribute to such paradigm shifts by including the cultural dimension of human existence and nature into the research agenda. Moreover, by providing space and opportunities for dialogue and networking for a wider range of scientists, La Loingtaine will contribute to the creation of a European arm of the international network of scientists created by the New Integrated Sciences Project at Kyoto University.
 
-The *Fontainebleau Dialogues* explore how emerging paradigm shifts in science can inform better governance and foster a deeper understanding of the universal principles that connect all domains of knowledge.
-
-### The International Network
-
-The network brings together **15 research institutes** across multiple continents, creating a unique space for interdisciplinary exchange that bridges the gap between fundamental research and practical applications for society.
-
-Topics explored include ecology, sustainable development, the relationship between art and science, and the role of culture in social transformation.
+![](/images/science-culture-image.webp)

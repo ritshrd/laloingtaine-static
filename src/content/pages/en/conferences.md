@@ -1,20 +1,51 @@
 ---
-title: "Conferences"
-section: "sharing"
+title: Conferences
+section: sharing
 order: 3
+image: /images/ideas-forum.jpg
 ---
+Due to the COVID19 situation we have not yet been able to fix a programme but some very interesting speakers have already agreed to come to La Loingtaine, including:
 
-Distinguished speakers share their insights on art, science, music, and heritage 
-at La Loingtaine.
+ 
 
-## 🧠 Brain Imaging and Music
-### Dr. Denis Le Bihan
-A pioneering researcher in brain imaging, Dr. Le Bihan explores how our brains 
-process music and the neural pathways involved in musical perception.
+2021
 
-## 🏺 UNESCO and Cultural Heritage
-### Georges Kutukdjian
-A distinguished figure in international cultural policy, Georges Kutukdjian 
-brings decades of UNESCO experience to heritage discussions.
+ 
 
-Interested in attending or proposing a conference? Please contact us at [info@laloingtaine.org](mailto:info@laloingtaine.org).
+Saturday 4 december 2021 at 3pm
+
+Didier Durand-Bancel
+spiritualité de Beethoven
+
+ 
+
+2022
+
+ 
+
+Saturday 17 September at 3 pm
+
+Conference by Dr Denis Le Bihan
+The images and the sound: what brain imaging reveals musician’s brain
+
+ 
+
+Denis Le Bihan
+
+Le cerveau et la musique
+
+ 
+
+Georges  Kutukdjian   
+“What is Unesco doing?
+
+ 
+
+Tristan Lefort-Martine
+Des droits de la Nature (l’expérience équatorienne)
+
+ 
+
+Jean Philippe Vasser (cancelled)
+
+La personnalité de Camille Saint-Saëns

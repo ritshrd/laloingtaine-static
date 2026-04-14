@@ -1,22 +1,23 @@
 ---
-title: "Festival Echoes"
-section: "sharing"
+title: Echoes of the Fontainebleau International Festival of Art History
+section: sharing
 order: 4
+image: /images/ideas-forum.jpg
 ---
+Echoes of a Festival – an annual programme of activities focusing on the music, art and culture of a specific country as identified by the annual History of Art Festival of the Château de Fontainebleau.
 
-Linked to the Château de Fontainebleau International Festival of Art History, 
-the "Echoes of the Festival" series brings art historical insights to La Loingtaine.
+For 10 years now, Château Fontainebleau has organized a Festival of Art History, unique among the many festivals in the world. The Festival lasts 3 days and takes place the first weekend in June every year. The efforts and work that are put in behind the scenes are unimaginable including scientific commissions and a wide range of specialists of the theme of the year. The Festival attracts visitors, scientists, specialists, and other intellectuals from around the world as well as people from the Fontainebleau and Seine-Marne region.
 
-Each year, the **Château de Fontainebleau International Festival of Art History** 
-brings together scholars, curators, and art lovers from around the world. La Loingtaine 
-participates in this celebration of art history through our *Echoes of the Festival* 
-lecture series.
+To support and enhance the interest evoked during the Festival, La Loingtaine has decided each year to dedicate days to a special programme related to the theme of the Festival. The activities may include conferences, exhibitions, activities for children, projection of films and concerts, etc.
 
-These lectures extend the themes of the festival to our intimate setting, where 
-audiences can engage more deeply with the ideas and discoveries presented.
+<center>
 
-### About the Festival
+**April 24 at 4 p.m.**
 
-The Festival de l'Histoire de l'Art is held annually at the Château de Fontainebleau, 
-just a short distance from La Loingtaine. It is a unique event that gathers art 
-historians, museum professionals, students, and the general public.
+Concert « Regards croisés autour des Haiku de Renaud Gagneux aussi de Louis Couperin et Claude Debussy
+
+Nozomi Misawa, piano\
+Laure Morabito, clavecin\
+Akihiro Nishida récitant
+
+</center>

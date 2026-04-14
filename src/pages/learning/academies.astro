@@ -14,32 +14,14 @@ const { Content } = await render(entry);
   section="learning"
   activePage="academies"
   description="String Academy at La Loingtaine — immersive summer music education near Fontainebleau."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="learning-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-
-    <div class="main-text">
+    <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: "Cinzel Decorative", cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .main-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .learning-page {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-</style>

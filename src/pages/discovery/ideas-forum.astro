@@ -14,53 +14,14 @@ const { Content } = await render(entry);
   section="discovery" 
   activePage="forum" 
   description="The Ideas Forum — a community space for conferences, workshops, and exhibitions at La Loingtaine."
-  heroImage={entry.data.image}
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="forum-container">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-
-  .cta-box {
-    text-align: center;
-    background: #fdfaf2;
-    border: 1px dashed #c9b08a;
-    border-radius: 4px;
-    padding: 40px;
-    margin-top: 50px;
-  }
-
-  .cta-box h3 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 15px;
-    color: var(--color-burgundy);
-  }
-
-  .contact-link {
-    margin-top: 20px;
-  }
-</style>

@@ -100,13 +100,13 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   margin-bottom: var(--space-xl);
   margin-top: var(--space-lg);
 }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   margin-top: var(--space-lg);
 }
 
@@ -116,6 +116,14 @@ p {
   font-family: var(--font-body);
 }
 
+/* --- Section Page Intro --- */
+.section-intro h2 {
+  font-family: 'Cinzel Decorative', cursive;
+  color: var(--color-burgundy);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
 /* Specific content styling (markdown outputs) */
 .content-body {
   font-size: 1rem;
@@ -123,6 +131,13 @@ p {
   color: var(--color-text);
   text-align: left;
   max-width: 100%;
+}
+
+.map-wrapper {
+  margin-top: var(--space-xl);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .content-body p {

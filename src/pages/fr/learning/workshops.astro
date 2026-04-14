@@ -3,8 +3,9 @@ import SectionLayout from '../../../layouts/SectionLayout.astro';
 import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'fr/workshops');
+const enEntry = await getEntry('pages', 'en/workshops');
 if (!entry) {
-  throw new Error('Workshops page content not found');
+  throw new Error('Workshops page content not found (FR)');
 }
 const { Content } = await render(entry);
 ---
@@ -14,44 +15,14 @@ const { Content } = await render(entry);
   section="learning" 
   activePage="workshops" 
   description="Ateliers d'étude orchestrale à La Loingtaine."
-  heroImage="/images/site/home-hero.jpg"
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="learning-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
-    <div class="body-text">
+    <div class="content-body">
       <Content />
     </div>
-
-    {entry.data.highlights && (
-      <div class="features-grid">
-        {entry.data.highlights.map((h) => (
-          <div class="feature-card">
-            <span class="feat-icon">{h.icon}</span>
-            <h3>{h.title}</h3>
-            <p>{h.description}</p>
-          </div>
-        ))}
-      </div>
-    )}
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
-  }
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-</style>
+

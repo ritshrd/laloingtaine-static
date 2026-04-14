@@ -18,8 +18,8 @@ export const ui = {
     // Sub-navigation: Delight
     'nav.labande': 'La Bande<br/>La Loingtaine',
     'nav.concerts': 'Concerts',
-    'nav.upcoming': 'Upcoming<br/>concerts',
     'nav.past': 'Past<br/>concerts',
+    'nav.upcoming': 'Upcoming<br/>concerts',
     'nav.schubertiades': 'Association<br/>Schubertiades',
     'nav.gallery': 'Photo gallery',
 
@@ -27,18 +27,19 @@ export const ui = {
     'nav.academies': 'Academies',
     'nav.masterclasses': 'Masterclasses',
     'nav.workshops': 'Workshops',
+    'nav.propellor': 'Propellor Project',
     'nav.test': 'Test',
 
     // Sub-navigation: Discovery
-    'nav.science': 'Science, Culture and Nature',
-    'nav.forum': 'Ideas Forum',
+    'nav.science': 'Science, culture and nature<br/>Fontainebleau Dialogues',
+    'nav.forum': 'La Loingtaine<br/>Ideas Forum',
 
     // Sub-navigation: Sharing
-    'nav.books': 'Books',
-    'nav.publishing': 'La Loingtaine Publishing',
-    'nav.library': 'Virtual Library Project',
-    'nav.echoes': 'Festival Echoes',
     'nav.conferences': 'Conferences',
+    'nav.echoes': 'Echoes Festival',
+    'nav.books': 'Books',
+    'nav.publishing': 'La Loingtaine<br/>Publishing',
+    'nav.library': 'Virtual <br/>Library Project',
 
     // About
     'nav.laloingtaine': 'La Loingtaine',
@@ -68,8 +69,8 @@ export const ui = {
     // Sub-navigation: Delight
     'nav.labande': 'La Bande<br/>La Loingtaine',
     'nav.concerts': 'Concerts',
-    'nav.upcoming': 'Prochains<br/>concerts',
     'nav.past': 'Concerts<br/>passés',
+    'nav.upcoming': 'Prochains<br/>concerts',
     'nav.schubertiades': 'Association<br/>Schubertiades',
     'nav.gallery': 'Galerie photos',
 
@@ -77,16 +78,17 @@ export const ui = {
     'nav.academies': 'Académies',
     'nav.masterclasses': 'Masterclasses',
     'nav.workshops': 'Ateliers',
+    'nav.propellor': 'Projet Propeller',
     'nav.test': 'Teste',
 
     // Sub-navigation: Discovery
-    'nav.science': 'Science, Culture et Nature',
-    'nav.forum': 'Forum des Idées',
+    'nav.science': 'Science, Culture et Nature<br/>Fontainebleau Dialogues',
+    'nav.forum': 'La Loingtaine<br/>Forum des idées',
 
     // Sub-navigation: Sharing
     'nav.books': 'Livres',
-    'nav.publishing': 'Éditions La Loingtaine',
-    'nav.library': 'Bibliothèque Virtuelle',
+    'nav.publishing': 'Maison Edition <br/>La Loingtaine',
+    'nav.library': 'Bibliothèque <br/>Virtuelle',
     'nav.echoes': 'Échos du Festival',
     'nav.conferences': 'Conférences',
 

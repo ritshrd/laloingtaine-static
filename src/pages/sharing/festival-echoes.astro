@@ -13,40 +13,15 @@ const { Content } = await render(entry);
   title={entry.data.title} 
   section="sharing" 
   activePage="echoes" 
-  heroImage={entry.data.image || "/images/site/home-hero.jpg"} 
   description="Echoes of the Festival — lectures linked to the Château de Fontainebleau International Festival of Art History."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="echoes-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-  .info-card {
-    background: #fdfaf2;
-    border: 1px solid #ddd;
-    padding: 30px;
-    border-radius: 4px;
-    margin-top: 40px;
-  }
-</style>
+

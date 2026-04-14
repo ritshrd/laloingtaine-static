@@ -19,6 +19,7 @@ const t = useTranslations(lang);
 const sectionNavs: Record<string, NavItem[]> = {
   delight: [
     { key: "labande", label: t("nav.labande"), path: "/delight/la-bande/" },
+    { key: "concerts", label: t("nav.concerts"), path: "/delight/concerts/" },
     {
       key: "upcoming",
       label: t("nav.upcoming"),
@@ -48,7 +49,11 @@ const sectionNavs: Record<string, NavItem[]> = {
       label: t("nav.workshops"),
       path: "/learning/workshops/",
     },
-    { key: "test", label: t("nav.test"), path: "/learning/test/" },
+    {
+      key: "propellor-project",
+      label: t("nav.propellor"),
+      path: "/learning/propellor-project/",
+    },
   ],
   discovery: [
     {
@@ -59,6 +64,16 @@ const sectionNavs: Record<string, NavItem[]> = {
     { key: "forum", label: t("nav.forum"), path: "/discovery/ideas-forum/" },
   ],
   sharing: [
+    {
+      key: "conferences",
+      label: t("nav.conferences"),
+      path: "/sharing/conferences/",
+    },
+    {
+      key: "echoes",
+      label: t("nav.echoes"),
+      path: "/sharing/festival-echoes/",
+    },
     { key: "books", label: t("nav.books"), path: "/sharing/books/" },
     {
       key: "publishing",
@@ -69,16 +84,6 @@ const sectionNavs: Record<string, NavItem[]> = {
       key: "library",
       label: t("nav.library"),
       path: "/sharing/virtual-library/",
-    },
-    {
-      key: "echoes",
-      label: t("nav.echoes"),
-      path: "/sharing/festival-echoes/",
-    },
-    {
-      key: "conferences",
-      label: t("nav.conferences"),
-      path: "/sharing/conferences/",
     },
   ],
   about: [
@@ -141,8 +146,8 @@ const navItems = sectionNavs[section] || [];
     line-height: 1.1;
     transition: opacity 0.2s ease;
     white-space: normal;
-    text-align: center;
-    max-width: 130px;
+    text-align: left;
+    /*max-width: 130px;*/
     display: inline-block;
     text-transform: capitalize;
   }
@@ -163,17 +168,21 @@ const navItems = sectionNavs[section] || [];
     border-radius: 50%;
     background: transparent;
     transition: all 0.3s ease;
+    flex-shrink: 0;
   }
 
   .indicator--active {
-    background: #e6dfd1; /* A light parchment color for the active dot inside */
-    border-color: white;
+    background: #7a171a;
+    border-color: #7a171a;
+  }
+
+  .nav-item-wrapper:hover .indicator {
+    background: white;
   }
 
   .separator {
     color: rgba(255, 255, 255, 0.6);
     font-size: 1.1rem;
-    margin-left: 4px;
     font-weight: 300;
   }
 

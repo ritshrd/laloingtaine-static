@@ -5,7 +5,7 @@ import { getEntry, render } from 'astro:content';
 const entry = await getEntry('pages', 'fr/conferences');
 const enEntry = await getEntry('pages', 'en/conferences');
 if (!entry) {
-  throw new Error('Conferences page content not found');
+  throw new Error('Conferences page content not found (FR)');
 }
 const { Content } = await render(entry);
 ---
@@ -14,68 +14,15 @@ const { Content } = await render(entry);
   title={entry.data.title} 
   section="sharing" 
   activePage="conferences" 
-  description="Conférences à La Loingtaine — intervenants invités sur l'art, la science, la musique et le patrimonio."
+  description="Conférences à La Loingtaine — intervenants invités sur l'art, la science, la musique et le patrimoine."
   heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="conferences-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-  .speaker-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  .speaker-item {
-    background: #fdfaf2;
-    padding: 30px;
-    border-radius: 4px;
-    border: 1px solid #eee;
-  }
-  .topic-tag {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.75rem;
-    color: white;
-    background: var(--color-burgundy);
-    display: inline-block;
-    padding: 2px 12px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-  .speaker-item h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-  }
-  .speaker-item p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #555;
-  }
-  .footer-cta {
-    text-align: center;
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px dashed #ccc;
-  }
-</style>
+

@@ -14,45 +14,14 @@ const { Content } = await render(entry);
   section="learning" 
   activePage="workshops" 
   description="Orchestral study workshops at La Loingtaine — preparation for auditions and professional development."
-  heroImage="/images/site/home-hero.jpg"
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="learning-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
-    <div class="body-text">
+    <div class="content-body">
       <Content />
     </div>
-
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
-  }
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  .feature-card {
-    background: #fdfaf2;
-    padding: 25px;
-    border-radius: 4px;
-    text-align: center;
-    border: 1px solid #eee;
-  }
-  .feat-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 10px;
-  }
-</style>
+

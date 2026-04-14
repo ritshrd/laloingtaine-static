@@ -1,22 +1,24 @@
 ---
-title: "Échos du Festival"
-section: "sharing"
+title: Echo de Festival
+section: sharing
 order: 4
 ---
+Depuis 2011, le Château de Fontainebleau organise le Festival de l’Histoire de l’Art, unique du monde, dans la première semaine de juin. Fruit d’un travail énorme de préparation thématique qui court sur toute l’année, le Festival réunit pendant trois jours des visiteurs venus du monde entier, aussi bien que de la Seine-et-Marne, curieux et spécialistes, poètes, intellectuels et scientifiques, musiciens et mélomanes, en un ensemble d’une richesse inimaginable.
 
-Liée au Festival international de l'histoire de l'art du Château de Fontainebleau, 
-la série "Échos du Festival" apporte des éclairages sur l'histoire de l'art à La Loingtaine.
+Enthousiaste et souhaitant multiplier les rencontres, La Loingtaine a décidé de programmer des journées spéciales autour du pays invité au Festival. Ces journées prennent la forme de conférences, d’expositions, d’activités pour les enfants, de projection de films et de concerts – au service de cette idée du partage, de la rencontre, de la compréhension du monde. 
 
-Chaque année, le **Festival international de l'histoire de l'art du Château de Fontainebleau** 
-réunit des chercheurs, des conservateurs et des passionnés d'art du monde entier. La Loingtaine 
-participe à cette célébration de l'histoire de l'art à travers notre série de conférences 
-*Échos du Festival*.
 
-Ces conférences prolongent les thèmes du festival dans notre cadre intime, où 
-le public peut s'engager plus profondément dans les idées et les découverts présentées.
 
-### À propos du Festival
 
-Le Festival de l'histoire de l'art se tient chaque année au Château de Fontainebleau, 
-à une courte distance de La Loingtaine. C'est un événement unique qui rassemble des historiens 
-de l'art, des professionnels de musées, des étudiants et le grand public.
+<center>
+
+
+
+**24 avril à 16h**
+
+
+Concert « Regards croisés autour des Haiku de Renaud Gagneux aussi de Louis Couperin et Claude Debussy
+
+Nozomi Misawa, piano\
+Laure Morabito, clavecin\
+Akihiro Nishida récitant

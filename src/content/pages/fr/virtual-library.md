@@ -1,18 +1,10 @@
 ---
-title: "Projet de Bibliothèque Virtuelle"
-section: "sharing"
+title: Bibliothèque virtuelle
+section: sharing
 order: 5
 ---
+L’idée de créer une bibliothèque virtuelle est née de la conviction que La Loingtaine, avec son identité spécifique, pouvait utilement abriter une bibliothèque spécialisée. Mais comme une bibliothèque physique ne serait accessible qu’à un nombre limité de personnes, il apparaît qu’une bibliothèque numérique serait la meilleure façon d’atteindre un public élargi tout en renforçant le sentiment de communauté autour de La Loingtaine.
 
-Un projet de bibliographie annotée axé sur les publications de l'UNESCO, des sciences et de l'écologie.
+ 
 
-Le projet de bibliothèque virtuelle de La Loingtaine vise à créer une collection accessible 
-et annotée d'ouvrages importants dans les domaines des **initiatives de l'UNESCO**, 
-de la **recherche scientifique** et de l'**écologie**.
-
-En conservant et en annotant ces ouvrages, nous espérons les rendre plus accessibles 
-aux chercheurs, aux étudiants et aux esprits curieux du monde entier, poursuivant ainsi 
-notre mission de partage des connaissances par-delà les frontières et les disciplines.
-
-> *Ce projet est actuellement en cours de développement. Les contributions et suggestions sont les bienvenues.*
-> Contact : [info@laloingtaine.org](mailto:info@laloingtaine.org)
+Cet espace est ouvert pour que vous y suggériez les livres de votre choix avec vos commentaires et des informations bibliographiques (titre, auteur, éditeur – nom et nationalité – année de parution et numéro ISBN si possible)

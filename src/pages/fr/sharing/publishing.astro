@@ -5,7 +5,7 @@ import { getEntry, render } from 'astro:content';
 const entry = await getEntry('pages', 'fr/publishing');
 const enEntry = await getEntry('pages', 'en/publishing');
 if (!entry) {
-  throw new Error('Publishing page content not found');
+  throw new Error('Publishing page content not found (FR)');
 }
 const { Content } = await render(entry);
 ---
@@ -17,36 +17,12 @@ const { Content } = await render(entry);
   description="Éditions La Loingtaine — maison d'édition internationale."
   heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="publishing-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-  .contact-card {
-    background: #fdfaf2;
-    border-left: 4px solid var(--color-burgundy);
-    padding: 30px;
-    margin-top: 40px;
-  }
-</style>
+

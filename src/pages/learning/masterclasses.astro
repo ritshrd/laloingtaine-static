@@ -14,65 +14,14 @@ const { Content } = await render(entry);
   section="learning" 
   activePage="masterclasses" 
   description="Monthly masterclasses at La Loingtaine led by Aki Saulière for conservatory students."
-  heroImage="/images/site/home-hero.jpg"
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="learning-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
-    <div class="body-text">
+    <div class="content-body">
       <Content />
     </div>
-
-    {entry.data.details && (
-      <div class="info-card">
-        <h3>Masterclass Information</h3>
-        <ul class="details-list">
-          {entry.data.details.map((detail) => (
-            <li><strong>{detail.label}:</strong> {detail.value}</li>
-          ))}
-        </ul>
-        <div class="registration">
-          <p>For information and registration:</p>
-          <a href="mailto:info@laloingtaine.org">info@laloingtaine.org</a>
-        </div>
-      </div>
-    )}
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
-  }
-  .info-card {
-    background: #fdfaf2;
-    padding: 30px;
-    border-radius: 4px;
-    border-left: 4px solid var(--color-burgundy);
-  }
-  .info-card h3 {
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 20px;
-  }
-  .details-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  .details-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-  }
-  .registration {
-    margin-top: 20px;
-    font-style: italic;
-  }
-</style>
+

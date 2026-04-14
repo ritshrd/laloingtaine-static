@@ -1,15 +1,9 @@
 ---
-title: "Livres et Publications"
-section: "sharing"
+title: Livres
+section: sharing
 order: 1
 ---
+Les activités de La Loingtaine ont pour objectif de mettre en valeur et de diffuser les connaissances et l'expérience liées à la musique, à l'art, à l'histoire et à la philosophie, à travers divers supports. Une attention particulière sera accordée aux savoirs culturels moins connus et qui risquent peut-être de disparaître.
+Pour répondre à ce défi, nous avons lancé des initiatives consacrées à la documentation et à la transmission des connaissances sous forme de documents écrits et d'ouvrages, grâce à la création des Éditions La Loingtaine et du projet de bibliothèque virtuelle La Loingtaine. 
 
-Éditions La Loingtaine apporte la parole escrita à notre mission de partage culturel.
 
-### Éditions La Loingtaine
-Maison d'édition internationale fondée en 2018 au Japon, publiant des musiciens, des écrivains et des peintres.
-[En savoir plus →](/fr/sharing/publishing/)
-
-### Projet de Bibliothèque Virtuelle
-Une bibliographie annotée axée sur les publications de l'UNESCO, des sciences et de l'écologie.
-[Explorer l'Archive →](/fr/sharing/virtual-library/)

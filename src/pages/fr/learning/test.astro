@@ -3,8 +3,9 @@ import SectionLayout from "../../../layouts/SectionLayout.astro";
 import { getEntry, render } from "astro:content";
 
 const entry = await getEntry("pages", "fr/test");
+const enEntry = await getEntry("pages", "en/test");
 if (!entry) {
-  throw new Error("Academies page content not found");
+  throw new Error("Test page content not found (FR)");
 }
 const { Content } = await render(entry);
 ---
@@ -14,115 +15,14 @@ const { Content } = await render(entry);
   section="learning"
   activePage="test"
   description="Académie de cordes à La Loingtaine — éducation musicale immersive estivale."
-  heroImage="/images/site/home-hero.jpg"
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="academy-info">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-
-    <div class="main-text">
+    <div class="content-body">
       <Content />
     </div>
-
-    {
-      entry.data.professors && (
-        <div class="professors-section">
-          <h3>Professeurs</h3>
-          <ul class="professor-list">
-            {entry.data.professors.map((prof) => (
-              <li>
-                <strong>{prof}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-
-    {
-      entry.data.highlights && (
-        <div class="highlights-grid">
-          {entry.data.highlights.map((h) => (
-            <div class="highlight-item">
-              <span class="hl-icon">{h.icon}</span>
-              <h4>{h.title}</h4>
-              <p>{h.description}</p>
-            </div>
-          ))}
-        </div>
-      )
-    }
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: "Cinzel Decorative", cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .main-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .professors-section {
-    background: #fdfaf2;
-    padding: 30px;
-    border-radius: 4px;
-    margin-bottom: 40px;
-  }
-
-  .professors-section h3 {
-    font-family: "Playfair Display", serif;
-    margin-bottom: 20px;
-    color: var(--color-burgundy);
-  }
-
-  .professor-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 40px;
-  }
-
-  .professor-list li::before {
-    content: "●";
-    color: var(--color-burgundy);
-    margin-right: 10px;
-    font-size: 0.7rem;
-  }
-
-  .highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-  }
-
-  .highlight-item {
-    padding: 20px;
-    background: white;
-    border: 1px solid #eee;
-    text-align: center;
-    border-radius: 4px;
-  }
-
-  .hl-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .highlight-item h4 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-
-  .highlight-item p {
-    font-size: 0.85rem;
-    color: #666;
-  }
-</style>

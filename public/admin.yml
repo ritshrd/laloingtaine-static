@@ -83,26 +83,26 @@ collections:
           - { label: "About", value: "about" }
       - { label: "Order", name: "order", widget: "number", default: 0 }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - label: "Highlights"
-        name: "highlights"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "Icon (Emoji)", name: "icon", widget: "string" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "string" }
-      - label: "Professors"
-        name: "professors"
-        widget: "list"
-        required: false
-        field: { label: "Name", name: "name", widget: "string" }
-      - label: "Technical Details (Info Box)"
-        name: "details"
-        widget: "list"
-        required: false
-        fields:
-          - { label: "Label", name: "label", widget: "string" }
-          - { label: "Value", name: "value", widget: "string" }
+    # - label: "Highlights"
+    #   name: "highlights"
+    #   widget: "list"
+    #   required: false
+    #   fields:
+    #     - { label: "Icon (Emoji)", name: "icon", widget: "string" }
+    #     - { label: "Title", name: "title", widget: "string" }
+    #     - { label: "Description", name: "description", widget: "string" }
+    #  - label: "Professors"
+    #    name: "professors"
+    #    widget: "list"
+    #    required: false
+    #    field: { label: "Name", name: "name", widget: "string" }
+    #  - label: "Technical Details (Info Box)"
+    #    name: "details"
+    #    widget: "list"
+    #    required: false
+    #    fields:
+    #      - { label: "Label", name: "label", widget: "string" }
+    #      - { label: "Value", name: "value", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown", i18n: true }
 
   # --- Gallery ---

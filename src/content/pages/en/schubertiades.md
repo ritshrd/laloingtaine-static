@@ -1,31 +1,17 @@
 ---
-title: "Association Schubertiades"
-section: "delight"
+title: Association Schubertiades
+section: delight
 order: 3
+image: /images/ideas-forum.jpg
 ---
+The Schubertiades Association was created in 2005 (Law 1901) with the project of making La Loingtaine – an old farmhouse from the end of the 18th century, restored at the beginning of the last century – a living place, mainly through music, but also open to other arts.
 
-Founded in **2005**, the Association Schubertiades was created to transform
-an 18th-century farmhouse near Fontainebleau into a **living cultural space**
-for chamber music and the arts.
+A barn transformed into a concert hall, a music room where musicians have the opportunity to express themselves in their usual training and to discover others.
 
-Inspired by the Schubertiades of the early 19th century — intimate gatherings where
-Franz Schubert and his friends would share music, poetry, and ideas — our association
-continues this tradition of bringing artists and audiences together in a warm, personal setting.
+Regular concerts throughout the year are organized by the Association, which allow the public of Seine et Marne to discover young artists, little-known artists or foreign artists who do not have the opportunity to perform in France.
 
-### The association organizes:
+An educational space for children, students, amateurs and professionals.
 
-- Chamber music concerts throughout the year
-- Music academies and masterclasses for young musicians
-- Cultural events, conferences, and exhibitions
-- Residency programs for international artists
+A house to welcome musicians from other countries, allow meetings and reunions, and share with the public these special moments.
 
-### Get Involved
-
-The Association Schubertiades welcomes members, donors, and volunteers
-who share our passion for chamber music and cultural exchange.
-
-**Contact:**  
-Association Schubertiades  
-40 rue Grande, Sorques  
-77690 Montigny sur Loing  
-[info@laloingtaine.org](mailto:info@laloingtaine.org)
+[Download the Schuberti Association membership form](https://laloingtaine.org/wp-content/uploads/2020/12/le-bulletin-dadhesion.doc)

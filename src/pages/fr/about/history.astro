@@ -17,25 +17,12 @@ const { Content } = await render(entry);
   description="La Loingtaine — une ferme du XVIIIe siècle dédiée à la musique et aux arts."
   heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="history-content">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .content-body {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-</style>

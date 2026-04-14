@@ -1,21 +1,19 @@
 ---
-title: "Sharing"
+title: Sharing
 section: sharing
 order: 1
+image: /images/ideas-forum.jpg
 ---
+The intellectual development of our activities is to a great extent a result of inputs and ideas coming from the community that over the years has emerged around our programme. Hence it is a core tenet of La Loingtaine to be open and inviting towards new ideas and knowledge.
 
-## Lectures and Conferences
+La Loingtaine’s “SHARING” program offers a series of lectures on various subjects drawn from such disciplines as art, history, philosophy, anthropology, sociology, and ecology .. all such topics that concern us and give opportunity to question ourselves and deepen our knowledge.
 
-La Loingtaine offers a rich program of lectures on art, history, philosophy, anthropology, and ecology. These events bring together experts and enthusiasts in the intimate setting of our historic farmhouse.
+A number of new activities are planned including publication activities, which is a new area for us and various conferences and workshop. Each of these activities are briefly described below.
 
-## Echo of the Festival
+For the first time, a series of varied activities will be planned focusing each year on the culture of a specific  country as our new programme, Echo of the Festival, will elaborate on the current theme of the annual History of Art Festival of the Château de Fontainebleau.
 
-The "Echo of the Festival" program is linked to the History of Art Festival of the Château de Fontainebleau, bringing cultural discussions and presentations to our community.
 
-## Publishing
 
-We are developing new publication activities, including books that capture the spirit of La Loingtaine and disseminate the knowledge shared during our events.
+![](/images/partage-photo2.webp)
 
-## Disseminating Knowledge
-
-Our goal is to disseminate knowledge through a wide range of activities — conferences, publications, and cultural exchanges — making the richness of La Loingtaine's programming accessible to a broader audience.
+![](/images/partage-photo1.webp)

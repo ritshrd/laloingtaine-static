@@ -1,0 +1,25 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'en/concerts');
+if (!entry) {
+  throw new Error('Concerts page content not found');
+}
+const { Content } = await render(entry);
+---
+
+<SectionLayout 
+  title={entry.data.title} 
+  section="delight" 
+  activePage="concerts" 
+  description="Chamber music concerts at La Loingtaine near Fontainebleau."
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
+    </div>
+  </div>
+</SectionLayout>

@@ -1,98 +1,28 @@
 ---
 import SectionLayout from '../../../layouts/SectionLayout.astro';
-import { getCollection, getEntry, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'fr/who-are-we');
 const enEntry = await getEntry('pages', 'en/who-are-we');
-const { Content } = entry ? await render(entry) : { Content: null };
-
-const team = await getCollection('artists', (entry) => {
-  return entry.id.startsWith('fr/') && (entry.data as any).order !== undefined;
-});
-
-const sortedTeam = team.sort((a, b) => ((a.data as any).order || 99) - ((b.data as any).order || 99));
+if (!entry) {
+  throw new Error('Who Are We page content not found (FR)');
+}
+const { Content } = await render(entry);
 ---
 
 <SectionLayout 
-  title={entry?.data.title || "Qui sommes-nous ?"} 
+  title={entry.data.title} 
   section="about" 
   activePage="whoarewe" 
   description="Rencontrez l'équipe de La Loingtaine — Aki Saulière, Raphael Bell, Masako Saulière et Claude Saulière."
-  heroImage={entry?.data.image || enEntry?.data.image}
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="team-page">
-    <h2>{entry?.data.title || "Qui sommes-nous ?"}</h2>
-    <div class="intro">
-      {Content ? <Content /> : <p>L'équipe dévouée à la mission culturelle de La Loingtaine.</p>}
-    </div>
-
-    <div class="team-list">
-      {sortedTeam.map(async (member) => {
-        const { Content } = await render(member);
-        return (
-          <div class="team-member">
-            <div class="member-header">
-              <h3>{member.data.name}</h3>
-              <span class="member-role">{member.data.instrument}</span>
-            </div>
-            <div class="member-bio">
-              <Content />
-            </div>
-          </div>
-        );
-      })}
+  <div class="section-intro">
+    <h2>{entry.data.title}</h2>
+    <div class="content-body">
+      <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
 
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-
-  .team-list {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .team-member {
-    border-bottom: 1px dashed #ddd;
-    padding-bottom: 30px;
-  }
-
-  .team-member:last-child {
-    border-bottom: none;
-  }
-
-  h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-  }
-
-  .member-role {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.85rem;
-    color: var(--color-burgundy);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-  }
-
-  .member-bio {
-    margin-top: 15px;
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
-</style>

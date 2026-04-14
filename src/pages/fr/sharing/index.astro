@@ -3,6 +3,7 @@ import SectionLayout from '../../../layouts/SectionLayout.astro';
 import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('pages', 'fr/sharing');
+const enEntry = await getEntry('pages', 'en/sharing');
 if (!entry) {
   throw new Error('Sharing page content not found (FR)');
 }
@@ -13,7 +14,7 @@ const { Content } = await render(entry);
   title={entry.data.title} 
   section="sharing" 
   description="Partage à La Loingtaine — conférences, livres et échange culturel."
-  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+  heroImage={entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg"}
 >
   <div class="section-intro">
     <h2>{entry.data.title}</h2>
@@ -23,15 +24,4 @@ const { Content } = await render(entry);
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .content-body {
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
-</style>
+

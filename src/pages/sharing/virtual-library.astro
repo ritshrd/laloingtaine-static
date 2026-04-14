@@ -14,39 +14,14 @@ const { Content } = await render(entry);
   section="sharing" 
   activePage="library" 
   description="Virtual Library Project — an annotated bibliography on UNESCO, science, and ecology."
-  heroImage={entry.data.image}
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="library-page">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-    
     <div class="content-body">
       <Content />
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  h2 {
-    font-family: 'Cinzel Decorative', cursive;
-    color: var(--color-burgundy);
-    margin-bottom: var(--space-xl);
-    text-align: center;
-  }
-  .intro {
-    text-align: center;
-    font-style: italic;
-    color: var(--color-brown);
-    margin-bottom: 40px;
-  }
-  .body-text {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-  .status-box {
-    text-align: center;
-    background: #fdfaf2;
-    border: 1px dashed #c9b08a;
-    padding: 30px;
-    margin-top: 50px;
-  }
-</style>
+

@@ -1,11 +1,22 @@
 ---
 import HomeLayout from '../../layouts/HomeLayout.astro';
 import { useTranslations } from '../../i18n/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 
 const lang = 'fr';
 const t = useTranslations(lang);
 const now = new Date();
+
+// Get home page content (French)
+const entry = await getEntry('pages', 'fr/home');
+if (!entry) {
+  throw new Error('French home page content not found');
+}
+const { Content } = await render(entry);
+
+// Get English home page content for image fallback
+const enEntry = await getEntry('pages', 'en/home');
+const heroImage = entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg";
 
 // Get next upcoming featured concert in French
 const allConcerts = await getCollection('concerts', (entry) => {
@@ -21,9 +32,9 @@ const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConce
 const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 ---
 
-<HomeLayout title="Accueil" heroImage="/images/site/home-hero.jpg">
+<HomeLayout title="Accueil" heroImage={heroImage}>
   <div class="home-internal-content">
-    {nextConcert ? (
+    {nextConcert && (
       <div class="upcoming-announcement">
         <p class="announcement-date">
           {new Date(nextConcert.data.date).getDate()} {months[new Date(nextConcert.data.date).getMonth()]} à {nextConcert.data.time || '16:00'}
@@ -33,11 +44,14 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
           <p class="musician-info">{m.name} ({m.instrument})</p>
         ))}
       </div>
-    ) : (
-      <div class="welcome-msg">
-        <p>Vivez la culture et la musique au cœur de la nature.</p>
-      </div>
     )}
+
+    <div class="section-intro">
+      <div class="content-body">
+        <Content />
+      </div>
+    </div>
+
 
     <div class="action-buttons">
       <a href="/fr/delight/upcoming-concerts/" class="btn-main">cliquez pour le programme des concerts</a>

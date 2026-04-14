@@ -1,21 +1,24 @@
 ---
-title: "Plaisir"
+title: Émotion – Concerts
 section: delight
 order: 1
 ---
+**La musique avant tout**
 
-## La musique, expression intime de l'âme
+La musique est la forme d’expression artistique la plus immatérielle et la plus émouvante qui soit, et elle nous apporte un plaisir indéfinissable.
 
-La musique est une expression intime de l'âme et créatrice d'harmonie. À La Loingtaine, les expériences de musique vivante avec les musiciens en résidence créent des moments précieux de partage.
+Selon Romain Rolland, « si la musique nous est si chère, c’est qu’elle est la parole la plus profonde de l’âme », et d’après Stravinski «elle institue un ordre entre l’homme et le temps ».
 
-## La musique de chambre au cœur de notre identité
+On pourrait dire ainsi qu’elle est la voix éternelle de l’âme et du cœur.
 
-La musique de chambre est le fondement de l'identité de La Loingtaine. Notre salle de concert intime permet au public d'être au cœur de l'interprétation, créant un lien unique entre musiciens et auditeurs.
+Les concerts de musique de chambre de La Loingtaine constituent sa principale activité depuis sa création en 2005. Grâce au dévouement d’Aki Saulière et de Raphael Bell, eux-mêmes grands interprètes, qui y attirent des instrumentistes internationaux de haut niveau et un public de plus en plus nombreux.
 
-## Artistes résidents
+Mis à part quelques grands interprètes comme Renaud Capuçon, venu en 2006 et 2007, ces musiciens ne sont pas tous connus en France et, chose rare à souligner, ils ne se produisent ensemble qu’à La Loingtaine.
 
-Les artistes résidents collaborent pour façonner un profil musical unique qui définit La Loingtaine. Par leur artisanat et leur dévouement, ils transforment chaque concert en une expérience inoubliable.
+C’est pourquoi ces concerts sont uniques en leur genre.
 
-## Une communauté de mélomanes
+A la suite du confinement, après sa levée La Loingtaine a amorcé un cycle de concerts en plein air chez des particuliers passionnés par la musique de chambre à leur invitation. Nous allons développer ce concept.
 
-Nos concerts se terminent souvent autour d'un thé et de gourmandises, favorisant un lien amical entre le public et les musiciens. Cette tradition conviviale est devenue l'une des marques de fabrique de La Loingtaine.
+Après chaque concert, le public peut rencontrer les musiciens autour d’une tasse de thé, créant ainsi un lien amical et convivial entre les uns et les autres.
+
+![](/images/plaisir2.png)

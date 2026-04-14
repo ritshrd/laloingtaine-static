@@ -1,31 +1,16 @@
 ---
-title: "Association Schubertiades"
-section: "delight"
+title: Association Schubertiades
+section: delight
 order: 3
 ---
+L’Association Schubertiades a été créée 2005 (Loi 1901) en a pour projet de faire de La Loingtaine- une vieille ferme de la fin du 18ème siècle, restaurée au début du siècle dernier -un lieu vivant, essentiellement à travers la musique, mais aussi ouvert à d’autres arts.
 
-Fondée en **2005**, l'Association Schubertiades a été créée para transformar
-une ferme du XVIIIe siècle près de Fontainebleau en un **espace culturel vivant**
-pour la musique de chambre et les arts.
+Une grange transformée en salle de concerts, un salon de musique où des musiciens ont l’opportunité de s’exprimer dans leur formation habituelle et d’en découvrir d’autres.
 
-Inspirée des Schubertiades du début du XIXe siècle — ces rencontres intimes où
-Franz Schubert et ses amis partageaient musique, poésie et idées — notre association
-perpétue cette tradition en réunissant artistes et public dans un cadre chaleureux et personnel.
+Des concerts réguliers tout au long de l’année sont organisés par L’Association, qui permettent au public de Seine et Marne de découvrir des jeunes artistes, artistes peu connus ou étrangers qui n’ont pas l’occasion de se produire en France.
 
-### L'association organise :
+Un espace de pédagogie pour les enfants, étudiants, amateurs, et professionnels.
 
-- Des concerts de musique de chambre tout au long de l'année
-- Des académies de musique et des masterclasses pour les jeunes musiciens
-- Des manifestations culturelles, des conférences et des expositions
-- Des programmes de résidence pour des artistes internationaux
+Une maison pour accueillir des musiciens d’autres pays, permettre des rencontres et des retrouvailles, et partager avec le public ces moments privilégiés.
 
-### S'impliquer
-
-L'Association Schubertiades accueille les membres, les donateurs et les bénévoles
-qui partagent notre passion pour la musique de chambre et les échanges culturels.
-
-**Contact :**  
-Association Schubertiades  
-40 rue Grande, Sorques  
-77690 Montigny sur Loing  
-[info@laloingtaine.org](mailto:info@laloingtaine.org)
+[Télécharger le bulletin d’adhésion à l’association Schubertiades](https://laloingtaine.org/wp-content/uploads/2020/12/le-bulletin-dadhesion.doc)

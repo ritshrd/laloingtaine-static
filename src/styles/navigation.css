@@ -49,7 +49,7 @@
 
 .sub-nav__link {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--color-brown);
   text-decoration: none;
   padding: var(--space-xs) 0;
@@ -60,24 +60,15 @@
   gap: var(--space-xs);
 }
 
-.sub-nav__link::before {
-  content: '●';
-  font-size: 0.5rem;
-  color: var(--color-brown-light);
-  transition: color var(--transition-fast);
-}
+
 
 .sub-nav__link:hover,
 .sub-nav__link--active {
   color: var(--color-burgundy);
-  border-bottom-color: var(--color-burgundy);
   text-decoration: none;
 }
 
-.sub-nav__link:hover::before,
-.sub-nav__link--active::before {
-  color: var(--color-burgundy);
-}
+
 
 /* --- Footer Navigation --- */
 .footer-nav {

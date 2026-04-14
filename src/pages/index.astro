@@ -1,11 +1,18 @@
 ---
 import HomeLayout from '../layouts/HomeLayout.astro';
 import { useTranslations } from '../i18n/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 
 const lang = 'en';
 const t = useTranslations(lang);
 const now = new Date();
+
+// Get home page content
+const entry = await getEntry('pages', 'en/home');
+if (!entry) {
+  throw new Error('Home page content not found');
+}
+const { Content } = await render(entry);
 
 // Get next upcoming featured concert
 const allConcerts = await getCollection('concerts', (entry) => {
@@ -21,9 +28,9 @@ const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConce
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 ---
 
-<HomeLayout title="Home" heroImage="/images/site/home-hero.jpg">
+<HomeLayout title="Home" heroImage={entry.data.image || "/images/site/home-hero.jpg"}>
   <div class="home-internal-content">
-    {nextConcert ? (
+    {nextConcert && (
       <div class="upcoming-announcement">
         <p class="announcement-date">
           {months[new Date(nextConcert.data.date).getMonth()]} {new Date(nextConcert.data.date).getDate()} at {nextConcert.data.time || '4:00 p.m.'}
@@ -33,11 +40,14 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
           <p class="musician-info">{m.name} ({m.instrument})</p>
         ))}
       </div>
-    ) : (
-      <div class="welcome-msg">
-        <p>Experience culture and music in the heart of nature.</p>
-      </div>
     )}
+
+    <div class="section-intro">
+      <div class="content-body">
+        <Content />
+      </div>
+    </div>
+
 
     <div class="action-buttons">
       <a href="/delight/upcoming-concerts/" class="btn-main">click to get the concert schedule</a>

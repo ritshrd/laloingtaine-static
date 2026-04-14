@@ -16,59 +16,12 @@ const { Content } = await render(entry);
   description="Why La Loingtaine created a new website — from music venue to cultural institute."
   heroImage={entry.data.image || "/images/site/home-hero.jpg"}
 >
-  <div class="why-new-site">
+  <div class="section-intro">
     <h2>{entry.data.title}</h2>
-
     <div class="content-body">
       <Content />
-    </div>
-
-    <div class="pillars-grid">
-      <div class="pillar">
-        <h3>Delight</h3>
-        <p>Chamber music concerts that bring joy and inspiration</p>
-      </div>
-      <div class="pillar">
-        <h3>Learning</h3>
-        <p>Musical education that nurtures the whole artist</p>
-      </div>
-      <div class="pillar">
-        <h3>Discovery</h3>
-        <p>Scientific and intellectual exploration</p>
-      </div>
-      <div class="pillar">
-        <h3>Sharing</h3>
-        <p>Books, conferences, and cultural exchange</p>
-      </div>
     </div>
   </div>
 </SectionLayout>
 
-<style>
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 40px;
-  }
 
-  .pillar {
-    background: #fdfaf2;
-    padding: 25px;
-    border-top: 3px solid var(--color-burgundy);
-    border-radius: 4px;
-    text-align: center;
-  }
-
-  .pillar p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 600px) {
-    .pillars-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
