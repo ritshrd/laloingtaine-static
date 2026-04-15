@@ -1,19 +1,22 @@
 ---
-import SectionLayout from '../../../layouts/SectionLayout.astro';
-import ConcertCard from '../../../components/ConcertCard.astro';
-import { getCollection } from 'astro:content';
-import { getLangFromUrl } from '../../../i18n/utils';
+import SectionLayout from "../../../layouts/SectionLayout.astro";
+import ConcertCard from "../../../components/ConcertCard.astro";
+import YearFilterBar from "../../../components/YearFilterBar.astro";
+import { getCollection } from "astro:content";
+import { getLangFromUrl } from "../../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const now = new Date();
 
-const allConcerts = await getCollection('concerts', (entry) => {
-  return entry.id.startsWith('fr/');
+const allConcerts = await getCollection("concerts", (entry) => {
+  return entry.id.startsWith("fr/");
 });
 
 const pastConcerts = allConcerts
   .filter((c) => new Date(c.data.date) < now)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
 
 const concertsByYear: Record<number, typeof pastConcerts> = {};
 pastConcerts.forEach((concert) => {
@@ -22,47 +25,102 @@ pastConcerts.forEach((concert) => {
   concertsByYear[year].push(concert);
 });
 
-const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
+const years = Object.keys(concertsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
-<SectionLayout title="Concerts Passés" section="delight" activePage="past" description="Archives des concerts de musique de chambre à La Loingtaine depuis 2005.">
-  <h2>Concerts Passés</h2>
-  <p class="page-intro">
-    Plus de 200 concerts ont été organisés à La Loingtaine depuis 2005. Voici les archives de notre riche histoire musicale.
-  </p>
+<SectionLayout
+  title="Concerts Passés"
+  section="delight"
+  activePage="past"
+  description="Archives des concerts de musique de chambre à La Loingtaine depuis 2005."
+>
+  <div class="archive-container">
+    <h2>Concerts Passés</h2>
 
-  <div class="concerts-archive">
-    {years.map((year) => (
-      <div class="year-section">
-        <h3 class="year-heading">{year}</h3>
-        <div class="concert-list-compact">
-          {concertsByYear[year].map((concert) => (
-            <ConcertCard
-              title={concert.data.title}
-              date={new Date(concert.data.date)}
-              musicians={concert.data.musicians}
-              compact={true}
-              lang={lang}
-            />
-          ))}
-        </div>
-      </div>
-    ))}
+    <YearFilterBar
+      years={years}
+      allLabel="Tous"
+      targetId="concert-years-list"
+    />
 
-    <div class="year-section">
-      <h3 class="year-heading">2005–2024</h3>
-      <p class="coming-soon">
-        Une archive complète de notre histoire est en préparation.
-        Pour plus d'informations, <a href="mailto:info@laloingtaine.org">contactez-nous</a>.
-      </p>
+    <div class="years-list" id="concert-years-list">
+      {
+        years.map((year) => (
+          <div class="year-block" data-year-block={year.toString()}>
+            <h3 class="year-label">{year}</h3>
+            <div class="year-concerts">
+              {concertsByYear[year].map((concert) => (
+                <ConcertCard
+                  title={concert.data.title}
+                  date={new Date(concert.data.date)}
+                  musicians={concert.data.musicians}
+                  program={concert.data.program}
+                  archive={true}
+                  lang={lang}
+                />
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      {
+        years.length === 0 && (
+          <div class="placeholder">
+            <p>Une archive complète de notre histoire est en préparation.</p>
+          </div>
+        )
+      }
     </div>
   </div>
 </SectionLayout>
 
 <style>
-  .concerts-archive { max-width: 800px; margin: 0 auto; }
-  .year-section { margin-bottom: var(--space-2xl); }
-  .year-heading { font-size: 1.6rem; padding-bottom: var(--space-sm); border-bottom: 2px solid var(--color-burgundy); margin-bottom: var(--space-lg); }
-  .concert-list-compact { display: flex; flex-direction: column; gap: var(--space-md); }
-  .coming-soon { font-style: italic; color: var(--color-brown); padding: var(--space-lg); background: var(--color-cream-light); border-radius: 4px; text-align: center; }
+  .archive-container {
+    color: var(--color-text);
+  }
+
+  h2 {
+    font-family: "Cinzel Decorative", cursive;
+    color: var(--color-burgundy);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--color-brown);
+    margin-bottom: var(--space-2xl);
+    line-height: 1.6;
+  }
+
+  /* --- Year blocks --- */
+  .year-block {
+    margin-bottom: 40px;
+  }
+
+  .year-label {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: var(--color-burgundy);
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+  }
+
+  .year-concerts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .placeholder {
+    text-align: center;
+    padding: 30px;
+    background: #fdfaf2;
+    font-style: italic;
+  }
 </style>

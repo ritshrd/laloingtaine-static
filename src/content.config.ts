@@ -10,19 +10,8 @@ const concerts = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    time: z.string().optional(),
-    location: z.string().default('La Loingtaine'),
-    image: z.string().optional(),
-    featured: z.boolean().default(false),
-    musicians: z.array(z.object({
-      name: z.string(),
-      instrument: z.string().optional(),
-      country: z.string().optional(),
-    })).optional(),
-    program: z.array(z.object({
-      composer: z.string(),
-      piece: z.string(),
-    })).optional(),
+    musicians: z.string().optional(),
+    program: z.string().optional(),
   }),
 });
 
@@ -65,7 +54,7 @@ const gallery = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/gallery' }),
   schema: z.object({
     title: z.string(),
-    year: z.number(),
+    year: z.coerce.number(),
     category: z.enum(['concerts', 'academies', 'events', 'general']),
     photos: z.array(z.object({
       image: z.string(),

@@ -1,21 +1,6 @@
+﻿---
+title: "Concert de trio avec piano "
+date: 2025-12-21T00:00:00.000-05:00
+musicians: Aki Saulière (Violin), Amy Norrington (Cello), Alasdair Beatson (Piano)
+program: Chausson and Brahms
 ---
-title: "Aki Saulière, Amy Norrington & Alasdair Beatson"
-date: 2025-12-21
-time: "4:00 PM"
-location: "La Loingtaine"
-featured: false
-musicians:
-  - name: "Aki Saulière"
-    instrument: "Violin"
-  - name: "Amy Norrington"
-    instrument: "Cello"
-  - name: "Alasdair Beatson"
-    instrument: "Piano"
-program:
-  - composer: "Ernest Chausson"
-    piece: "Piano Trio"
-  - composer: "Johannes Brahms"
-    piece: "Piano Trio"
----
-
-An intimate evening of piano trios featuring works by Chausson and Brahms.

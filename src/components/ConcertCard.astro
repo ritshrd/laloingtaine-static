@@ -3,83 +3,153 @@
  * ConcertCard.astro
  * Displays a single concert with date badge, musicians, and program info.
  * Used in both upcoming and past concert listings.
+ *
+ * Modes:
+ *   - default (full card with date badge)
+ *   - compact={true}  → one-line grid row
+ *   - archive={true}  → plain-text block: title, date, musicians, program
  */
-interface Musician {
-  name: string;
-  instrument?: string;
-  country?: string;
-}
-
 interface Props {
   title: string;
   date: Date;
   time?: string;
   location?: string;
-  musicians?: Musician[];
+  musicians?: string;
+  program?: string;
   description?: string;
   featured?: boolean;
   compact?: boolean;
-  lang?: 'en' | 'fr';
+  archive?: boolean;
+  lang?: "en" | "fr";
 }
 
 const {
   title,
   date,
   time,
-  location = 'La Loingtaine',
-  musicians = [],
+  location = "La Loingtaine",
+  musicians = "",
+  program = "",
   description,
   featured = false,
   compact = false,
-  lang = 'en',
+  archive = false,
+  lang = "en",
 } = Astro.props;
 
 const months = {
-  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  fr: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+  en: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  fr: [
+    "Jan",
+    "Fév",
+    "Mar",
+    "Avr",
+    "Mai",
+    "Juin",
+    "Juil",
+    "Août",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Déc",
+  ],
+};
+
+const monthsFull = {
+  en: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  fr: [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ],
 };
 
 const day = date.getDate();
 const month = months[lang][date.getMonth()];
+const monthFull = monthsFull[lang][date.getMonth()];
 const year = date.getFullYear();
 ---
 
-{compact ? (
-  <div class="concert-item">
-    <span class="concert-item__date">{month} {day}</span>
-    <span class="concert-item__title">{title}</span>
-    {musicians.length > 0 && (
-      <span class="concert-item__artists">
-        {musicians.map(m => m.name + (m.instrument ? ` (${m.instrument})` : '')).join(', ')}
+{
+  archive ? (
+    <div class="archive-entry">
+      <p class="archive-entry__date">
+        {day}&nbsp;{monthFull}&nbsp;{year}
+      </p>
+      <p class="archive-entry__title">{title}</p>
+      {musicians && <p class="archive-entry__musicians">{musicians}</p>}
+      {program && <p class="archive-entry__program">{program}</p>}
+    </div>
+  ) : compact ? (
+    <div class="concert-item">
+      <span class="concert-item__date">
+        {month} {day}
       </span>
-    )}
-  </div>
-) : (
-  <article class:list={["concert-card", { "concert-card--featured": featured }]}>
-    <div class="concert-card__date">
-      <span class="concert-card__day">{day}</span>
-      <span class="concert-card__month">{month}</span>
-      <span class="concert-card__year">{year}</span>
+      <span class="concert-item__title">{title}</span>
+      {musicians && <span class="concert-item__artists">{musicians}</span>}
     </div>
-    <div class="concert-card__details">
-      <h3 class="concert-card__title">{title}</h3>
-      {time && <p class="concert-card__time">⏰ {time} — {location}</p>}
-      {musicians.length > 0 && (
-        <div class="concert-card__musicians">
-          {musicians.map((m) => (
-            <span class="concert-card__musician">
-              <strong>{m.name}</strong>
-              {m.instrument && <span class="concert-card__instrument"> — {m.instrument}</span>}
-              {m.country && <span class="concert-card__country"> ({m.country})</span>}
-            </span>
-          ))}
-        </div>
-      )}
-      {description && <p class="concert-card__description">{description}</p>}
-      <slot />
-    </div>
-  </article>
-)}
+  ) : (
+    <article
+      class:list={["concert-card", { "concert-card--featured": featured }]}
+    >
+      <div class="concert-card__date">
+        <span class="concert-card__day">{day}</span>
+        <span class="concert-card__month">{month}</span>
+        <span class="concert-card__year">{year}</span>
+      </div>
+      <div class="concert-card__details">
+        <h3 class="concert-card__title">{title}</h3>
+        {time && (
+          <p class="concert-card__time">
+            ⏰ {time} — {location}
+          </p>
+        )}
+        {musicians && (
+          <div class="concert-card__musicians">
+            <span class="concert-card__musician">{musicians}</span>
+          </div>
+        )}
+        {description && <p class="concert-card__description">{description}</p>}
+        <slot />
+      </div>
+    </article>
+  )
+}
 
 <style>
   /* --- Full Card --- */
@@ -91,7 +161,9 @@ const year = date.getFullYear();
     border: 1px solid var(--color-border);
     border-radius: 6px;
     margin-bottom: var(--space-lg);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    transition:
+      transform var(--transition-normal),
+      box-shadow var(--transition-normal);
   }
 
   .concert-card:hover {
@@ -227,5 +299,44 @@ const year = date.getFullYear();
     .concert-item__artists {
       grid-column: 1;
     }
+  }
+
+  /* --- Archive Entry (past-concerts plain text mode) --- */
+  .archive-entry {
+    padding: var(--space-sm) var(--space-md);
+    border-left: 2px solid var(--color-border);
+    transition: border-color var(--transition-fast);
+    line-height: 1.5;
+  }
+
+  .archive-entry:hover {
+    border-left-color: var(--color-burgundy);
+  }
+
+  .archive-entry__title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin: 0 0 2px;
+  }
+
+  .archive-entry__date {
+    font-size: 0.8rem;
+    color: var(--color-burgundy);
+    font-family: var(--font-nav);
+    margin: 0 0 3px;
+  }
+
+  .archive-entry__musicians {
+    font-size: 0.82rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    margin: 0 0 2px;
+  }
+
+  .archive-entry__program {
+    font-size: 0.8rem;
+    color: var(--color-brown);
+    margin: 0;
   }
 </style>

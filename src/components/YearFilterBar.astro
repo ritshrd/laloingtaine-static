@@ -1,0 +1,96 @@
+---
+/**
+ * YearFilterBar.astro
+ * Botones de filtro por año — mismo diseño que PhotoGallery.
+ * Uso: <YearFilterBar years={[2024, 2023, 2022]} allLabel="All" targetId="concert-years-list" blockAttr="data-year-block" />
+ */
+interface Props {
+  years: number[];
+  allLabel?: string;
+  filterId?: string;
+  targetId: string;
+  blockAttr?: string;
+}
+
+const {
+  years,
+  allLabel = 'All',
+  filterId = 'year-filter-bar',
+  targetId,
+  blockAttr = 'data-year-block',
+} = Astro.props;
+---
+
+{years.length > 1 && (
+  <div class="year-filter-bar" id={filterId} data-target={targetId} data-block-attr={blockAttr}>
+    <button class="yfb-btn yfb-btn--active" data-year="all">{allLabel}</button>
+    {years.map((year) => (
+      <button class="yfb-btn" data-year={year.toString()}>{year}</button>
+    ))}
+  </div>
+)}
+
+<script>
+  document.querySelectorAll<HTMLElement>('.year-filter-bar').forEach((bar) => {
+    const targetId = bar.dataset.target!;
+    const blockAttr = bar.dataset.blockAttr || 'data-year-block';
+    const list = document.getElementById(targetId);
+    if (!list) return;
+
+    const blocks = list.querySelectorAll<HTMLElement>(`[${blockAttr}]`);
+
+    bar.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>('.yfb-btn');
+      if (!btn) return;
+
+      const selected = btn.dataset.year!;
+
+      bar.querySelectorAll('.yfb-btn').forEach(b => b.classList.remove('yfb-btn--active'));
+      btn.classList.add('yfb-btn--active');
+
+      blocks.forEach((block) => {
+        const blockYear = block.getAttribute(blockAttr.replace(/\[|\]/g, '')) || block.dataset.yearBlock;
+        const show = selected === 'all' || blockYear === selected;
+        block.style.display = show ? '' : 'none';
+        if (show) (block as HTMLElement).style.animation = 'yfbFadeIn 0.3s ease';
+      });
+    });
+  });
+</script>
+
+<style>
+  .year-filter-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .yfb-btn {
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-brown);
+    font-family: var(--font-nav);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all var(--transition-fast);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .yfb-btn:hover,
+  .yfb-btn--active {
+    background: var(--color-burgundy);
+    color: var(--color-white);
+    border-color: var(--color-burgundy);
+  }
+
+  @keyframes yfbFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

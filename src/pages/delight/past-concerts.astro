@@ -1,21 +1,24 @@
 ---
-import SectionLayout from '../../layouts/SectionLayout.astro';
-import ConcertCard from '../../components/ConcertCard.astro';
-import { getCollection } from 'astro:content';
-import { getLangFromUrl } from '../../i18n/utils';
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import ConcertCard from "../../components/ConcertCard.astro";
+import YearFilterBar from "../../components/YearFilterBar.astro";
+import { getCollection } from "astro:content";
+import { getLangFromUrl } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const now = new Date();
 
 // Get all English concerts
-const allConcerts = await getCollection('concerts', (entry) => {
-  return entry.id.startsWith('en/');
+const allConcerts = await getCollection("concerts", (entry) => {
+  return entry.id.startsWith("en/");
 });
 
 // Filter past concerts (date < today) and sort by date descending
 const pastConcerts = allConcerts
   .filter((c) => new Date(c.data.date) < now)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  );
 
 // Group by year
 const concertsByYear: Record<number, typeof pastConcerts> = {};
@@ -25,46 +28,51 @@ pastConcerts.forEach((concert) => {
   concertsByYear[year].push(concert);
 });
 
-const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
+const years = Object.keys(concertsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
-<SectionLayout 
-  title="Past Concerts" 
-  section="delight" 
-  activePage="past" 
+<SectionLayout
+  title="Past Concerts"
+  section="delight"
+  activePage="past"
   description="Archive of past chamber music concerts at La Loingtaine since 2005."
   heroImage="/images/site/home-hero.jpg"
 >
   <div class="archive-container">
     <h2>Concert Archive</h2>
-    <p class="intro">
-      Over 200 concerts have been organized at La Loingtaine since 2005. 
-      Here is an archive of our rich musical history.
-    </p>
 
-    <div class="years-list">
-      {years.map((year) => (
-        <div class="year-block">
-          <h3 class="year-label">{year}</h3>
-          <div class="year-concerts">
-            {concertsByYear[year].map((concert) => (
-              <ConcertCard
-                title={concert.data.title}
-                date={new Date(concert.data.date)}
-                musicians={concert.data.musicians}
-                compact={true}
-                lang={lang}
-              />
-            ))}
+    <YearFilterBar years={years} allLabel="All" targetId="concert-years-list" />
+
+    <div class="years-list" id="concert-years-list">
+      {
+        years.map((year) => (
+            <h3 class="year-label">{year}</h3>
+          <div class="year-block" data-year-block={year.toString()}>
+            <div class="year-concerts">
+              {concertsByYear[year].map((concert) => (
+                <ConcertCard
+                  title={concert.data.title}
+                  date={new Date(concert.data.date)}
+                  musicians={concert.data.musicians}
+                  program={concert.data.program}
+                  archive={true}
+                  lang={lang}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
 
-      {years.length === 0 && (
-        <div class="placeholder">
-          <p>The archive is currently being updated...</p>
-        </div>
-      )}
+      {
+        years.length === 0 && (
+          <div class="placeholder">
+            <p>The archive is currently being updated...</p>
+          </div>
+        )
+      }
     </div>
   </div>
 </SectionLayout>
@@ -75,7 +83,7 @@ const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
   }
 
   h2 {
-    font-family: 'Cinzel Decorative', cursive;
+    font-family: "Cinzel Decorative", cursive;
     color: var(--color-burgundy);
     margin-bottom: var(--space-xl);
     text-align: center;
@@ -89,12 +97,13 @@ const years = Object.keys(concertsByYear).map(Number).sort((a, b) => b - a);
     line-height: 1.6;
   }
 
+  /* --- Year blocks --- */
   .year-block {
     margin-bottom: 40px;
   }
 
   .year-label {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 1.8rem;
     color: var(--color-burgundy);
     border-bottom: 2px solid #eee;

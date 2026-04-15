@@ -26,13 +26,10 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Time", name: "time", widget: "string", required: false }
-      - { label: "Location", name: "location", widget: "string", default: "La Loingtaine" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
       - label: "Musicians"
         name: "musicians"
-        widget: "list"
+        widget: "string"
         i18n: true
         fields:
           - { label: "Name", name: "name", widget: "string" }
@@ -40,13 +37,13 @@ collections:
           - { label: "Country", name: "country", widget: "string", required: false }
       - label: "Program"
         name: "program"
-        widget: "list"
+        widget: "string"
         required: false
         i18n: true
         fields:
           - { label: "Composer", name: "composer", widget: "string" }
           - { label: "Piece", name: "piece", widget: "string" }
-      - { label: "Program Details", name: "body", widget: "markdown", i18n: true }
+      - { label: "Program Details", name: "body", widget: "markdown", i18n: true, required: false }
 
   # --- Artists ---
   - name: "artists"
