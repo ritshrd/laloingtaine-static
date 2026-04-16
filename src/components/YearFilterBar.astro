@@ -39,14 +39,10 @@ const {
 
     const blocks = list.querySelectorAll<HTMLElement>(`[${blockAttr}]`);
 
-    bar.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>('.yfb-btn');
-      if (!btn) return;
-
-      const selected = btn.dataset.year!;
-
+    function filterByYear(selected: string) {
       bar.querySelectorAll('.yfb-btn').forEach(b => b.classList.remove('yfb-btn--active'));
-      btn.classList.add('yfb-btn--active');
+      const activeBtn = bar.querySelector(`.yfb-btn[data-year="${selected}"]`);
+      if (activeBtn) activeBtn.classList.add('yfb-btn--active');
 
       blocks.forEach((block) => {
         const blockYear = block.getAttribute(blockAttr.replace(/\[|\]/g, '')) || block.dataset.yearBlock;
@@ -54,6 +50,39 @@ const {
         block.style.display = show ? '' : 'none';
         if (show) (block as HTMLElement).style.animation = 'yfbFadeIn 0.3s ease';
       });
+    }
+
+    bar.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>('.yfb-btn');
+      if (!btn) return;
+
+      const selected = btn.dataset.year!;
+      filterByYear(selected);
+
+      // Persist in URL hash
+      if (selected === 'all') {
+        history.replaceState(null, '', window.location.pathname);
+      } else {
+        history.replaceState(null, '', `#year=${selected}`);
+      }
+    });
+
+    // On page load, restore from hash
+    const hash = window.location.hash;
+    const match = hash.match(/year=(\d+)/);
+    if (match) {
+      filterByYear(match[1]);
+    }
+  });
+
+  // Append current hash to language switcher links
+  document.querySelectorAll('.lang-switcher a, .lang-switch a').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const hash = window.location.hash;
+      if (hash) {
+        e.preventDefault();
+        window.location.href = (link as HTMLAnchorElement).href + hash;
+      }
     });
   });
 </script>

@@ -99,7 +99,13 @@ const monthsFull = {
   ],
 };
 
+const dayNames = {
+  en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  fr: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+};
+
 const day = date.getDate();
+const dayName = dayNames[lang][date.getDay()];
 const month = months[lang][date.getMonth()];
 const monthFull = monthsFull[lang][date.getMonth()];
 const year = date.getFullYear();
@@ -109,7 +115,7 @@ const year = date.getFullYear();
   archive ? (
     <div class="archive-entry">
       <p class="archive-entry__date">
-        {day}&nbsp;{monthFull}&nbsp;{year}
+        {dayName}&nbsp;{day}&nbsp;{monthFull}&nbsp;{year}
       </p>
       <p class="archive-entry__title">{title}</p>
       {musicians && <p class="archive-entry__musicians">{musicians}</p>}

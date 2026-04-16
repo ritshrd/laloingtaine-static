@@ -1,5 +1,0 @@
-﻿---
-title: "5th Anniversary Concert"
-date: 2010-06-12
-musicians: "Aki Saulière (Violin), Raphael Bell"
----

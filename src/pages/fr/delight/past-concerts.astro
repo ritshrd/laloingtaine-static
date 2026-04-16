@@ -8,19 +8,26 @@ import { getLangFromUrl } from "../../../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const now = new Date();
 
-const allConcerts = await getCollection("concerts", (entry) => {
+// Get all French year entries
+const allYears = await getCollection("concerts", (entry) => {
   return entry.id.startsWith("fr/");
 });
 
+// Flatten: each year file contains a list of concerts
+const allConcerts = allYears.flatMap((yearEntry) =>
+  yearEntry.data.concerts.map((concert) => ({
+    ...concert,
+    year: yearEntry.data.year,
+  })),
+);
+
 const pastConcerts = allConcerts
-  .filter((c) => new Date(c.data.date) < now)
-  .sort(
-    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-  );
+  .filter((c) => new Date(c.date) < now)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const concertsByYear: Record<number, typeof pastConcerts> = {};
 pastConcerts.forEach((concert) => {
-  const year = new Date(concert.data.date).getFullYear();
+  const year = concert.year;
   if (!concertsByYear[year]) concertsByYear[year] = [];
   concertsByYear[year].push(concert);
 });
@@ -35,6 +42,7 @@ const years = Object.keys(concertsByYear)
   section="delight"
   activePage="past"
   description="Archives des concerts de musique de chambre à La Loingtaine depuis 2005."
+  heroImage="/images/past-concerts.webp"
 >
   <div class="archive-container">
     <h2>Concerts Passés</h2>
@@ -49,14 +57,20 @@ const years = Object.keys(concertsByYear)
       {
         years.map((year) => (
           <div class="year-block" data-year-block={year.toString()}>
-            <h3 class="year-label">{year}</h3>
+            <h3 class="year-label">
+              {year}{" "}
+              <span class="year-count">
+                - {concertsByYear[year].length}{" "}
+                {concertsByYear[year].length === 1 ? "concert" : "concerts"}
+              </span>
+            </h3>
             <div class="year-concerts">
               {concertsByYear[year].map((concert) => (
                 <ConcertCard
-                  title={concert.data.title}
-                  date={new Date(concert.data.date)}
-                  musicians={concert.data.musicians}
-                  program={concert.data.program}
+                  title={concert.title}
+                  date={new Date(concert.date)}
+                  musicians={concert.musicians}
+                  program={concert.program}
                   archive={true}
                   lang={lang}
                 />
@@ -109,6 +123,13 @@ const years = Object.keys(concertsByYear)
     border-bottom: 2px solid #eee;
     margin-bottom: 20px;
     padding-bottom: 5px;
+  }
+
+  .year-count {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-brown);
+    opacity: 1;
   }
 
   .year-concerts {

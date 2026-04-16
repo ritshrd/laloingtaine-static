@@ -1,5 +1,0 @@
-﻿---
-title: "Trio Beethoven"
-date: 2020-02-15
-musicians: "Dmitri Makhtin (Violon), Raphael Bell (Violoncelle), Julia Siciliano (Piano)"
----

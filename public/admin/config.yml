@@ -15,19 +15,28 @@ i18n:
   default_locale: en
 
 collections:
-  # --- Concerts ---
+  # --- Concerts (grouped by year) ---
   - name: "concerts"
     label: "Concerts"
+    label_singular: "Concert Year"
     folder: "src/content/concerts"
     create: true
-    slug: "{{year}}-{{month}}-{{slug}}"
+    slug: "{{fields.year}}"
+    identifier_field: year
+    summary: "{{fields.year}}"
     i18n: true
-    sortable_fields: ['date', 'title']
+    sortable_fields: ['year']
     fields:
-      - { label: "Title", name: "title", widget: "string", i18n: true }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Musicians", name: "musicians", widget: "string", required: false, i18n: true, hint: "e.g. Aki Saulière (Violin), Amy Norrington (Cello)" }
-      - { label: "Program", name: "program", widget: "string", required: false, i18n: true, hint: "e.g. Beethoven — Sonata Op.24 · Brahms — Trio Op.8" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int", i18n: duplicate, hint: "e.g. 2025" }
+      - label: "Concerts"
+        name: "concerts"
+        widget: "list"
+        i18n: true
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Date", name: "date", widget: "datetime" }
+          - { label: "Musicians", name: "musicians", widget: "string", required: false, hint: "e.g. Aki Saulière (Violin), Amy Norrington (Cello)" }
+          - { label: "Program", name: "program", widget: "string", required: false, hint: "e.g. Beethoven — Sonata Op.24 · Brahms — Trio Op.8" }
 
   # --- Artists ---
   - name: "artists"

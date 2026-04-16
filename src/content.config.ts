@@ -8,10 +8,13 @@ import { glob } from 'astro/loaders';
 const concerts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/concerts' }),
   schema: z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    musicians: z.string().optional(),
-    program: z.string().optional(),
+    year: z.coerce.number(),
+    concerts: z.array(z.object({
+      title: z.string(),
+      date: z.coerce.date(),
+      musicians: z.string().optional(),
+      program: z.string().optional(),
+    })),
   }),
 });
 
