@@ -1,46 +1,72 @@
 ---
-import HomeLayout from '../layouts/HomeLayout.astro';
-import { useTranslations } from '../i18n/utils';
-import { getCollection, getEntry, render } from 'astro:content';
+import HomeLayout from "../layouts/HomeLayout.astro";
+import { useTranslations } from "../i18n/utils";
+import { getCollection, getEntry, render } from "astro:content";
 
-const lang = 'en';
+const lang = "en";
 const t = useTranslations(lang);
 const now = new Date();
 
 // Get home page content
-const entry = await getEntry('pages', 'en/home');
+const entry = await getEntry("pages", "en/home");
 if (!entry) {
-  throw new Error('Home page content not found');
+  throw new Error("Home page content not found");
 }
 const { Content } = await render(entry);
 
 // Get next upcoming featured concert
-const allConcerts = await getCollection('concerts', (entry) => {
-  return entry.id.startsWith('en/');
+const allConcerts = await getCollection("concerts", (entry) => {
+  return entry.id.startsWith("en/");
 });
 
 const upcomingConcerts = allConcerts
   .filter((c) => new Date(c.data.date) >= now)
-  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+  .sort(
+    (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime(),
+  );
 
-const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConcerts[0];
+const nextConcert =
+  upcomingConcerts.find((c) => c.data.featured) || upcomingConcerts[0];
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 ---
 
-<HomeLayout title="Home" heroImage={entry.data.image || "/images/site/home-hero.jpg"}>
+<HomeLayout
+  title="Home"
+  heroImage={entry.data.image || "/images/site/home-hero.jpg"}
+>
   <div class="home-internal-content">
-    {nextConcert && (
-      <div class="upcoming-announcement">
-        <p class="announcement-date">
-          {months[new Date(nextConcert.data.date).getMonth()]} {new Date(nextConcert.data.date).getDate()} at {nextConcert.data.time || '4:00 p.m.'}
-        </p>
-        <h3 class="announcement-title">{nextConcert.data.title}</h3>
-        {nextConcert.data.musicians && nextConcert.data.musicians.slice(0, 2).map(m => (
-          <p class="musician-info">{m.name} ({m.instrument})</p>
-        ))}
-      </div>
-    )}
+    {
+      nextConcert && (
+        <div class="upcoming-announcement">
+          <p class="announcement-date">
+            {months[new Date(nextConcert.data.date).getMonth()]}{" "}
+            {new Date(nextConcert.data.date).getDate()} at{" "}
+            {nextConcert.data.time || "4:00 p.m."}
+          </p>
+          <h3 class="announcement-title">{nextConcert.data.title}</h3>
+          {nextConcert.data.musicians &&
+            nextConcert.data.musicians.slice(0, 2).map((m) => (
+              <p class="musician-info">
+                {m.name} ({m.instrument})
+              </p>
+            ))}
+        </div>
+      )
+    }
 
     <div class="section-intro">
       <div class="content-body">
@@ -48,10 +74,11 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
       </div>
     </div>
 
-
     <div class="action-buttons">
-      <a href="/delight/upcoming-concerts/" class="btn-main">click to get the concert schedule</a>
-      <a href="/learning/academies/" class="btn-main">discover the music academy</a>
+      <a href="/delight/upcoming-concerts/" class="btn-main"
+        >click to get the concert schedule</a
+      >
+      <a href="/music-academy/" class="btn-main">discover the music academy</a>
     </div>
 
     <!-- About Sub-navigation -->
