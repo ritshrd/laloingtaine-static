@@ -23,158 +23,228 @@ const {
   photos,
   showFilters = true,
   columns = 3,
-  id = 'photo-gallery',
+  id = "photo-gallery",
 } = Astro.props;
 
 // Extract unique years for filters
-const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) => (b || 0) - (a || 0));
+const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
+  (a, b) => (b || 0) - (a || 0),
+);
 ---
 
 <div class="photo-gallery" id={id}>
-  {showFilters && years.length > 1 && (
-    <div class="gallery-filters" data-gallery={id}>
-      <button class="filter-btn filter-btn--active" data-filter="all">All</button>
-      {years.map((year) => (
-        <button class="filter-btn" data-filter={year?.toString()}>{year}</button>
-      ))}
-    </div>
-  )}
+  {
+    showFilters && years.length > 1 && (
+      <div class="gallery-filters-wrapper">
+        <div class="gallery-filters" data-gallery={id}>
+          <button class="filter-btn filter-btn--active" data-filter="all">
+            All
+          </button>
+          {years.map((year) => (
+            <button class="filter-btn" data-filter={year?.toString()}>
+              {year}
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   <div class="gallery-grid" style={`--gallery-columns: ${columns}`}>
-    {photos.map((photo, i) => (
-      <div
-        class="gallery-grid__item"
-        data-year={photo.year?.toString()}
-        data-category={photo.category}
-        data-index={i}
-      >
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          loading="lazy"
-          class="gallery-grid__img"
-        />
-        {photo.caption && (
-          <div class="gallery-grid__overlay">
-            <span class="gallery-grid__caption">{photo.caption}</span>
-          </div>
-        )}
-      </div>
-    ))}
+    {
+      photos.map((photo, i) => (
+        <div
+          class="gallery-grid__item"
+          data-year={photo.year?.toString()}
+          data-category={photo.category}
+          data-index={i}
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            loading="lazy"
+            class="gallery-grid__img"
+          />
+          {photo.caption && (
+            <div class="gallery-grid__overlay">
+              <span class="gallery-grid__caption">{photo.caption}</span>
+            </div>
+          )}
+        </div>
+      ))
+    }
   </div>
 
   <!-- Lightbox Modal -->
   <div class="lightbox" id={`${id}-lightbox`} role="dialog" aria-hidden="true">
-    <button class="lightbox__close" aria-label="Close" type="button">&times;</button>
+    <button class="lightbox__close" aria-label="Close" type="button"
+      >&times;</button
+    >
     <button class="lightbox__prev" aria-label="Previous" type="button">
-      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      <svg viewBox="0 0 24 24"
+        ><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg
+      >
     </button>
     <div class="lightbox__content">
       <img class="lightbox__img" src="" alt="" />
       <p class="lightbox__caption"></p>
     </div>
     <button class="lightbox__next" aria-label="Next" type="button">
-      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      <svg viewBox="0 0 24 24"
+        ><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg
+      >
     </button>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.photo-gallery').forEach((gallery) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".photo-gallery").forEach((gallery) => {
       const el = gallery as HTMLElement;
       const galleryId = el.id;
-      const items = el.querySelectorAll('.gallery-grid__item');
-      const filters = el.querySelector('.gallery-filters');
-      const lightbox = el.querySelector('.lightbox') as HTMLElement;
-      const lightboxImg = lightbox?.querySelector('.lightbox__img') as HTMLImageElement;
-      const lightboxCaption = lightbox?.querySelector('.lightbox__caption') as HTMLElement;
-      const closeBtn = lightbox?.querySelector('.lightbox__close');
-      const prevBtn = lightbox?.querySelector('.lightbox__prev');
-      const nextBtn = lightbox?.querySelector('.lightbox__next');
+      const items = el.querySelectorAll(".gallery-grid__item");
+      const filters = el.querySelector(".gallery-filters");
+      const lightbox = el.querySelector(".lightbox") as HTMLElement;
+      const lightboxImg = lightbox?.querySelector(
+        ".lightbox__img",
+      ) as HTMLImageElement;
+      const lightboxCaption = lightbox?.querySelector(
+        ".lightbox__caption",
+      ) as HTMLElement;
+      const closeBtn = lightbox?.querySelector(".lightbox__close");
+      const prevBtn = lightbox?.querySelector(".lightbox__prev");
+      const nextBtn = lightbox?.querySelector(".lightbox__next");
       let currentIndex = 0;
       let visibleItems: HTMLElement[] = [];
 
       function updateVisible() {
         visibleItems = Array.from(items).filter(
-          (item) => (item as HTMLElement).style.display !== 'none'
+          (item) => (item as HTMLElement).style.display !== "none",
         ) as HTMLElement[];
       }
 
-      // Filtering
-      filters?.addEventListener('click', (e) => {
-        const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLElement;
-        if (!btn) return;
-        const filter = btn.dataset.filter;
+      // Drag-to-scroll and Filtering
+      if (filters instanceof HTMLElement) {
+        let isDown = false;
+        let startX: number;
+        let scrollLeft: number;
+        let dragged = false;
 
-        filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
-        btn.classList.add('filter-btn--active');
-
-        items.forEach((item) => {
-          const el = item as HTMLElement;
-          const show = filter === 'all' || el.dataset.year === filter;
-          el.style.display = show ? '' : 'none';
-          if (show) el.style.animation = 'galleryFadeIn 0.3s ease';
+        filters.addEventListener("mousedown", (e) => {
+          isDown = true;
+          filters.classList.add("dragging");
+          startX = e.pageX - filters.offsetLeft;
+          scrollLeft = filters.scrollLeft;
+          dragged = false;
         });
-        updateVisible();
-      });
+
+        filters.addEventListener("mouseleave", () => {
+          isDown = false;
+          filters.classList.remove("dragging");
+        });
+
+        filters.addEventListener("mouseup", () => {
+          isDown = false;
+          filters.classList.remove("dragging");
+        });
+
+        filters.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - filters.offsetLeft;
+          const walk = (x - startX) * 2;
+          if (Math.abs(walk) > 5) dragged = true;
+          filters.scrollLeft = scrollLeft - walk;
+        });
+
+        filters.addEventListener("click", (e) => {
+          if (dragged) return;
+
+          const btn = (e.target as HTMLElement).closest(
+            ".filter-btn",
+          ) as HTMLElement;
+          if (!btn) return;
+          const filter = btn.dataset.filter;
+
+          filters
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("filter-btn--active"));
+          btn.classList.add("filter-btn--active");
+
+          items.forEach((item) => {
+            const el = item as HTMLElement;
+            const show = filter === "all" || el.dataset.year === filter;
+            el.style.display = show ? "" : "none";
+            if (show) el.style.animation = "galleryFadeIn 0.3s ease";
+          });
+          updateVisible();
+        });
+      }
 
       // Lightbox
       function openLightbox(index: number) {
         updateVisible();
         currentIndex = index;
         showSlide();
-        lightbox.classList.add('lightbox--open');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        lightbox.classList.add("lightbox--open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
       }
 
       function closeLightbox() {
-        lightbox.classList.remove('lightbox--open');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        lightbox.classList.remove("lightbox--open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
       }
 
       function showSlide() {
         const item = visibleItems[currentIndex];
         if (!item) return;
-        const img = item.querySelector('img') as HTMLImageElement;
-        const caption = item.querySelector('.gallery-grid__caption');
+        const img = item.querySelector("img") as HTMLImageElement;
+        const caption = item.querySelector(".gallery-grid__caption");
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt;
-        lightboxCaption.textContent = caption?.textContent || '';
+        lightboxCaption.textContent = caption?.textContent || "";
       }
 
       items.forEach((item, i) => {
-        item.addEventListener('click', () => {
+        item.addEventListener("click", () => {
           updateVisible();
           const visibleIndex = visibleItems.indexOf(item as HTMLElement);
           openLightbox(visibleIndex >= 0 ? visibleIndex : 0);
         });
       });
 
-      closeBtn?.addEventListener('click', closeLightbox);
-      lightbox?.addEventListener('click', (e) => {
+      closeBtn?.addEventListener("click", closeLightbox);
+      lightbox?.addEventListener("click", (e) => {
         if (e.target === lightbox) closeLightbox();
       });
 
-      prevBtn?.addEventListener('click', (e) => {
+      prevBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
-        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        currentIndex =
+          (currentIndex - 1 + visibleItems.length) % visibleItems.length;
         showSlide();
       });
 
-      nextBtn?.addEventListener('click', (e) => {
+      nextBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
         currentIndex = (currentIndex + 1) % visibleItems.length;
         showSlide();
       });
 
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('lightbox--open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length; showSlide(); }
-        if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleItems.length; showSlide(); }
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("lightbox--open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") {
+          currentIndex =
+            (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+          showSlide();
+        }
+        if (e.key === "ArrowRight") {
+          currentIndex = (currentIndex + 1) % visibleItems.length;
+          showSlide();
+        }
       });
 
       updateVisible();
@@ -184,12 +254,36 @@ const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) 
 
 <style>
   /* --- Filters --- */
+  .gallery-filters-wrapper {
+    position: relative;
+    margin-bottom: var(--space-xl);
+    width: 100%;
+    /* Gradient mask to indicate more content on the right */
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+
   .gallery-filters {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 10px 0;
+    width: 100%;
+    cursor: grab;
+  }
+
+  .gallery-filters.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .gallery-filters::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, etc. */
   }
 
   .filter-btn {
@@ -202,6 +296,8 @@ const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) 
     cursor: pointer;
     border-radius: 20px;
     transition: all var(--transition-fast);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .filter-btn:hover,
@@ -221,12 +317,14 @@ const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) 
 
   .gallery-grid__item {
     position: relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: auto;
     overflow: hidden;
     border-radius: 6px;
     border: 1px solid var(--color-border);
     cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
   }
 
   .gallery-grid__item:hover {
@@ -276,7 +374,9 @@ const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) 
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
   }
 
   .lightbox--open {
@@ -355,12 +455,22 @@ const years = [...new Set(photos.map(p => p.year).filter(Boolean))].sort((a, b) 
     fill: var(--color-white);
   }
 
-  .lightbox__prev { left: var(--space-lg); }
-  .lightbox__next { right: var(--space-lg); }
+  .lightbox__prev {
+    left: var(--space-lg);
+  }
+  .lightbox__next {
+    right: var(--space-lg);
+  }
 
   @keyframes galleryFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: 768px) {

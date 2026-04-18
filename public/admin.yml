@@ -99,10 +99,14 @@ collections:
   - name: "gallery"
     label: "Photo Gallery"
     folder: "src/content/gallery"
+    path: "{{slug}}"
+    slug: "{{title}}"
     create: true
+    media_folder: "../../../public/images/gallery"
+    public_folder: "/images/gallery"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
+      - { label: "Year", name: "year", widget: "number", value_type: "int" }
       - { label: "Category", name: "category", widget: "select",
           options: ["concerts", "academies", "events", "general"] }
       - label: "Photos"

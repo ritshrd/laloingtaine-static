@@ -14,60 +14,110 @@ interface Props {
 
 const {
   years,
-  allLabel = 'All',
-  filterId = 'year-filter-bar',
+  allLabel = "All",
+  filterId = "year-filter-bar",
   targetId,
-  blockAttr = 'data-year-block',
+  blockAttr = "data-year-block",
 } = Astro.props;
 ---
 
-{years.length > 1 && (
-  <div class="year-filter-bar" id={filterId} data-target={targetId} data-block-attr={blockAttr}>
-    <button class="yfb-btn yfb-btn--active" data-year="all">{allLabel}</button>
-    {years.map((year) => (
-      <button class="yfb-btn" data-year={year.toString()}>{year}</button>
-    ))}
-  </div>
-)}
+{
+  years.length > 1 && (
+    <div class="year-filter-wrapper">
+      <div
+        class="year-filter-bar"
+        id={filterId}
+        data-target={targetId}
+        data-block-attr={blockAttr}
+      >
+        <button class="yfb-btn yfb-btn--active" data-year="all">
+          {allLabel}
+        </button>
+        {years.map((year) => (
+          <button class="yfb-btn" data-year={year.toString()}>
+            {year}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 <script>
-  document.querySelectorAll<HTMLElement>('.year-filter-bar').forEach((bar) => {
+  document.querySelectorAll<HTMLElement>(".year-filter-bar").forEach((bar) => {
     const targetId = bar.dataset.target!;
-    const blockAttr = bar.dataset.blockAttr || 'data-year-block';
+    const blockAttr = bar.dataset.blockAttr || "data-year-block";
     const list = document.getElementById(targetId);
     if (!list) return;
 
     const blocks = list.querySelectorAll<HTMLElement>(`[${blockAttr}]`);
 
     function filterByYear(selected: string) {
-      bar.querySelectorAll('.yfb-btn').forEach(b => b.classList.remove('yfb-btn--active'));
+      bar
+        .querySelectorAll(".yfb-btn")
+        .forEach((b) => b.classList.remove("yfb-btn--active"));
       const activeBtn = bar.querySelector(`.yfb-btn[data-year="${selected}"]`);
-      if (activeBtn) activeBtn.classList.add('yfb-btn--active');
+      if (activeBtn) activeBtn.classList.add("yfb-btn--active");
 
       blocks.forEach((block) => {
-        const blockYear = block.getAttribute(blockAttr.replace(/\[|\]/g, '')) || block.dataset.yearBlock;
-        const show = selected === 'all' || blockYear === selected;
-        block.style.display = show ? '' : 'none';
-        if (show) (block as HTMLElement).style.animation = 'yfbFadeIn 0.3s ease';
+        const blockYear =
+          block.getAttribute(blockAttr.replace(/\[|\]/g, "")) ||
+          block.dataset.yearBlock;
+        const show = selected === "all" || blockYear === selected;
+        block.style.display = show ? "" : "none";
+        if (show)
+          (block as HTMLElement).style.animation = "yfbFadeIn 0.3s ease";
       });
     }
 
-    bar.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>('.yfb-btn');
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+    let dragged = false;
+
+    bar.addEventListener("mousedown", (e) => {
+      isDown = true;
+      bar.classList.add("dragging");
+      startX = e.pageX - bar.offsetLeft;
+      scrollLeft = bar.scrollLeft;
+      dragged = false;
+    });
+
+    bar.addEventListener("mouseleave", () => {
+      isDown = false;
+      bar.classList.remove("dragging");
+    });
+
+    bar.addEventListener("mouseup", () => {
+      isDown = false;
+      bar.classList.remove("dragging");
+    });
+
+    bar.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - bar.offsetLeft;
+      const walk = (x - startX) * 1;
+      if (Math.abs(walk) > 5) dragged = true;
+      bar.scrollLeft = scrollLeft - walk;
+    });
+
+    bar.addEventListener("click", (e) => {
+      if (dragged) return;
+
+      const btn = (e.target as HTMLElement).closest<HTMLElement>(".yfb-btn");
       if (!btn) return;
 
       const selected = btn.dataset.year!;
       filterByYear(selected);
 
-      // Persist in URL hash
-      if (selected === 'all') {
-        history.replaceState(null, '', window.location.pathname);
+      if (selected === "all") {
+        history.replaceState(null, "", window.location.pathname);
       } else {
-        history.replaceState(null, '', `#year=${selected}`);
+        history.replaceState(null, "", `#year=${selected}`);
       }
     });
 
-    // On page load, restore from hash
     const hash = window.location.hash;
     const match = hash.match(/year=(\d+)/);
     if (match) {
@@ -76,24 +126,50 @@ const {
   });
 
   // Append current hash to language switcher links
-  document.querySelectorAll('.lang-switcher a, .lang-switch a').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const hash = window.location.hash;
-      if (hash) {
-        e.preventDefault();
-        window.location.href = (link as HTMLAnchorElement).href + hash;
-      }
+  document
+    .querySelectorAll(".lang-switcher a, .lang-switch a")
+    .forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const hash = window.location.hash;
+        if (hash) {
+          e.preventDefault();
+          window.location.href = (link as HTMLAnchorElement).href + hash;
+        }
+      });
     });
-  });
 </script>
 
 <style>
+  .year-filter-wrapper {
+    position: relative;
+    margin-bottom: var(--space-2xl);
+    width: 100%;
+    /* Gradient mask to indicate more content on the right */
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+
   .year-filter-bar {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
     gap: var(--space-sm);
-    margin-bottom: var(--space-2xl);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 10px 0;
+    width: 100%;
+    cursor: grab;
+  }
+
+  .year-filter-bar.dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .year-filter-bar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, etc. */
   }
 
   .yfb-btn {
@@ -109,6 +185,7 @@ const {
     transition: all var(--transition-fast);
     line-height: 1.4;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .yfb-btn:hover,
@@ -119,7 +196,13 @@ const {
   }
 
   @keyframes yfbFadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
