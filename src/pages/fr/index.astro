@@ -1,50 +1,74 @@
 ---
-import HomeLayout from '../../layouts/HomeLayout.astro';
-import { useTranslations } from '../../i18n/utils';
-import { getCollection, getEntry, render } from 'astro:content';
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import { useTranslations } from "../../i18n/utils";
+import { getCollection, getEntry, render } from "astro:content";
 
-const lang = 'fr';
+const lang = "fr";
 const t = useTranslations(lang);
 const now = new Date();
 
 // Get home page content (French)
-const entry = await getEntry('pages', 'fr/home');
+const entry = await getEntry("pages", "fr/home");
 if (!entry) {
-  throw new Error('French home page content not found');
+  throw new Error("French home page content not found");
 }
 const { Content } = await render(entry);
 
 // Get English home page content for image fallback
-const enEntry = await getEntry('pages', 'en/home');
-const heroImage = entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg";
+const enEntry = await getEntry("pages", "en/home");
+const heroImage =
+  entry.data.image || enEntry?.data.image || "/images/site/home-hero.jpg";
 
 // Get next upcoming featured concert in French
-const allConcerts = await getCollection('concerts', (entry) => {
-  return entry.id.startsWith('fr/');
+const allConcerts = await getCollection("concerts", (entry) => {
+  return entry.id.startsWith("fr/");
 });
 
 const upcomingConcerts = allConcerts
   .filter((c) => new Date(c.data.date) >= now)
-  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+  .sort(
+    (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime(),
+  );
 
-const nextConcert = upcomingConcerts.find(c => c.data.featured) || upcomingConcerts[0];
+const nextConcert =
+  upcomingConcerts.find((c) => c.data.featured) || upcomingConcerts[0];
 
-const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+const months = [
+  "janvier",
+  "février",
+  "mars",
+  "avril",
+  "mai",
+  "juin",
+  "juillet",
+  "août",
+  "septembre",
+  "octobre",
+  "novembre",
+  "décembre",
+];
 ---
 
 <HomeLayout title="Accueil" heroImage={heroImage}>
   <div class="home-internal-content">
-    {nextConcert && (
-      <div class="upcoming-announcement">
-        <p class="announcement-date">
-          {new Date(nextConcert.data.date).getDate()} {months[new Date(nextConcert.data.date).getMonth()]} à {nextConcert.data.time || '16:00'}
-        </p>
-        <h3 class="announcement-title">{nextConcert.data.title}</h3>
-        {nextConcert.data.musicians && nextConcert.data.musicians.slice(0, 2).map(m => (
-          <p class="musician-info">{m.name} ({m.instrument})</p>
-        ))}
-      </div>
-    )}
+    {
+      nextConcert && (
+        <div class="upcoming-announcement">
+          <p class="announcement-date">
+            {new Date(nextConcert.data.date).getDate()}{" "}
+            {months[new Date(nextConcert.data.date).getMonth()]} à{" "}
+            {nextConcert.data.time || "16:00"}
+          </p>
+          <h3 class="announcement-title">{nextConcert.data.title}</h3>
+          {nextConcert.data.musicians &&
+            nextConcert.data.musicians.slice(0, 2).map((m) => (
+              <p class="musician-info">
+                {m.name} ({m.instrument})
+              </p>
+            ))}
+        </div>
+      )
+    }
 
     <div class="section-intro">
       <div class="content-body">
@@ -52,10 +76,13 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
       </div>
     </div>
 
-
     <div class="action-buttons">
-      <a href="/fr/delight/upcoming-concerts/" class="btn-main">cliquez pour le programme des concerts</a>
-      <a href="/fr/learning/academies/" class="btn-main">découvrir l'académie de musique</a>
+      <a href="/fr/delight/upcoming-concerts/" class="btn-main"
+        >cliquez pour le programme des concerts</a
+      >
+      <a href="/fr/learning/academies/" class="btn-main"
+        >découvrir l'académie de musique</a
+      >
     </div>
 
     <!-- About Sub-navigation -->
@@ -77,6 +104,10 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
     width: 100%;
   }
 
+  .home-internal-content .content-body {
+    text-align: center;
+  }
+
   .upcoming-announcement {
     margin-bottom: 40px;
     text-align: center;
@@ -90,7 +121,7 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
   }
 
   .announcement-title {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 1.6rem;
     color: #4a3728;
     margin-bottom: 10px;
@@ -101,7 +132,12 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
     color: #666;
     margin-bottom: 2px;
   }
+  /* ... otros estilos ... */
 
+  .home-internal-content .content-body :global(p) {
+    margin-bottom: 1.5rem; /* Espacio entre párrafos */
+    line-height: 1.4; /* Ajusta este número a tu gusto (ej: 1.4, 1.6, 1.8) */
+  }
   .action-buttons {
     display: flex;
     flex-direction: column;
@@ -115,7 +151,7 @@ const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet'
     text-decoration: none;
     padding: 12px 25px;
     border-radius: 4px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.9rem;
     text-transform: lowercase;
     transition: background 0.2s;

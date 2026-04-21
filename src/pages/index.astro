@@ -100,15 +100,26 @@ const months = [
     width: 100%;
   }
 
+  .home-internal-content .content-body {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  /* ... otros estilos ... */
+
+  .home-internal-content .content-body :global(p) {
+    margin-bottom: 1.5rem; /* Espacio entre párrafos */
+    line-height: 1.4; /* Ajusta este número a tu gusto (ej: 1.4, 1.6, 1.8) */
+  }
+
   .upcoming-announcement {
-    margin-bottom: 40px;
     text-align: center;
   }
 
   .announcement-date {
     color: var(--color-burgundy);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 5px;
   }
 

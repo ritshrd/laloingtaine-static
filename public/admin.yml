@@ -66,6 +66,7 @@ collections:
         name: "section"
         widget: "select"
         options:
+          - { label: "Home", value: "home" }
           - { label: "Delight", value: "delight" }
           - { label: "Learning (music)", value: "learning" }
           - { label: "Discovery", value: "discovery" }
