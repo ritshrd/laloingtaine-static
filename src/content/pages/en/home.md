@@ -4,11 +4,6 @@ section: home
 order: 1
 image: /images/home1.webp
 ---
-**April 26 at 4:00 p.m.
-Violin and Piano Recital**\
-Tamako Azuma (violin)\
-Masaru Yoshitake (piano)
-
 **May 1 at 4:00 p.m. Four-Hand Piano Recital**\
 Bernard Lanskey\
 Stephen Emmerson\

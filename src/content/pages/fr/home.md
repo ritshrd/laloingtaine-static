@@ -3,10 +3,6 @@ title: "Bienvenue à La Loingtaine "
 section: home
 image: /images/home1.webp
 ---
-**26 avril à 16h Récital violon et piano**\
-Tamako Azuma(violon)\
-Masaru Yoshitake (piano)
-
 **1 mai à 16h Concert de Musique à quatre mains**\
 Bernard Lanskey\
 Stephen Emmerson\
