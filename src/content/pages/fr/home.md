@@ -3,11 +3,6 @@ title: "Bienvenue à La Loingtaine "
 section: home
 image: /images/home1.webp
 ---
-**1 mai à 16h Concert de Musique à quatre mains**\
-Bernard Lanskey\
-Stephen Emmerson\
-Debussy, Schubert
-
 **6 mai Concert de Duo et Trio**\
 Liana Gourdjia, violon\
 Raphael Bell, violoncelle\
