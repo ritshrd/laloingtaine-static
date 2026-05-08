@@ -8,16 +8,18 @@ const { Content } = entry ? await render(entry) : { Content: null };
 
 const galleryEntries = await getCollection('gallery');
 
-// Flatten and map gallery entries into a flat array of photos
-const photos = galleryEntries.flatMap((entry) => 
-  entry.data.photos.map((photo) => ({
-    src: photo.image,
-    alt: photo.caption || entry.data.title,
-    caption: photo.caption,
-    year: entry.data.year,
-    category: entry.data.category
-  }))
-).sort((a, b) => (b.year || 0) - (a.year || 0));
+// Flatten and map gallery entries into a flat array of photos, newest first
+const photos = galleryEntries
+  .sort((a, b) => (b.data.year || 0) - (a.data.year || 0))
+  .flatMap((entry) => 
+    [...entry.data.photos].reverse().map((photo) => ({
+      src: photo.image,
+      alt: photo.caption || entry.data.title,
+      caption: photo.caption,
+      year: entry.data.year,
+      category: entry.data.category
+    }))
+  );
 ---
 
 <SectionLayout 

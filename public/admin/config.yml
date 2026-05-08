@@ -29,7 +29,8 @@ collections:
     identifier_field: year
     summary: "{{fields.year}}"
     i18n: true
-    sortable_fields: ['year']
+    sortable_fields:
+      - { field: "year", default_sort: "desc" }
     fields:
       - { label: "Year", name: "year", widget: "number", value_type: "int", i18n: duplicate, hint: "e.g. 2025" }
       - label: "Concerts"
@@ -109,6 +110,8 @@ collections:
     create: true
     media_folder: "../../../public/images/gallery"
     public_folder: "/images/gallery"
+    sortable_fields:
+      - { field: "year", default_sort: "desc" }
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Year", name: "year", widget: "number", value_type: "int" }
