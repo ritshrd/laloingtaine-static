@@ -3,8 +3,8 @@ title: "Bienvenue à La Loingtaine "
 section: home
 image: /images/home1.webp
 ---
-**6 mai Concert de Duo et Trio**\
-Liana Gourdjia, violon\
-Raphael Bell, violoncelle\
-Gülru Ensari, piano\
-Programme Schubert, Ravel et Dvorak
+**31  mai à 16h  Concert " Passion et Poésie"**\
+Roberte Mamou, Piano\
+Alexandre Brussivosky, violon\
+Sébastien Hurtard, violoncelle\
+Programme Schumann, Brahms, et Dvorak 
