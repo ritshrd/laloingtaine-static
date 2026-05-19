@@ -4,8 +4,8 @@ section: home
 order: 1
 image: /images/home1.webp
 ---
-**May 6: Duo and Trio Concert**\
-Liana Gourdjia, violin\
-Raphael Bell, cello\
-Gülru Ensari, piano\
-Program: Schubert, Ravel, and Dvořák
+**31  mai à 16h  Concert " Passion et Poésie"**\
+Roberte Mamou, Piano\
+Alexandre Brussivosky, violon\
+Sébastien Hurtard, violoncelle\
+Programme Schumann, Brahms, et Dvorak 
