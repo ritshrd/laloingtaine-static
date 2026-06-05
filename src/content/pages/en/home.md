@@ -4,8 +4,9 @@ section: home
 order: 1
 image: /images/home1.webp
 ---
-**May 31 at 4:00 p.m.  “Passion and Poetry” Concert**\
-Roberte Mamou, piano\
-Alexandre Brussivosky, violin\
-Sébastien Hurtard, cello\
-Program: Schumann, Brahms, and Dvořák
+**July 05 at 4:00 p.m. Atlas Quartet Concert**\
+Akinori Shibata, Maxime Ramic: violins\
+Jean-Paul Minassian: viola\
+Hélène Postel-Labarthe: cello\
+Program\
+Beethoven, Haydn, Schumann, and Komitas 
