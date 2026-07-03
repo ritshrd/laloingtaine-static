@@ -10,5 +10,5 @@ Hélène Postel-Labarthe : violoncelle\
 Programme\
 Beethoven Haydn Schumann and Komitas
 
+<a href="/images/program-concert-july-5.pdf" target="_blank" rel="noopener noreferrer">Cliquez ici pour consulter le programme détaillé.</a>
 
-[Cliquez ici pour consulter le programme détaillé.](/images/program-concert-july-5.pdf){:target="_blank"}
