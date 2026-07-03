@@ -9,3 +9,5 @@ Jean-Paul Minassian : alto\
 Hélène Postel-Labarthe : violoncelle\
 Programme\
 Beethoven Haydn Schumann and Komitas
+
+[Cliquez ici pour consulter le programme détaillé.](public/images/program-concert-july-5.pdf)
