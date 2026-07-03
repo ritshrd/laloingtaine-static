@@ -10,3 +10,5 @@ Jean-Paul Minassian: viola\
 Hélène Postel-Labarthe: cello\
 Program\
 Beethoven, Haydn, Schumann, and Komitas 
+
+[Click to view the detailed program.](public/images/program-concert-july-5.pdf)
