@@ -11,4 +11,4 @@ Hélène Postel-Labarthe: cello\
 Program\
 Beethoven, Haydn, Schumann, and Komitas 
 
-[Click to view the detailed program.](/images/program-concert-july-5.pdf)
+[Click to view the detailed program.](/images/program-concert-july-5.pdf){:target="_blank"}
