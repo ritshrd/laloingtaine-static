@@ -4,12 +4,12 @@ section: home
 order: 1
 image: /images/home1.webp
 ---
-**July 05 at 4:00 p.m. Atlas Quartet Concert**\
-Akinori Shibata, Maxime Ramic: violins\
-Jean-Paul Minassian: viola\
-Hélène Postel-Labarthe: cello\
-Program\
-Beethoven, Haydn, Schumann, and Komitas 
+July 19-25 “A piano at La Loingtaine” Masterclass at La Loingtaine
 
-<a href="/images/program-concert-july-5.pdf" target="_blank" rel="noopener noreferrer">Click to view the detailed program.</a>
+> This Masterclass is aimed at a privileged number of pianists, passionate about space, music, and the great outdoors, under the direction of Roberte Mamou
 
+This Masterclass is aimed at a privileged number of pianists, passionate about space, music, and the great outdoors, under the direction of Roberte Mamou
+
+July 21-23	8:00 PM	Audition/
+July 25-26	3:00 PM	Student concert/
+July 26	8:00 PM	Recital by Roberte Mamou
