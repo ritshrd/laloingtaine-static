@@ -13,6 +13,6 @@ This Masterclass is aimed at a privileged number of pianists, passionate about s
 **July 26**	8:00 PM	Recital by Roberte Mamou
 |   |   |   |   |   |
 |---|---|---|---|---|
-| July 21-23  | 8:00 PM | Audition  |   |   |
-|  July 21-23 |  8:00 PM | Audition  |   |   |
+| **July 21-23**  |  | 8:00 PM |   |  Audition   |
+|  **July 21-23** |  | 8:00 PM |   | Audition    |
 |   |   |   |   |   |
