@@ -25,8 +25,6 @@ Clement Keller, contrebasse et arcordéon
 **31 mai à 16h** Concert de musique de chambre avec Roberte\
 Mamou au piano
 
-**Juin à confirmer**
-
 **Juillet 19 – 26 juillet MUSICA RESERVATA**\
 «Master classe pour Piano à La Loingtaine conduit par Roberte Mamou, pianiste
 
