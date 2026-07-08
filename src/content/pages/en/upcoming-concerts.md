@@ -26,8 +26,6 @@ Clement Keller, double bass and accordion
 **May 31 at 4 p.m.** Chamber music concert with Roberte\
 Mamou on piano
 
-**June to be confirmed**
-
 **July 19–26 MUSICA RESERVATA**\
 “Master class for Piano à La Loingtaine led by Roberte Mamou, pianist
 
