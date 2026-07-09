@@ -1,0 +1,1074 @@
+---
+import SectionLayout from "../../../layouts/SectionLayout.astro";
+import { getEntry } from "astro:content";
+
+const entry = await getEntry("pages", "fr/schubertiades");
+const enEntry = await getEntry("pages", "en/schubertiades");
+const title = "Adhésion Association Schubertiades";
+const description = "Formulaire d'inscription pour l'Association Schubertiades 2026 à La Loingtaine.";
+---
+
+<SectionLayout
+  title={title}
+  section="delight"
+  activePage="schubertiades"
+  description={description}
+  heroImage={entry?.data.image || enEntry?.data.image || "/images/ideas-forum.jpg"}
+>
+  <div class="membership-container">
+    <!-- Header of the document -->
+    <div class="association-header">
+      <div class="logo-area">
+        <svg class="schubert-logo" viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
+          <path d="M20,80 L20,30 L50,15 L80,30 L80,80 Z" fill="none" stroke="var(--color-burgundy)" stroke-width="4" stroke-linejoin="round"></path>
+          <path d="M35,65 Q50,45 65,65" fill="none" stroke="var(--color-burgundy)" stroke-width="4" stroke-linecap="round"></path>
+          <circle cx="50" cy="40" r="6" fill="var(--color-burgundy)"></circle>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-title">SCHUBERTIADES</span>
+          <span class="logo-subtitle">ASSOCIATION</span>
+        </div>
+      </div>
+      <div class="header-accent-bar"></div>
+    </div>
+
+    <h2 class="form-title">BULLETIN D’ADHESION A L’ASSOCIATON<br/><span class="subtitle">« SCHUBERTIADES » 2026</span></h2>
+
+    <p class="intro-paragraph">
+      Nous espérons vous compter parmi nos membres de l’Association afin de perdurer l’activité musicale de la Loingtaine. 
+      Nous vous remercions de bien vouloir compléter ce bulletin 2026.
+    </p>
+
+    <!-- Form Section -->
+    <form
+      id="membership-form"
+      class="styled-form"
+      data-netlify="true"
+      name="schubertiades-membership-fr"
+      method="POST"
+      action="/fr/delight/schuberti-association-membership/?success=true"
+    >
+      <!-- Netlify detection input -->
+      <input type="hidden" name="form-name" value="schubertiades-membership-fr" />
+      
+      <!-- Honeypot -->
+      <p class="hidden-field" style="display: none;">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+
+      <!-- Section 1: Options -->
+      <div class="form-section">
+        <h3 class="section-heading">1. Options d'Adhésion</h3>
+        
+        <div class="input-choice-wrapper">
+          <label class="custom-checkbox-container">
+            <input type="checkbox" name="join_association" id="join_association" value="yes" checked />
+            <span class="checkbox-checkmark"></span>
+            <span class="checkbox-label">Je souhaite adhérer à l’Association Schubertiades ou renouveler mon adhésion</span>
+          </label>
+        </div>
+
+        <!-- Collapsible area for membership details -->
+        <div class="collapsible-box" id="membership-details-box">
+          <ul class="informative-pricing-list">
+            <li>Cotisation 25€ minimum par personne</li>
+            <li>Cotisation spéciale pour un couple 45€ minimum</li>
+          </ul>
+
+          <!-- Amount input removed as requested -->
+        </div>
+
+        <div class="input-choice-wrapper spacer-top">
+          <label class="custom-checkbox-container">
+            <input type="checkbox" name="receive_info" value="yes" checked />
+            <span class="checkbox-checkmark"></span>
+            <span class="checkbox-label">Je souhaite recevoir les informations relatives à l’Association Schubertiades</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 2: Contact Details -->
+      <div class="form-section">
+        <h3 class="section-heading">2. Coordonnées</h3>
+        
+        <div class="form-row-grid">
+          <div class="form-field-group">
+            <label for="last_name" class="field-label">Nom *</label>
+            <input type="text" id="last_name" name="last_name" required placeholder="ex. Dupont" />
+          </div>
+          <div class="form-field-group">
+            <label for="first_name" class="field-label">Prénom *</label>
+            <input type="text" id="first_name" name="first_name" required placeholder="ex. Jean" />
+          </div>
+        </div>
+
+        <div class="form-field-group">
+          <label for="address" class="field-label">Adresse (Personne physique ou morale) *</label>
+          <textarea id="address" name="address" rows="3" required placeholder="Rue, Ville, Code Postal, Pays"></textarea>
+        </div>
+
+        <div class="form-row-grid">
+          <div class="form-field-group">
+            <label for="email" class="field-label">Adresse E-mail *</label>
+            <input type="email" id="email" name="email" required placeholder="nom@exemple.com" />
+          </div>
+          <div class="form-field-group">
+            <label for="phone" class="field-label">Numéro de Téléphone *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="ex. 06 12 34 56 78" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Payment Method -->
+      <div class="form-section">
+        <h3 class="section-heading">3. Mode de Paiement</h3>
+        <p class="info-help-text">Veuillez choisir comment vous souhaitez régler votre cotisation :</p>
+        
+        <div class="radio-options-group payment-options">
+          <label class="custom-radio-container">
+            <input type="radio" name="payment_method" id="pay_transfer" value="transfer" checked />
+            <span class="radio-checkmark"></span>
+            <span class="radio-label">Virement bancaire (coordonnées ci-dessous)</span>
+          </label>
+          <label class="custom-radio-container">
+            <input type="radio" name="payment_method" id="pay_cheque" value="cheque" />
+            <span class="radio-checkmark"></span>
+            <span class="radio-label">Chèque (à l'ordre de "Association Schubertiades")</span>
+          </label>
+        </div>
+
+        <div class="instruction-box cheque-instruction" id="cheque-instructions" style="display: none;">
+          <p class="instruction-text">
+            * Les chèques doivent être libellés à l'ordre de <strong>l'Association Schubertiades</strong> et envoyés à :
+          </p>
+          <address class="postal-address">
+            Association Schubertiades<br/>
+            40 rue Grande, Sorques<br/>
+            77690 Montigny-sur-Loing, France
+          </address>
+        </div>
+      </div>
+
+      <div class="submit-wrapper">
+        <button type="submit" id="submit-button" class="form-submit-btn">
+          <span class="btn-text">Envoyer le bulletin d'adhésion</span>
+          <span class="btn-spinner" style="display: none;">Envoi en cours...</span>
+        </button>
+      </div>
+      <p class="form-error-feedback" id="form-error-message" style="display: none;"></p>
+    </form>
+
+    <!-- Success Feedback Area -->
+    <div id="success-screen" class="success-screen-box" style="display: none;">
+      <div class="success-icon-animation">
+        <svg viewBox="0 0 52 52" class="checkmark-svg">
+          <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"></circle>
+          <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" class="checkmark-check" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <h3 class="success-heading">Merci !</h3>
+      <p class="success-text">Votre demande d'adhésion a été soumise avec succès.</p>
+      
+      <div class="next-steps-container" id="steps-transfer">
+        <p><strong>Étape suivante :</strong> Veuillez effectuer un virement bancaire pour le montant de la cotisation (25€ minimum par personne / 45€ minimum pour un couple) sur les coordonnées ci-dessous :</p>
+      </div>
+      
+      <div class="next-steps-container" id="steps-cheque" style="display: none;">
+        <p><strong>Étape suivante :</strong> Veuillez envoyer un chèque pour le montant de la cotisation (25€ minimum par personne / 45€ minimum pour un couple) à l'ordre de <strong>l'Association Schubertiades</strong> à l'adresse suivante :</p>
+        <address class="postal-address compact">
+          Association Schubertiades<br/>
+          40 rue Grande, Sorques<br/>
+          77690 Montigny-sur-Loing, France
+        </address>
+      </div>
+      
+      <button type="button" id="reset-form-btn" class="secondary-reset-btn">Envoyer un autre bulletin</button>
+    </div>
+
+    <!-- Bank Details Footer Info -->
+    <div class="bank-details-card">
+      <h4 class="bank-card-title">Coordonnées Bancaires</h4>
+      
+      <div class="bank-info-grid">
+        <div class="bank-info-row">
+          <span class="info-label">Banque :</span>
+          <span class="info-val">Crédit Agricole Brie Picardie</span>
+        </div>
+        
+        <div class="bank-info-row">
+          <span class="info-label">Titulaire du compte :</span>
+          <span class="info-val">Assoc. Schubertiades La Loingtaine Sorques</span>
+        </div>
+        
+        <div class="bank-info-row">
+          <span class="info-label">IBAN :</span>
+          <span class="info-val copyable-code" id="iban-code" title="Cliquez pour copier">
+            FR76 1870 6000 0097 5744 0777 388
+            <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+            </svg>
+          </span>
+        </div>
+        
+        <div class="bank-info-row">
+          <span class="info-label">BIC (SWIFT) :</span>
+          <span class="info-val copyable-code" id="bic-code" title="Cliquez pour copier">
+            AGRIFRPP887
+            <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+            </svg>
+          </span>
+        </div>
+      </div>
+      
+      <p id="copy-notification" class="clipboard-toast" aria-live="polite">Copié dans le presse-papiers !</p>
+    </div>
+  </div>
+</SectionLayout>
+
+<style>
+  .membership-container {
+    padding: var(--space-md) var(--space-xs);
+    font-family: var(--font-body);
+    color: var(--color-text);
+  }
+
+  /* Document layout header */
+  .association-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .schubert-logo {
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-family: var(--font-logo);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-burgundy);
+    line-height: 1.1;
+  }
+
+  .logo-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .header-accent-bar {
+    height: 12px;
+    width: 120px;
+    background-color: var(--color-burgundy);
+    border-radius: 2px;
+  }
+
+  /* Headings & Texts */
+  .form-title {
+    font-size: 2.2rem;
+    color: var(--color-burgundy);
+    font-family: var(--font-heading);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
+    text-align: center;
+  }
+
+  .form-title .subtitle {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: var(--color-brown);
+  }
+
+  .intro-paragraph {
+    font-style: italic;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+    text-align: justify;
+  }
+
+  /* Form layouts */
+  .styled-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-section {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    box-shadow: 0 4px 10px rgba(139, 117, 101, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .form-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 117, 101, 0.08);
+  }
+
+  .section-heading {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-burgundy);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-help-text {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+  }
+
+  /* Grid details */
+  .form-row-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 600px) {
+    .form-row-grid {
+      grid-template-columns: 1fr;
+    }
+    .association-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .header-accent-bar {
+      width: 100%;
+      height: 6px;
+    }
+  }
+
+  .form-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .field-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Modern visual styled inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1.5px solid var(--color-border);
+    background-color: var(--color-cream-light);
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-burgundy);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(160, 30, 34, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  .field-hint {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-top: 2px;
+  }
+
+  /* Custom Checkbox styles */
+  .input-choice-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .spacer-top {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .custom-checkbox-container {
+    display: flex;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    align-items: center;
+    color: var(--color-black);
+    font-weight: 500;
+  }
+
+  .custom-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkbox-checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--color-cream-light);
+    border: 1.5px solid var(--color-border);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .custom-checkbox-container:hover input ~ .checkbox-checkmark {
+    border-color: var(--color-burgundy);
+  }
+
+  .custom-checkbox-container input:checked ~ .checkbox-checkmark {
+    background-color: var(--color-burgundy);
+    border-color: var(--color-burgundy);
+  }
+
+  .checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .custom-checkbox-container input:checked ~ .checkbox-checkmark:after {
+    display: block;
+  }
+
+  .custom-checkbox-container .checkbox-checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  /* Custom Radio button styles */
+  .radio-options-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .custom-radio-container {
+    display: flex;
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    align-items: center;
+  }
+
+  .custom-radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .radio-checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: var(--color-cream-light);
+    border: 1.5px solid var(--color-border);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .custom-radio-container:hover input ~ .radio-checkmark {
+    border-color: var(--color-burgundy);
+  }
+
+  .custom-radio-container input:checked ~ .radio-checkmark {
+    border-color: var(--color-burgundy);
+    background-color: var(--color-cream-light);
+  }
+
+  .radio-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .custom-radio-container input:checked ~ .radio-checkmark:after {
+    display: block;
+  }
+
+  .custom-radio-container .radio-checkmark:after {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-burgundy);
+  }
+
+  /* Collapsible elements */
+  .collapsible-box {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: rgba(139, 117, 101, 0.05);
+    border-left: 3px solid var(--color-burgundy);
+    border-radius: 0 6px 6px 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .informative-pricing-list {
+    margin: 0 0 var(--space-md) 0;
+    padding-left: var(--space-lg);
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .informative-pricing-list li {
+    margin-bottom: var(--space-xs);
+  }
+
+  .amount-field-group {
+    margin-top: var(--space-md);
+  }
+
+  .number-input-wrapper {
+    position: relative;
+    max-width: 150px;
+  }
+
+  .number-input-wrapper input {
+    padding-left: var(--space-xl);
+  }
+
+  .currency-symbol {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: var(--color-text-light);
+  }
+
+  /* Payments specifics */
+  .payment-options {
+    margin-top: var(--space-sm);
+  }
+
+  .instruction-box {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background-color: #f7ede2;
+    border: 1px dashed var(--color-burgundy);
+    border-radius: 6px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .instruction-text {
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-burgundy-dark);
+  }
+
+  .postal-address {
+    font-style: normal;
+    font-weight: 500;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-burgundy-dark);
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .postal-address.compact {
+    font-size: 0.9rem;
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Submit Button styling */
+  .submit-wrapper {
+    margin-top: var(--space-md);
+  }
+
+  .form-submit-btn {
+    width: 100%;
+    padding: var(--space-md);
+    background-color: var(--color-burgundy);
+    color: var(--color-white);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(160, 30, 34, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .form-submit-btn:hover {
+    background-color: var(--color-burgundy-dark);
+    box-shadow: 0 6px 15px rgba(160, 30, 34, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .form-submit-btn:active {
+    transform: translateY(1px);
+  }
+
+  .form-error-feedback {
+    color: var(--color-burgundy);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: var(--space-md);
+    padding: var(--space-sm);
+    background-color: rgba(160, 30, 34, 0.05);
+    border: 1px solid rgba(160, 30, 34, 0.2);
+    border-radius: 4px;
+    animation: shake 0.3s ease;
+  }
+
+  /* Success Screen styles */
+  .success-screen-box {
+    background: var(--color-white);
+    border: 2px solid #2c4a3e;
+    border-radius: 8px;
+    padding: var(--space-xl);
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(44, 74, 62, 0.1);
+    animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .success-icon-animation {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-md);
+  }
+
+  .checkmark-svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .checkmark-circle {
+    stroke: #2c4a3e;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+
+  .checkmark-check {
+    stroke: #2c4a3e;
+    stroke-width: 3;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: drawCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+  }
+
+  .success-heading {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #2c4a3e;
+    margin-bottom: var(--space-sm);
+  }
+
+  .success-text {
+    font-size: 1.05rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+  }
+
+  .next-steps-container {
+    background-color: #f0f5f2;
+    border-left: 4px solid #2c4a3e;
+    border-radius: 0 6px 6px 0;
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    text-align: left;
+  }
+
+  .next-steps-container p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #1e332a;
+    margin: 0;
+  }
+
+  .secondary-reset-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-light);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+
+  .secondary-reset-btn:hover {
+    background-color: var(--color-cream-light);
+    color: var(--color-black);
+    border-color: var(--color-text-light);
+  }
+
+  /* Bank Info Card style */
+  .bank-details-card {
+    background: #eef2f6;
+    border: 1px solid #c8d6e5;
+    border-radius: 8px;
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  }
+
+  .bank-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: #2c3e50;
+    margin-bottom: var(--space-md);
+    border-bottom: 1.5px solid #dcdde1;
+    padding-bottom: var(--space-xs);
+    text-align: left;
+  }
+
+  .bank-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .bank-info-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: baseline;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 500px) {
+    .bank-info-row {
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: #576574;
+  }
+
+  .info-val {
+    color: var(--color-black);
+    font-weight: 500;
+  }
+
+  /* Copyable values */
+  .copyable-code {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: 'Courier Prime', Courier, monospace;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.04);
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: all;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    word-break: break-all;
+  }
+
+  .copyable-code:hover {
+    background-color: var(--color-burgundy);
+    color: var(--color-white);
+  }
+
+  .copy-icon {
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .copyable-code:hover .copy-icon {
+    opacity: 1;
+  }
+
+  .clipboard-toast {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #2c4a3e;
+    background-color: #e3ece8;
+    border: 1px solid #b7cfc4;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: var(--space-md);
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .clipboard-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes drawCircle {
+    100% { stroke-dashoffset: 0; }
+  }
+
+  @keyframes drawCheck {
+    100% { stroke-dashoffset: 0; }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+  }
+</style>
+
+<script>
+  // Script handles interactive states, limits, and submission logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("membership-form") as HTMLFormElement | null;
+    const joinCheckbox = document.getElementById("join_association") as HTMLInputElement | null;
+    const detailsBox = document.getElementById("membership-details-box") as HTMLDivElement | null;
+    
+    const payTransfer = document.getElementById("pay_transfer") as HTMLInputElement | null;
+    const payCheque = document.getElementById("pay_cheque") as HTMLInputElement | null;
+    const chequeInstructions = document.getElementById("cheque-instructions") as HTMLDivElement | null;
+    
+    const submitButton = document.getElementById("submit-button") as HTMLButtonElement | null;
+    const btnText = submitButton?.querySelector(".btn-text") as HTMLElement | null;
+    const btnSpinner = submitButton?.querySelector(".btn-spinner") as HTMLElement | null;
+    const formErrorMessage = document.getElementById("form-error-message") as HTMLElement | null;
+    
+    const successScreen = document.getElementById("success-screen") as HTMLDivElement | null;
+    const stepsTransfer = document.getElementById("steps-transfer") as HTMLDivElement | null;
+    const stepsCheque = document.getElementById("steps-cheque") as HTMLDivElement | null;
+    const resetFormBtn = document.getElementById("reset-form-btn") as HTMLButtonElement | null;
+
+    if (!form) return;
+
+    // Toggle membership details visibility based on the main checkbox
+    const updateMembershipVisibility = () => {
+      if (!joinCheckbox || !detailsBox) return;
+      
+      if (joinCheckbox.checked) {
+        detailsBox.style.display = "block";
+      } else {
+        detailsBox.style.display = "none";
+      }
+    };
+
+    joinCheckbox?.addEventListener("change", updateMembershipVisibility);
+    updateMembershipVisibility(); // Init
+
+    // Show/hide payment instructions dynamically
+    const updatePaymentMethodView = () => {
+      if (!payCheque || !chequeInstructions) return;
+      if (payCheque.checked) {
+        chequeInstructions.style.display = "block";
+      } else {
+        chequeInstructions.style.display = "none";
+      }
+    };
+
+    payTransfer?.addEventListener("change", updatePaymentMethodView);
+    payCheque?.addEventListener("change", updatePaymentMethodView);
+    updatePaymentMethodView(); // Init
+
+    // AJAX Form submission
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      
+      if (formErrorMessage) {
+        formErrorMessage.style.display = "none";
+        formErrorMessage.innerText = "";
+      }
+
+      // Visual sending state
+      if (submitButton && btnText && btnSpinner) {
+        submitButton.disabled = true;
+        btnText.style.display = "none";
+        btnSpinner.style.display = "inline";
+      }
+
+      const formData = new FormData(form);
+      const urlEncodedData = new URLSearchParams();
+      
+      // Append form fields to search params for submission
+      for (const [key, value] of formData.entries()) {
+        urlEncodedData.append(key, value.toString());
+      }
+
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: urlEncodedData.toString(),
+        });
+
+        if (response.ok) {
+          const paymentMethod = payCheque?.checked ? "cheque" : "transfer";
+          
+          if (successScreen) {
+            // Hide the active form layout
+            form.style.display = "none";
+            successScreen.style.display = "block";
+            
+            // Customize next step layout depending on payment method
+            if (paymentMethod === "cheque") {
+              if (stepsTransfer) stepsTransfer.style.display = "none";
+              if (stepsCheque) {
+                stepsCheque.style.display = "block";
+              }
+            } else {
+              if (stepsCheque) stepsCheque.style.display = "none";
+              if (stepsTransfer) {
+                stepsTransfer.style.display = "block";
+              }
+            }
+
+            // Scroll success screen into focus nicely
+            successScreen.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        } else {
+          throw new Error(`Server returned code ${response.status}`);
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+        if (formErrorMessage) {
+          formErrorMessage.style.display = "block";
+          formErrorMessage.innerText = "Une erreur est survenue lors de l'envoi de votre formulaire. Veuillez vérifier votre connexion ou réessayer plus tard.";
+        }
+        
+        // Reset sending button states
+        if (submitButton && btnText && btnSpinner) {
+          submitButton.disabled = false;
+          btnText.style.display = "inline";
+          btnSpinner.style.display = "none";
+        }
+      }
+    });
+
+    // Reset Form (Submit another)
+    resetFormBtn?.addEventListener("click", () => {
+      form.reset();
+      form.style.display = "flex";
+      if (successScreen) successScreen.style.display = "none";
+      updateMembershipVisibility();
+      updatePaymentMethodView();
+      
+      // Reset submit button state
+      if (submitButton && btnText && btnSpinner) {
+        submitButton.disabled = false;
+        btnText.style.display = "inline";
+        btnSpinner.style.display = "none";
+      }
+    });
+
+    // Copy to clipboard helpers
+    const copyNotification = document.getElementById("copy-notification");
+    const copyToClipboard = (elementId: string, label: string) => {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      
+      element.addEventListener("click", () => {
+        // Strip out SVG icon markup or extra white spaces for clean IBAN value
+        const rawText = element.textContent?.replace(/\s+/g, ' ').trim() || "";
+        // Extract only the code parts (alphanumeric and spaces)
+        const cleanText = rawText.replace(/[^A-Z0-9 ]/g, '').trim();
+
+        navigator.clipboard.writeText(cleanText).then(() => {
+          if (copyNotification) {
+            copyNotification.innerText = `${label} copié dans le presse-papiers !`;
+            copyNotification.classList.add("show");
+            setTimeout(() => {
+              copyNotification.classList.remove("show");
+            }, 2500);
+          }
+        }).catch(err => {
+          console.error("Clipboard copy failed", err);
+        });
+      });
+    };
+
+    copyToClipboard("iban-code", "L'IBAN");
+    copyToClipboard("bic-code", "Le BIC (SWIFT)");
+  });
+</script>

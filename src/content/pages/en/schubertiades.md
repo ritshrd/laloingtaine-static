@@ -14,4 +14,4 @@ An educational space for children, students, amateurs and professionals.
 
 A house to welcome musicians from other countries, allow meetings and reunions, and share with the public these special moments.
 
-[Download the Schuberti Association membership form](https://laloingtaine.org/wp-content/uploads/2020/12/le-bulletin-dadhesion.doc)
+[Access the online membership form](/delight/schuberti-association-membership/)

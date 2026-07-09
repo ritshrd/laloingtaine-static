@@ -13,4 +13,4 @@ Un espace de pédagogie pour les enfants, étudiants, amateurs, et professionnel
 
 Une maison pour accueillir des musiciens d’autres pays, permettre des rencontres et des retrouvailles, et partager avec le public ces moments privilégiés.
 
-[Télécharger le bulletin d’adhésion à l’association Schubertiades](https://laloingtaine.org/wp-content/uploads/2020/12/le-bulletin-dadhesion.doc)
+[Accéder au bulletin d'adhésion en ligne](/fr/delight/schuberti-association-membership/)
