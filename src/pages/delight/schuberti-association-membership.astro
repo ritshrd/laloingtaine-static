@@ -4,7 +4,8 @@ import { getEntry } from "astro:content";
 
 const entry = await getEntry("pages", "en/schubertiades");
 const title = "Association Schubertiades Membership";
-const description = "Membership registration form for the Association Schubertiades 2026 at La Loingtaine.";
+const description =
+  "Membership registration form for the Association Schubertiades 2026 at La Loingtaine.";
 ---
 
 <SectionLayout
@@ -18,24 +19,23 @@ const description = "Membership registration form for the Association Schubertia
     <!-- Header of the document -->
     <div class="association-header">
       <div class="logo-area">
-        <svg class="schubert-logo" viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
-          <path d="M20,80 L20,30 L50,15 L80,30 L80,80 Z" fill="none" stroke="var(--color-burgundy)" stroke-width="4" stroke-linejoin="round"></path>
-          <path d="M35,65 Q50,45 65,65" fill="none" stroke="var(--color-burgundy)" stroke-width="4" stroke-linecap="round"></path>
-          <circle cx="50" cy="40" r="6" fill="var(--color-burgundy)"></circle>
-        </svg>
-        <div class="logo-text">
-          <span class="logo-title">SCHUBERTIADES</span>
-          <span class="logo-subtitle">ASSOCIATION</span>
-        </div>
+        <img
+          src="/public/images/Association-Schubertiades-logo.svg"
+          alt="Schubertiades Association Logo"
+        />
       </div>
       <div class="header-accent-bar"></div>
     </div>
 
-    <h2 class="form-title">MEMBERSHIP FORM FOR THE ASSOCIATION<br/><span class="subtitle">« SCHUBERTIADES » 2026</span></h2>
+    <h2 class="form-title">
+      MEMBERSHIP FORM FOR THE ASSOCIATION<br /><span class="subtitle"
+        >« SCHUBERTIADES » 2026</span>
+    </h2>
 
     <p class="intro-paragraph">
-      We hope to count you among the members of the Association to sustain the musical activity of La Loingtaine. 
-      Thank you for completing this 2026 membership form.
+      We hope to count you among the members of the Association to sustain the
+      musical activity of La Loingtaine. Thank you for completing this 2026
+      membership form.
     </p>
 
     <!-- Form Section -->
@@ -49,29 +49,46 @@ const description = "Membership registration form for the Association Schubertia
     >
       <!-- Netlify detection input -->
       <input type="hidden" name="form-name" value="schubertiades-membership" />
-      
+
       <!-- Honeypot -->
       <p class="hidden-field" style="display: none;">
-        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        <label
+          >Don't fill this out if you're human: <input
+            name="bot-field"
+          /></label
+        >
       </p>
 
       <!-- Section 1: Options -->
       <div class="form-section">
         <h3 class="section-heading">1. Membership Options</h3>
-        
+
         <div class="input-choice-wrapper">
           <label class="custom-checkbox-container">
-            <input type="checkbox" name="join_association" id="join_association" value="yes" checked />
+            <input
+              type="checkbox"
+              name="join_association"
+              id="join_association"
+              value="yes"
+              checked
+            />
             <span class="checkbox-checkmark"></span>
-            <span class="checkbox-label">I wish to join the Schubertiades Association or renew my membership</span>
+            <span class="checkbox-label"
+              >I wish to join the Schubertiades Association or renew my
+              membership</span
+            >
           </label>
         </div>
 
         <!-- Collapsible area for membership details -->
         <div class="collapsible-box" id="membership-details-box">
           <ul class="informative-pricing-list">
-            <li>Individual Membership — <strong>€25 minimum</strong> per person</li>
-            <li>Special membership for a couple — <strong>€45 minimum</strong></li>
+            <li>
+              Individual Membership — <strong>€25 minimum</strong> per person
+            </li>
+            <li>
+              Special membership for a couple — <strong>€45 minimum</strong>
+            </li>
           </ul>
 
           <!-- Amount input removed as requested -->
@@ -81,7 +98,10 @@ const description = "Membership registration form for the Association Schubertia
           <label class="custom-checkbox-container">
             <input type="checkbox" name="receive_info" value="yes" checked />
             <span class="checkbox-checkmark"></span>
-            <span class="checkbox-label">I wish to receive information regarding the Schubertiades Association</span>
+            <span class="checkbox-label"
+              >I wish to receive information regarding the Schubertiades
+              Association</span
+            >
           </label>
         </div>
       </div>
@@ -89,31 +109,62 @@ const description = "Membership registration form for the Association Schubertia
       <!-- Section 2: Contact Details -->
       <div class="form-section">
         <h3 class="section-heading">2. Personal Details</h3>
-        
+
         <div class="form-row-grid">
           <div class="form-field-group">
             <label for="last_name" class="field-label">Last Name *</label>
-            <input type="text" id="last_name" name="last_name" required placeholder="e.g. Smith" />
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              required
+              placeholder="e.g. Smith"
+            />
           </div>
           <div class="form-field-group">
             <label for="first_name" class="field-label">First Name *</label>
-            <input type="text" id="first_name" name="first_name" required placeholder="e.g. John" />
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+              placeholder="e.g. John"
+            />
           </div>
         </div>
 
         <div class="form-field-group">
-          <label for="address" class="field-label">Address (Individual or Organization) *</label>
-          <textarea id="address" name="address" rows="3" required placeholder="Street address, City, Postal Code, Country"></textarea>
+          <label for="address" class="field-label"
+            >Address (Individual or Organization) *</label
+          >
+          <textarea
+            id="address"
+            name="address"
+            rows="3"
+            required
+            placeholder="Street address, City, Postal Code, Country"></textarea>
         </div>
 
         <div class="form-row-grid">
           <div class="form-field-group">
             <label for="email" class="field-label">Email Address *</label>
-            <input type="email" id="email" name="email" required placeholder="name@example.com" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="name@example.com"
+            />
           </div>
           <div class="form-field-group">
             <label for="phone" class="field-label">Phone Number *</label>
-            <input type="tel" id="phone" name="phone" required placeholder="e.g. +33 6 12 34 56 78" />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              placeholder="e.g. +33 6 12 34 56 78"
+            />
           </div>
         </div>
       </div>
@@ -121,28 +172,49 @@ const description = "Membership registration form for the Association Schubertia
       <!-- Section 3: Payment Method -->
       <div class="form-section">
         <h3 class="section-heading">3. Payment Method</h3>
-        <p class="info-help-text">Please choose how you will submit your membership fee:</p>
-        
+        <p class="info-help-text">
+          Please choose how you will submit your membership fee:
+        </p>
+
         <div class="radio-options-group payment-options">
           <label class="custom-radio-container">
-            <input type="radio" name="payment_method" id="pay_transfer" value="transfer" checked />
+            <input
+              type="radio"
+              name="payment_method"
+              id="pay_transfer"
+              value="transfer"
+              checked
+            />
             <span class="radio-checkmark"></span>
             <span class="radio-label">Bank Transfer (details below)</span>
           </label>
           <label class="custom-radio-container">
-            <input type="radio" name="payment_method" id="pay_cheque" value="cheque" />
+            <input
+              type="radio"
+              name="payment_method"
+              id="pay_cheque"
+              value="cheque"
+            />
             <span class="radio-checkmark"></span>
-            <span class="radio-label">Cheque (payable to "Association Schubertiades")</span>
+            <span class="radio-label"
+              >Cheque (payable to "Association Schubertiades")</span
+            >
           </label>
         </div>
 
-        <div class="instruction-box cheque-instruction" id="cheque-instructions" style="display: none;">
+        <div
+          class="instruction-box cheque-instruction"
+          id="cheque-instructions"
+          style="display: none;"
+        >
           <p class="instruction-text">
-            * Cheques should be made payable to the order of <strong>Association Schubertiades</strong> and sent to:
+            * Cheques should be made payable to the order of <strong
+              >Association Schubertiades</strong
+            > and sent to:
           </p>
           <address class="postal-address">
-            Association Schubertiades<br/>
-            40 rue Grande, Sorques<br/>
+            Association Schubertiades<br />
+            40 rue Grande, Sorques<br />
             77690 Montigny-sur-Loing, France
           </address>
         </div>
@@ -154,73 +226,116 @@ const description = "Membership registration form for the Association Schubertia
           <span class="btn-spinner" style="display: none;">Sending...</span>
         </button>
       </div>
-      <p class="form-error-feedback" id="form-error-message" style="display: none;"></p>
+      <p
+        class="form-error-feedback"
+        id="form-error-message"
+        style="display: none;"
+      >
+      </p>
     </form>
 
     <!-- Success Feedback Area -->
     <div id="success-screen" class="success-screen-box" style="display: none;">
       <div class="success-icon-animation">
         <svg viewBox="0 0 52 52" class="checkmark-svg">
-          <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"></circle>
-          <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" class="checkmark-check" stroke-linecap="round"></path>
+          <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"
+          ></circle>
+          <path
+            fill="none"
+            d="M14.1 27.2l7.1 7.2 16.7-16.8"
+            class="checkmark-check"
+            stroke-linecap="round"></path>
         </svg>
       </div>
       <h3 class="success-heading">Thank You!</h3>
-      <p class="success-text">Your membership application has been submitted successfully.</p>
-      
+      <p class="success-text">
+        Your membership application has been submitted successfully.
+      </p>
+
       <div class="next-steps-container" id="steps-transfer">
-        <p><strong>Next Step:</strong> Please initiate a bank transfer for the membership fee (€25 minimum per person / €45 minimum for a couple) using the account details listed below:</p>
+        <p>
+          <strong>Next Step:</strong> Please initiate a bank transfer for the membership
+          fee (€25 minimum per person / €45 minimum for a couple) using the account
+          details listed below:
+        </p>
       </div>
-      
-      <div class="next-steps-container" id="steps-cheque" style="display: none;">
-        <p><strong>Next Step:</strong> Please mail a cheque for the membership fee (€25 minimum per person / €45 minimum for a couple) made payable to <strong>Association Schubertiades</strong> to the address below:</p>
+
+      <div
+        class="next-steps-container"
+        id="steps-cheque"
+        style="display: none;"
+      >
+        <p>
+          <strong>Next Step:</strong> Please mail a cheque for the membership fee
+          (€25 minimum per person / €45 minimum for a couple) made payable to <strong
+            >Association Schubertiades</strong
+          > to the address below:
+        </p>
         <address class="postal-address compact">
-          Association Schubertiades<br/>
-          40 rue Grande, Sorques<br/>
+          Association Schubertiades<br />
+          40 rue Grande, Sorques<br />
           77690 Montigny-sur-Loing, France
         </address>
       </div>
-      
-      <button type="button" id="reset-form-btn" class="secondary-reset-btn">Submit Another Form</button>
+
+      <button type="button" id="reset-form-btn" class="secondary-reset-btn"
+        >Submit Another Form</button
+      >
     </div>
 
     <!-- Bank Details Footer Info -->
     <div class="bank-details-card">
       <h4 class="bank-card-title">Bank Account Details</h4>
-      
+
       <div class="bank-info-grid">
         <div class="bank-info-row">
           <span class="info-label">Bank:</span>
           <span class="info-val">Crédit Agricole Brie Picardie</span>
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">Account Holder:</span>
-          <span class="info-val">Assoc. Schubertiades La Loingtaine Sorques</span>
+          <span class="info-val"
+            >Assoc. Schubertiades La Loingtaine Sorques</span
+          >
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">IBAN:</span>
-          <span class="info-val copyable-code" id="iban-code" title="Click to copy">
+          <span
+            class="info-val copyable-code"
+            id="iban-code"
+            title="Click to copy"
+          >
             FR76 1870 6000 0097 5744 0777 388
             <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+              <path
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                fill="currentColor"></path>
             </svg>
           </span>
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">BIC (SWIFT):</span>
-          <span class="info-val copyable-code" id="bic-code" title="Click to copy">
+          <span
+            class="info-val copyable-code"
+            id="bic-code"
+            title="Click to copy"
+          >
             AGRIFRPP887
             <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+              <path
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                fill="currentColor"></path>
             </svg>
           </span>
         </div>
       </div>
-      
-      <p id="copy-notification" class="clipboard-toast" aria-live="polite">Copied to clipboard!</p>
+
+      <p id="copy-notification" class="clipboard-toast" aria-live="polite">
+        Copied to clipboard!
+      </p>
     </div>
   </div>
 </SectionLayout>
@@ -320,7 +435,9 @@ const description = "Membership registration form for the Association Schubertia
     border-radius: 8px;
     padding: var(--space-lg);
     box-shadow: 0 4px 10px rgba(139, 117, 101, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .form-section:hover {
@@ -827,14 +944,16 @@ const description = "Membership registration form for the Association Schubertia
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-    font-family: 'Courier Prime', Courier, monospace;
+    font-family: "Courier Prime", Courier, monospace;
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.04);
     padding: 2px 6px;
     border-radius: 4px;
     cursor: pointer;
     user-select: all;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
     word-break: break-all;
   }
 
@@ -876,57 +995,110 @@ const description = "Membership registration form for the Association Schubertia
 
   /* Animations */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes scaleUp {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   @keyframes drawCircle {
-    100% { stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes drawCheck {
-    100% { stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-4px); }
-    40%, 80% { transform: translateX(4px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-4px);
+    }
+    40%,
+    80% {
+      transform: translateX(4px);
+    }
   }
 </style>
 
 <script>
   // Script handles interactive states, limits, and submission logic
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("membership-form") as HTMLFormElement | null;
-    const joinCheckbox = document.getElementById("join_association") as HTMLInputElement | null;
-    const detailsBox = document.getElementById("membership-details-box") as HTMLDivElement | null;
-    
-    const payTransfer = document.getElementById("pay_transfer") as HTMLInputElement | null;
-    const payCheque = document.getElementById("pay_cheque") as HTMLInputElement | null;
-    const chequeInstructions = document.getElementById("cheque-instructions") as HTMLDivElement | null;
-    
-    const submitButton = document.getElementById("submit-button") as HTMLButtonElement | null;
-    const btnText = submitButton?.querySelector(".btn-text") as HTMLElement | null;
-    const btnSpinner = submitButton?.querySelector(".btn-spinner") as HTMLElement | null;
-    const formErrorMessage = document.getElementById("form-error-message") as HTMLElement | null;
-    
-    const successScreen = document.getElementById("success-screen") as HTMLDivElement | null;
-    const stepsTransfer = document.getElementById("steps-transfer") as HTMLDivElement | null;
-    const stepsCheque = document.getElementById("steps-cheque") as HTMLDivElement | null;
-    const resetFormBtn = document.getElementById("reset-form-btn") as HTMLButtonElement | null;
+    const form = document.getElementById(
+      "membership-form",
+    ) as HTMLFormElement | null;
+    const joinCheckbox = document.getElementById(
+      "join_association",
+    ) as HTMLInputElement | null;
+    const detailsBox = document.getElementById(
+      "membership-details-box",
+    ) as HTMLDivElement | null;
+
+    const payTransfer = document.getElementById(
+      "pay_transfer",
+    ) as HTMLInputElement | null;
+    const payCheque = document.getElementById(
+      "pay_cheque",
+    ) as HTMLInputElement | null;
+    const chequeInstructions = document.getElementById(
+      "cheque-instructions",
+    ) as HTMLDivElement | null;
+
+    const submitButton = document.getElementById(
+      "submit-button",
+    ) as HTMLButtonElement | null;
+    const btnText = submitButton?.querySelector(
+      ".btn-text",
+    ) as HTMLElement | null;
+    const btnSpinner = submitButton?.querySelector(
+      ".btn-spinner",
+    ) as HTMLElement | null;
+    const formErrorMessage = document.getElementById(
+      "form-error-message",
+    ) as HTMLElement | null;
+
+    const successScreen = document.getElementById(
+      "success-screen",
+    ) as HTMLDivElement | null;
+    const stepsTransfer = document.getElementById(
+      "steps-transfer",
+    ) as HTMLDivElement | null;
+    const stepsCheque = document.getElementById(
+      "steps-cheque",
+    ) as HTMLDivElement | null;
+    const resetFormBtn = document.getElementById(
+      "reset-form-btn",
+    ) as HTMLButtonElement | null;
 
     if (!form) return;
 
     // Toggle membership details visibility based on the main checkbox
     const updateMembershipVisibility = () => {
       if (!joinCheckbox || !detailsBox) return;
-      
+
       if (joinCheckbox.checked) {
         detailsBox.style.display = "block";
       } else {
@@ -954,7 +1126,7 @@ const description = "Membership registration form for the Association Schubertia
     // AJAX Form submission
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      
+
       if (formErrorMessage) {
         formErrorMessage.style.display = "none";
         formErrorMessage.innerText = "";
@@ -969,7 +1141,7 @@ const description = "Membership registration form for the Association Schubertia
 
       const formData = new FormData(form);
       const urlEncodedData = new URLSearchParams();
-      
+
       // Append form fields to search params for submission
       for (const [key, value] of formData.entries()) {
         urlEncodedData.append(key, value.toString());
@@ -984,12 +1156,12 @@ const description = "Membership registration form for the Association Schubertia
 
         if (response.ok) {
           const paymentMethod = payCheque?.checked ? "cheque" : "transfer";
-          
+
           if (successScreen) {
             // Hide the active form layout
             form.style.display = "none";
             successScreen.style.display = "block";
-            
+
             // Customize next step layout depending on payment method
             if (paymentMethod === "cheque") {
               if (stepsTransfer) stepsTransfer.style.display = "none";
@@ -1004,7 +1176,10 @@ const description = "Membership registration form for the Association Schubertia
             }
 
             // Scroll success screen into focus nicely
-            successScreen.scrollIntoView({ behavior: "smooth", block: "center" });
+            successScreen.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
         } else {
           throw new Error(`Server returned code ${response.status}`);
@@ -1013,9 +1188,10 @@ const description = "Membership registration form for the Association Schubertia
         console.error("Submission error:", err);
         if (formErrorMessage) {
           formErrorMessage.style.display = "block";
-          formErrorMessage.innerText = "There was an error sending your application. Please check your internet connection or try again later.";
+          formErrorMessage.innerText =
+            "There was an error sending your application. Please check your internet connection or try again later.";
         }
-        
+
         // Reset sending button states
         if (submitButton && btnText && btnSpinner) {
           submitButton.disabled = false;
@@ -1032,7 +1208,7 @@ const description = "Membership registration form for the Association Schubertia
       if (successScreen) successScreen.style.display = "none";
       updateMembershipVisibility();
       updatePaymentMethodView();
-      
+
       // Reset submit button state
       if (submitButton && btnText && btnSpinner) {
         submitButton.disabled = false;
@@ -1046,24 +1222,27 @@ const description = "Membership registration form for the Association Schubertia
     const copyToClipboard = (elementId: string, label: string) => {
       const element = document.getElementById(elementId);
       if (!element) return;
-      
+
       element.addEventListener("click", () => {
         // Strip out SVG icon markup or extra white spaces for clean IBAN value
-        const rawText = element.textContent?.replace(/\s+/g, ' ').trim() || "";
+        const rawText = element.textContent?.replace(/\s+/g, " ").trim() || "";
         // Extract only the code parts (alphanumeric and spaces)
-        const cleanText = rawText.replace(/[^A-Z0-9 ]/g, '').trim();
+        const cleanText = rawText.replace(/[^A-Z0-9 ]/g, "").trim();
 
-        navigator.clipboard.writeText(cleanText).then(() => {
-          if (copyNotification) {
-            copyNotification.innerText = `Copied ${label} to clipboard!`;
-            copyNotification.classList.add("show");
-            setTimeout(() => {
-              copyNotification.classList.remove("show");
-            }, 2500);
-          }
-        }).catch(err => {
-          console.error("Clipboard copy failed", err);
-        });
+        navigator.clipboard
+          .writeText(cleanText)
+          .then(() => {
+            if (copyNotification) {
+              copyNotification.innerText = `Copied ${label} to clipboard!`;
+              copyNotification.classList.add("show");
+              setTimeout(() => {
+                copyNotification.classList.remove("show");
+              }, 2500);
+            }
+          })
+          .catch((err) => {
+            console.error("Clipboard copy failed", err);
+          });
       });
     };
 
