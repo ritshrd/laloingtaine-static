@@ -365,7 +365,7 @@ ol {
 }
 
 .layout-content-side {
-  padding: 20px 20px;
+  padding: 60px 50px;
   display: flex;
   flex-direction: column;
   background: white;
@@ -397,6 +397,10 @@ ol {
 @media (max-width: 900px) {
   .layout-columns {
     grid-template-columns: 1fr;
+  }
+
+  .layout-content-side {
+    padding: 20px 20px;
   }
 
   .layout-card {
