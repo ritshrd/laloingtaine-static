@@ -5,7 +5,8 @@ import { getEntry } from "astro:content";
 const entry = await getEntry("pages", "fr/schubertiades");
 const enEntry = await getEntry("pages", "en/schubertiades");
 const title = "Adhésion Association Schubertiades";
-const description = "Formulaire d'inscription pour l'Association Schubertiades 2026 à La Loingtaine.";
+const description =
+  "Formulaire d'inscription pour l'Association Schubertiades 2026 à La Loingtaine.";
 ---
 
 <SectionLayout
@@ -13,43 +14,35 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
   section="delight"
   activePage="schubertiades"
   description={description}
-  heroImage={entry?.data.image || enEntry?.data.image || "/images/ideas-forum.jpg"}
+  heroImage={entry?.data.image ||
+    enEntry?.data.image ||
+    "/images/ideas-forum.jpg"}
 >
   <div class="membership-container">
     <!-- Header of the document -->
     <div class="association-header">
       <div class="logo-area">
-        <svg class="schubert-logo" viewBox="0 0 100 100" width="54" height="54" aria-hidden="true">
-          <g fill="var(--color-burgundy)">
-            <!-- Left slanted roof line (brush stroke) -->
-            <path d="M 64,15 C 50,22 32,38 20,53 C 18,55 19,57 22,56 C 30,52 46,39 58,28 C 65,22 67,17 64,15 Z" />
-            <!-- Right slanted roof line (brush stroke) -->
-            <path d="M 64,15 C 68,16 78,21 88,25 C 91,26 91,28 88,29 C 80,30 70,26 64,22 C 61,20 61,16 64,15 Z" />
-            <!-- Slanted inner horizontal stroke -->
-            <path d="M 35,46 C 30,48 30,50 34,49 C 42,47 52,43 62,39 C 68,37 68,35 64,35 C 56,37 44,42 35,46 Z" />
-            <!-- Vertical right stroke with bottom turn -->
-            <path d="M 81,25 C 83,35 84,48 83,61 C 82,72 80,82 76,86 C 74,88 72,87 72,84 C 73,80 75,70 76,60 C 77,48 76,36 74,30 C 73,27 77,22 81,25 Z" />
-            <!-- Right hook leg extension -->
-            <path d="M 75,85 C 77,88 80,95 81,99 C 82,102 79,104 77,104 C 75,104 73,101 72,97 C 71,93 72,88 75,85 Z" transform="scale(0.9) translate(5, 5)" />
-            <!-- Left bottom leg 1 -->
-            <path d="M 33,75 C 29,78 20,89 15,97 C 13,100 15,101 17,100 C 23,94 31,83 35,76 C 36,73 35,73 33,75 Z" />
-            <!-- Left bottom leg 2 -->
-            <path d="M 45,78 C 41,81 32,92 27,100 C 25,103 27,104 29,103 C 35,97 43,86 47,79 C 48,76 47,76 45,78 Z" />
-          </g>
-        </svg>
-        <div class="logo-text">
-          <span class="logo-title">SCHUBERTIADES</span>
-          <span class="logo-subtitle">ASSOCIATION</span>
-        </div>
+        <a href="/fr/" class="logo-link">
+          <img
+            src="/images/Association-Schubertiades-logo.svg"
+            alt="Schubertiades Association Logo"
+            class="schubert-logo-img"
+          />
+        </a>
       </div>
       <div class="header-accent-bar"></div>
     </div>
 
-    <h2 class="form-title">BULLETIN D’ADHESION A L’ASSOCIATON<br/><span class="subtitle">« SCHUBERTIADES » 2026</span></h2>
+    <h2 class="form-title">
+      BULLETIN D’ADHESION A L’ASSOCIATON<br /><span class="subtitle"
+        >« SCHUBERTIADES » 2026</span
+      >
+    </h2>
 
     <p class="intro-paragraph">
-      Nous espérons vous compter parmi nos membres de l’Association afin de perdurer l’activité musicale de la Loingtaine. 
-      Nous vous remercions de bien vouloir compléter ce bulletin 2026.
+      Nous espérons vous compter parmi nos membres de l’Association afin de
+      perdurer l’activité musicale de la Loingtaine. Nous vous remercions de
+      bien vouloir compléter ce bulletin 2026.
     </p>
 
     <!-- Form Section -->
@@ -62,22 +55,39 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
       action="/fr/delight/schuberti-association-membership/?success=true"
     >
       <!-- Netlify detection input -->
-      <input type="hidden" name="form-name" value="schubertiades-membership-fr" />
-      
+      <input
+        type="hidden"
+        name="form-name"
+        value="schubertiades-membership-fr"
+      />
+
       <!-- Honeypot -->
       <p class="hidden-field" style="display: none;">
-        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        <label
+          >Don't fill this out if you're human: <input
+            name="bot-field"
+          /></label
+        >
       </p>
 
       <!-- Section 1: Options -->
       <div class="form-section">
         <h3 class="section-heading">1. Options d'Adhésion</h3>
-        
+
         <div class="input-choice-wrapper">
           <label class="custom-checkbox-container">
-            <input type="checkbox" name="join_association" id="join_association" value="yes" checked />
+            <input
+              type="checkbox"
+              name="join_association"
+              id="join_association"
+              value="yes"
+              checked
+            />
             <span class="checkbox-checkmark"></span>
-            <span class="checkbox-label">Je souhaite adhérer à l’Association Schubertiades ou renouveler mon adhésion</span>
+            <span class="checkbox-label"
+              >Je souhaite adhérer à l’Association Schubertiades ou renouveler
+              mon adhésion</span
+            >
           </label>
         </div>
 
@@ -95,7 +105,10 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
           <label class="custom-checkbox-container">
             <input type="checkbox" name="receive_info" value="yes" checked />
             <span class="checkbox-checkmark"></span>
-            <span class="checkbox-label">Je souhaite recevoir les informations relatives à l’Association Schubertiades</span>
+            <span class="checkbox-label"
+              >Je souhaite recevoir les informations relatives à l’Association
+              Schubertiades</span
+            >
           </label>
         </div>
       </div>
@@ -103,31 +116,62 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
       <!-- Section 2: Contact Details -->
       <div class="form-section">
         <h3 class="section-heading">2. Coordonnées</h3>
-        
+
         <div class="form-row-grid">
           <div class="form-field-group">
             <label for="last_name" class="field-label">Nom *</label>
-            <input type="text" id="last_name" name="last_name" required placeholder="ex. Dupont" />
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              required
+              placeholder="ex. Dupont"
+            />
           </div>
           <div class="form-field-group">
             <label for="first_name" class="field-label">Prénom *</label>
-            <input type="text" id="first_name" name="first_name" required placeholder="ex. Jean" />
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+              placeholder="ex. Jean"
+            />
           </div>
         </div>
 
         <div class="form-field-group">
-          <label for="address" class="field-label">Adresse (Personne physique ou morale) *</label>
-          <textarea id="address" name="address" rows="3" required placeholder="Rue, Ville, Code Postal, Pays"></textarea>
+          <label for="address" class="field-label"
+            >Adresse (Personne physique ou morale) *</label
+          >
+          <textarea
+            id="address"
+            name="address"
+            rows="3"
+            required
+            placeholder="Rue, Ville, Code Postal, Pays"></textarea>
         </div>
 
         <div class="form-row-grid">
           <div class="form-field-group">
             <label for="email" class="field-label">Adresse E-mail *</label>
-            <input type="email" id="email" name="email" required placeholder="nom@exemple.com" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="nom@exemple.com"
+            />
           </div>
           <div class="form-field-group">
             <label for="phone" class="field-label">Numéro de Téléphone *</label>
-            <input type="tel" id="phone" name="phone" required placeholder="ex. 06 12 34 56 78" />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              placeholder="ex. 06 12 34 56 78"
+            />
           </div>
         </div>
       </div>
@@ -135,28 +179,51 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
       <!-- Section 3: Payment Method -->
       <div class="form-section">
         <h3 class="section-heading">3. Mode de Paiement</h3>
-        <p class="info-help-text">Veuillez choisir comment vous souhaitez régler votre cotisation :</p>
-        
+        <p class="info-help-text">
+          Veuillez choisir comment vous souhaitez régler votre cotisation :
+        </p>
+
         <div class="radio-options-group payment-options">
           <label class="custom-radio-container">
-            <input type="radio" name="payment_method" id="pay_transfer" value="transfer" checked />
+            <input
+              type="radio"
+              name="payment_method"
+              id="pay_transfer"
+              value="transfer"
+              checked
+            />
             <span class="radio-checkmark"></span>
-            <span class="radio-label">Virement bancaire (coordonnées ci-dessous)</span>
+            <span class="radio-label"
+              >Virement bancaire (coordonnées ci-dessous)</span
+            >
           </label>
           <label class="custom-radio-container">
-            <input type="radio" name="payment_method" id="pay_cheque" value="cheque" />
+            <input
+              type="radio"
+              name="payment_method"
+              id="pay_cheque"
+              value="cheque"
+            />
             <span class="radio-checkmark"></span>
-            <span class="radio-label">Chèque (à l'ordre de "Association Schubertiades")</span>
+            <span class="radio-label"
+              >Chèque (à l'ordre de "Association Schubertiades")</span
+            >
           </label>
         </div>
 
-        <div class="instruction-box cheque-instruction" id="cheque-instructions" style="display: none;">
+        <div
+          class="instruction-box cheque-instruction"
+          id="cheque-instructions"
+          style="display: none;"
+        >
           <p class="instruction-text">
-            * Les chèques doivent être libellés à l'ordre de <strong>l'Association Schubertiades</strong> et envoyés à :
+            * Les chèques doivent être libellés à l'ordre de <strong
+              >l'Association Schubertiades</strong
+            > et envoyés à :
           </p>
           <address class="postal-address">
-            Association Schubertiades<br/>
-            40 rue Grande, Sorques<br/>
+            Association Schubertiades<br />
+            40 rue Grande, Sorques<br />
             77690 Montigny-sur-Loing, France
           </address>
         </div>
@@ -165,76 +232,121 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
       <div class="submit-wrapper">
         <button type="submit" id="submit-button" class="form-submit-btn">
           <span class="btn-text">Envoyer le bulletin d'adhésion</span>
-          <span class="btn-spinner" style="display: none;">Envoi en cours...</span>
+          <span class="btn-spinner" style="display: none;"
+            >Envoi en cours...</span
+          >
         </button>
       </div>
-      <p class="form-error-feedback" id="form-error-message" style="display: none;"></p>
+      <p
+        class="form-error-feedback"
+        id="form-error-message"
+        style="display: none;"
+      >
+      </p>
     </form>
 
     <!-- Success Feedback Area -->
     <div id="success-screen" class="success-screen-box" style="display: none;">
       <div class="success-icon-animation">
         <svg viewBox="0 0 52 52" class="checkmark-svg">
-          <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"></circle>
-          <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" class="checkmark-check" stroke-linecap="round"></path>
+          <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"
+          ></circle>
+          <path
+            fill="none"
+            d="M14.1 27.2l7.1 7.2 16.7-16.8"
+            class="checkmark-check"
+            stroke-linecap="round"></path>
         </svg>
       </div>
       <h3 class="success-heading">Merci !</h3>
-      <p class="success-text">Votre demande d'adhésion a été soumise avec succès.</p>
-      
+      <p class="success-text">
+        Votre demande d'adhésion a été soumise avec succès.
+      </p>
+
       <div class="next-steps-container" id="steps-transfer">
-        <p><strong>Étape suivante :</strong> Veuillez effectuer un virement bancaire pour le montant de la cotisation (25€ minimum par personne / 45€ minimum pour un couple) sur les coordonnées ci-dessous :</p>
+        <p>
+          <strong>Étape suivante :</strong> Veuillez effectuer un virement bancaire
+          pour le montant de la cotisation (25€ minimum par personne / 45€ minimum
+          pour un couple) sur les coordonnées ci-dessous :
+        </p>
       </div>
-      
-      <div class="next-steps-container" id="steps-cheque" style="display: none;">
-        <p><strong>Étape suivante :</strong> Veuillez envoyer un chèque pour le montant de la cotisation (25€ minimum par personne / 45€ minimum pour un couple) à l'ordre de <strong>l'Association Schubertiades</strong> à l'adresse suivante :</p>
+
+      <div
+        class="next-steps-container"
+        id="steps-cheque"
+        style="display: none;"
+      >
+        <p>
+          <strong>Étape suivante :</strong> Veuillez envoyer un chèque pour le montant
+          de la cotisation (25€ minimum par personne / 45€ minimum pour un couple)
+          à l'ordre de <strong>l'Association Schubertiades</strong> à l'adresse suivante
+          :
+        </p>
         <address class="postal-address compact">
-          Association Schubertiades<br/>
-          40 rue Grande, Sorques<br/>
+          Association Schubertiades<br />
+          40 rue Grande, Sorques<br />
           77690 Montigny-sur-Loing, France
         </address>
       </div>
-      
-      <button type="button" id="reset-form-btn" class="secondary-reset-btn">Envoyer un autre bulletin</button>
+
+      <button type="button" id="reset-form-btn" class="secondary-reset-btn"
+        >Envoyer un autre bulletin</button
+      >
     </div>
 
     <!-- Bank Details Footer Info -->
     <div class="bank-details-card">
       <h4 class="bank-card-title">Coordonnées Bancaires</h4>
-      
+
       <div class="bank-info-grid">
         <div class="bank-info-row">
           <span class="info-label">Banque :</span>
           <span class="info-val">Crédit Agricole Brie Picardie</span>
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">Titulaire du compte :</span>
-          <span class="info-val">Assoc. Schubertiades La Loingtaine Sorques</span>
+          <span class="info-val"
+            >Assoc. Schubertiades La Loingtaine Sorques</span
+          >
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">IBAN :</span>
-          <span class="info-val copyable-code" id="iban-code" title="Cliquez pour copier">
+          <span
+            class="info-val copyable-code"
+            id="iban-code"
+            title="Cliquez pour copier"
+          >
             FR76 1870 6000 0097 5744 0777 388
             <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+              <path
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                fill="currentColor"></path>
             </svg>
           </span>
         </div>
-        
+
         <div class="bank-info-row">
           <span class="info-label">BIC (SWIFT) :</span>
-          <span class="info-val copyable-code" id="bic-code" title="Cliquez pour copier">
+          <span
+            class="info-val copyable-code"
+            id="bic-code"
+            title="Cliquez pour copier"
+          >
             AGRIFRPP887
             <svg class="copy-icon" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" fill="currentColor"></path>
+              <path
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                fill="currentColor"></path>
             </svg>
           </span>
         </div>
       </div>
-      
-      <p id="copy-notification" class="clipboard-toast" aria-live="polite">Copié dans le presse-papiers !</p>
+
+      <p id="copy-notification" class="clipboard-toast" aria-live="polite">
+        Copié dans le presse-papiers !
+      </p>
     </div>
   </div>
 </SectionLayout>
@@ -259,32 +371,21 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
   .logo-area {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
   }
 
-  .schubert-logo {
-    flex-shrink: 0;
+  .logo-link {
+    display: inline-block;
+    transition: transform 0.2s ease;
   }
 
-  .logo-text {
-    display: flex;
-    flex-direction: column;
+  .logo-link:hover {
+    transform: scale(1.02);
   }
 
-  .logo-title {
-    font-family: var(--font-logo);
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--color-burgundy);
-    line-height: 1.1;
-  }
-
-  .logo-subtitle {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    color: var(--color-text-light);
-    font-weight: 500;
+  .schubert-logo-img {
+    height: 54px;
+    width: auto;
+    display: block;
   }
 
   .header-accent-bar {
@@ -334,7 +435,9 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
     border-radius: 8px;
     padding: var(--space-lg);
     box-shadow: 0 4px 10px rgba(139, 117, 101, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .form-section:hover {
@@ -841,14 +944,16 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
     display: inline-flex;
     align-items: center;
     gap: var(--space-xs);
-    font-family: 'Courier Prime', Courier, monospace;
+    font-family: "Courier Prime", Courier, monospace;
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.04);
     padding: 2px 6px;
     border-radius: 4px;
     cursor: pointer;
     user-select: all;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
     word-break: break-all;
   }
 
@@ -890,57 +995,110 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
 
   /* Animations */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes scaleUp {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   @keyframes drawCircle {
-    100% { stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes drawCheck {
-    100% { stroke-dashoffset: 0; }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-4px); }
-    40%, 80% { transform: translateX(4px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-4px);
+    }
+    40%,
+    80% {
+      transform: translateX(4px);
+    }
   }
 </style>
 
 <script>
   // Script handles interactive states, limits, and submission logic
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("membership-form") as HTMLFormElement | null;
-    const joinCheckbox = document.getElementById("join_association") as HTMLInputElement | null;
-    const detailsBox = document.getElementById("membership-details-box") as HTMLDivElement | null;
-    
-    const payTransfer = document.getElementById("pay_transfer") as HTMLInputElement | null;
-    const payCheque = document.getElementById("pay_cheque") as HTMLInputElement | null;
-    const chequeInstructions = document.getElementById("cheque-instructions") as HTMLDivElement | null;
-    
-    const submitButton = document.getElementById("submit-button") as HTMLButtonElement | null;
-    const btnText = submitButton?.querySelector(".btn-text") as HTMLElement | null;
-    const btnSpinner = submitButton?.querySelector(".btn-spinner") as HTMLElement | null;
-    const formErrorMessage = document.getElementById("form-error-message") as HTMLElement | null;
-    
-    const successScreen = document.getElementById("success-screen") as HTMLDivElement | null;
-    const stepsTransfer = document.getElementById("steps-transfer") as HTMLDivElement | null;
-    const stepsCheque = document.getElementById("steps-cheque") as HTMLDivElement | null;
-    const resetFormBtn = document.getElementById("reset-form-btn") as HTMLButtonElement | null;
+    const form = document.getElementById(
+      "membership-form",
+    ) as HTMLFormElement | null;
+    const joinCheckbox = document.getElementById(
+      "join_association",
+    ) as HTMLInputElement | null;
+    const detailsBox = document.getElementById(
+      "membership-details-box",
+    ) as HTMLDivElement | null;
+
+    const payTransfer = document.getElementById(
+      "pay_transfer",
+    ) as HTMLInputElement | null;
+    const payCheque = document.getElementById(
+      "pay_cheque",
+    ) as HTMLInputElement | null;
+    const chequeInstructions = document.getElementById(
+      "cheque-instructions",
+    ) as HTMLDivElement | null;
+
+    const submitButton = document.getElementById(
+      "submit-button",
+    ) as HTMLButtonElement | null;
+    const btnText = submitButton?.querySelector(
+      ".btn-text",
+    ) as HTMLElement | null;
+    const btnSpinner = submitButton?.querySelector(
+      ".btn-spinner",
+    ) as HTMLElement | null;
+    const formErrorMessage = document.getElementById(
+      "form-error-message",
+    ) as HTMLElement | null;
+
+    const successScreen = document.getElementById(
+      "success-screen",
+    ) as HTMLDivElement | null;
+    const stepsTransfer = document.getElementById(
+      "steps-transfer",
+    ) as HTMLDivElement | null;
+    const stepsCheque = document.getElementById(
+      "steps-cheque",
+    ) as HTMLDivElement | null;
+    const resetFormBtn = document.getElementById(
+      "reset-form-btn",
+    ) as HTMLButtonElement | null;
 
     if (!form) return;
 
     // Toggle membership details visibility based on the main checkbox
     const updateMembershipVisibility = () => {
       if (!joinCheckbox || !detailsBox) return;
-      
+
       if (joinCheckbox.checked) {
         detailsBox.style.display = "block";
       } else {
@@ -968,7 +1126,7 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
     // AJAX Form submission
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      
+
       if (formErrorMessage) {
         formErrorMessage.style.display = "none";
         formErrorMessage.innerText = "";
@@ -983,7 +1141,7 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
 
       const formData = new FormData(form);
       const urlEncodedData = new URLSearchParams();
-      
+
       // Append form fields to search params for submission
       for (const [key, value] of formData.entries()) {
         urlEncodedData.append(key, value.toString());
@@ -998,12 +1156,12 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
 
         if (response.ok) {
           const paymentMethod = payCheque?.checked ? "cheque" : "transfer";
-          
+
           if (successScreen) {
             // Hide the active form layout
             form.style.display = "none";
             successScreen.style.display = "block";
-            
+
             // Customize next step layout depending on payment method
             if (paymentMethod === "cheque") {
               if (stepsTransfer) stepsTransfer.style.display = "none";
@@ -1018,7 +1176,10 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
             }
 
             // Scroll success screen into focus nicely
-            successScreen.scrollIntoView({ behavior: "smooth", block: "center" });
+            successScreen.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
         } else {
           throw new Error(`Server returned code ${response.status}`);
@@ -1027,9 +1188,10 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
         console.error("Submission error:", err);
         if (formErrorMessage) {
           formErrorMessage.style.display = "block";
-          formErrorMessage.innerText = "Une erreur est survenue lors de l'envoi de votre formulaire. Veuillez vérifier votre connexion ou réessayer plus tard.";
+          formErrorMessage.innerText =
+            "Une erreur est survenue lors de l'envoi de votre formulaire. Veuillez vérifier votre connexion ou réessayer plus tard.";
         }
-        
+
         // Reset sending button states
         if (submitButton && btnText && btnSpinner) {
           submitButton.disabled = false;
@@ -1046,7 +1208,7 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
       if (successScreen) successScreen.style.display = "none";
       updateMembershipVisibility();
       updatePaymentMethodView();
-      
+
       // Reset submit button state
       if (submitButton && btnText && btnSpinner) {
         submitButton.disabled = false;
@@ -1060,24 +1222,27 @@ const description = "Formulaire d'inscription pour l'Association Schubertiades 2
     const copyToClipboard = (elementId: string, label: string) => {
       const element = document.getElementById(elementId);
       if (!element) return;
-      
+
       element.addEventListener("click", () => {
         // Strip out SVG icon markup or extra white spaces for clean IBAN value
-        const rawText = element.textContent?.replace(/\s+/g, ' ').trim() || "";
+        const rawText = element.textContent?.replace(/\s+/g, " ").trim() || "";
         // Extract only the code parts (alphanumeric and spaces)
-        const cleanText = rawText.replace(/[^A-Z0-9 ]/g, '').trim();
+        const cleanText = rawText.replace(/[^A-Z0-9 ]/g, "").trim();
 
-        navigator.clipboard.writeText(cleanText).then(() => {
-          if (copyNotification) {
-            copyNotification.innerText = `${label} copié dans le presse-papiers !`;
-            copyNotification.classList.add("show");
-            setTimeout(() => {
-              copyNotification.classList.remove("show");
-            }, 2500);
-          }
-        }).catch(err => {
-          console.error("Clipboard copy failed", err);
-        });
+        navigator.clipboard
+          .writeText(cleanText)
+          .then(() => {
+            if (copyNotification) {
+              copyNotification.innerText = `${label} copié dans le presse-papiers !`;
+              copyNotification.classList.add("show");
+              setTimeout(() => {
+                copyNotification.classList.remove("show");
+              }, 2500);
+            }
+          })
+          .catch((err) => {
+            console.error("Clipboard copy failed", err);
+          });
       });
     };
 

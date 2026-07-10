@@ -20,8 +20,9 @@ const description =
     <div class="association-header">
       <div class="logo-area">
         <img
-          src="/public/images/Association-Schubertiades-logo.svg"
+          src="/images/Association-Schubertiades-logo.svg"
           alt="Schubertiades Association Logo"
+          class="schubert-logo-img"
         />
       </div>
       <div class="header-accent-bar"></div>
@@ -29,7 +30,8 @@ const description =
 
     <h2 class="form-title">
       MEMBERSHIP FORM FOR THE ASSOCIATION<br /><span class="subtitle"
-        >« SCHUBERTIADES » 2026</span>
+        >« SCHUBERTIADES » 2026</span
+      >
     </h2>
 
     <p class="intro-paragraph">
@@ -360,32 +362,21 @@ const description =
   .logo-area {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
   }
 
-  .schubert-logo {
-    flex-shrink: 0;
+  .logo-link {
+    display: inline-block;
+    transition: transform 0.2s ease;
   }
 
-  .logo-text {
-    display: flex;
-    flex-direction: column;
+  .logo-link:hover {
+    transform: scale(1.02);
   }
 
-  .logo-title {
-    font-family: var(--font-logo);
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--color-burgundy);
-    line-height: 1.1;
-  }
-
-  .logo-subtitle {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    color: var(--color-text-light);
-    font-weight: 500;
+  .schubert-logo-img {
+    height: 54px;
+    width: auto;
+    display: block;
   }
 
   .header-accent-bar {
