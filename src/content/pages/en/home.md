@@ -9,10 +9,8 @@ image: /images/home1.webp
 Three concerts will take place
 
 **Friday, August 14 at 5 p.m.** \
-       at the Église de Saint-Martin, La Genevraye
-
+       at the Église de Saint-Martin, La Genevraye\
 **Saturday, August 15 at 5 p.m.**\
-       at the Église de Saint-Martin, Dormelles
-
+       at the Église de Saint-Martin, Dormelles\
 **Sunday, August 16 at 4 p.m.**\
        at La Loingtaine, Montigny-sur-Loing
