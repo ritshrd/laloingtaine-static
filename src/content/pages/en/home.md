@@ -4,10 +4,13 @@ section: home
 order: 1
 image: /images/home1.webp
 ---
-**July 19-25 “A piano at La Loingtaine” Masterclass at La Loingtaine**
+**As part of the La Loingtaine 2026 Summer Chamber Music Academy**
 
-This Masterclass is aimed at a privileged number of pianists, passionate about space, music, and the great outdoors, under the direction of **Roberte Mamou**
+Three concerts will take place
 
-**July 21-23**	8:00 PM	Audition\
-**July 25-26**	3:00 PM	Student concert\
-**July 26**	8:00 PM	Recital by Roberte Mamou
+**Friday, August 14 at 5 p.m.** \
+       at the Église de Saint-Martin, La Genevraye\
+**Saturday, August 15 at 5 p.m.**\
+       at the Église de Saint-Martin, Dormelles\
+**Sunday, August 16 at 4 p.m.**\
+       at La Loingtaine, Montigny-sur-Loing
