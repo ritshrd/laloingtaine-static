@@ -54,8 +54,15 @@ const homePath = lang === "fr" ? "/fr/" : "/";
         <!-- Right: Content Column -->
         <div class="layout-content-side">
           <header class="home-header">
-            <h1 class="site-title">La Loingtaine</h1>
-            <p class="tagline">Au plus près de la culture et de la musique</p>
+            <h1 class="visually-hidden">La Loingtaine</h1>
+            <p class="visually-hidden">
+              Au plus près de la culture et de la musique
+            </p>
+            <img
+              src="/images/site/laloingtaine-logo-v2.svg"
+              alt="La Loingtaine"
+              class="site-logo-img"
+            />
             <div class="header-line"></div>
           </header>
 
@@ -149,6 +156,14 @@ const homePath = lang === "fr" ? "/fr/" : "/";
     color: #8b1e1e;
     margin: 0;
     line-height: 1;
+  }
+
+  .site-logo-img {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   .tagline {
