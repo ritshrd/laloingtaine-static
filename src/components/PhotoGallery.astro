@@ -64,6 +64,7 @@ const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
             alt={photo.alt}
             loading="lazy"
             class="gallery-grid__img"
+            draggable="false"
           />
           {photo.caption && (
             <div class="gallery-grid__overlay">
@@ -86,7 +87,7 @@ const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
       >
     </button>
     <div class="lightbox__content">
-      <img class="lightbox__img" src="" alt="" />
+      <img class="lightbox__img" src="" alt="" draggable="false" />
       <p class="lightbox__caption"></p>
     </div>
     <button class="lightbox__next" aria-label="Next" type="button">
@@ -116,6 +117,16 @@ const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
       const nextBtn = lightbox?.querySelector(".lightbox__next");
       let currentIndex = 0;
       let visibleItems: HTMLElement[] = [];
+
+      // Discourage casual copying and saving from the browser UI. The image
+      // files remain public because the browser must download them to display.
+      const preventImageCopy = (event: Event) => {
+        if ((event.target as HTMLElement).closest("img")) {
+          event.preventDefault();
+        }
+      };
+      el.addEventListener("contextmenu", preventImageCopy);
+      el.addEventListener("dragstart", preventImageCopy);
 
       function updateVisible() {
         visibleItems = Array.from(items).filter(
@@ -337,6 +348,10 @@ const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-normal);
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .gallery-grid__item:hover .gallery-grid__img {
@@ -397,6 +412,10 @@ const years = [...new Set(photos.map((p) => p.year).filter(Boolean))].sort(
     max-height: 80vh;
     object-fit: contain;
     border-radius: 4px;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .lightbox__caption {
